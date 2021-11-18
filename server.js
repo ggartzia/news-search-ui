@@ -5,7 +5,6 @@ const path = require('path');
 const port = process.env.PORT || 8080;
 
 const app = express();
-app.use(favicon(__dirname + '/build/favicon.ico'));
 
 // motor de plantillas
 app.set('view engine', 'ejs');
