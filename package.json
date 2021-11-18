@@ -1,10 +1,10 @@
 {
-  "name": "PFG Garazi Gartzia",
+  "name": "news-search-ui",
   "version": "1.0.0",
   "descripcion": "Proyecto Fin de Grado de Garazi Gartzia",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-     "start": "node app" 
+     "start": "node server.js" 
   },
   "keywords": [],
   "author": "Garazi Gartzia Gartzia",
@@ -12,6 +12,7 @@
   "dependencies": {
     "cowsay": "^1.4.0",
     "ejs": "^3.1.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-favicon": "^2.0.1"
   }
 }
