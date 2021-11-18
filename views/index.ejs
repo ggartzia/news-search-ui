@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PFG de Garazi Gartzia</title>
-  </head>
+  <%- include('cabecera', {tituloweb: 'PFG de Garazi Gartzia'}); %>
 
-  <body>
+  <body class="container">
+    <%- include('navbar') %>
+    
     <h1>Hola a EJS <%= titulo %></h1>
+    
+    <%- include('footer'); %>
   </body>
 </html>
