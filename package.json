@@ -1,18 +1,50 @@
 {
   "name": "news-search-ui",
   "version": "1.0.0",
-  "descripcion": "Proyecto Fin de Grado de Garazi Gartzia",
+  "author": "Garazi Gartzia Gartzia",
+  "description": "Aplicación React para visualizar las últimas noticias compartidas en Twitter",
+  "homepage": "https://news-search-ui.herokuapp.com/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ggartzia/news-search-ui.git"
+  },
   "main": "server.js",
   "scripts": {
-     "start": "node server.js" 
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
   },
   "keywords": [],
-  "author": "Garazi Gartzia Gartzia",
   "license": "ISC",
   "dependencies": {
-    "cowsay": "^1.4.0",
-    "ejs": "^3.1.5",
-    "express": "^4.17.1",
-    "express-favicon": "^2.0.1"
+    "12": "^1.0.2",
+    "@emotion/cache": "11.4.0",
+    "@emotion/react": "11.4.1",
+    "@emotion/styled": "11.3.0",
+    "@mui/icons-material": "5.1.1",
+    "@mui/material": "5.1.1",
+    "@mui/styled-engine": "5.1.1",
+    "react": "17.0.2",
+    "react-chartjs-2": "3.0.4",
+    "react-countup": "5.2.0",
+    "react-dom": "17.0.2",
+    "react-flatpickr": "3.10.7",
+    "react-github-btn": "1.2.1",
+    "react-router-dom": "5.2.0",
+    "react-scripts": "4.0.3"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
