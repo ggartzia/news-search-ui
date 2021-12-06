@@ -6,32 +6,29 @@ import Cuentas from "./layout/cuentas";
 const routes = [
   { type: "title", title: "Noticias", key: "noticias" },
   {
-    type: "collapse",
+    type: "link",
     name: "Últimas noticias",
     key: "ultimas-noticias",
     route: "/",
-    //icon: <Shop size="12px" />,
-    component: UltimasNoticias,
-    noCollapse: true,
+    icon: "",
+    component: UltimasNoticias
   },
   {
-    type: "collapse",
+    type: "link",
     name: "Medios de comunicación",
     key: "medios",
     route: "/medios",
-    //icon: <Office size="12px" />,
-    component: Medios,
-    noCollapse: true,
+    icon: "",
+    component: Medios
   },
   { type: "title", title: "Cuentas Twitter", key: "cuentas-twitter" },
   {
-    type: "collapse",
+    type: "link",
     name: "Cuentas más activas",
     key: "cuentas",
     route: "/cuentas",
-    //icon: <CustomerSupport size="12px" />,
-    component: Cuentas,
-    noCollapse: true,
+    icon: "",
+    component: Cuentas
   }
 ];
 

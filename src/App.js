@@ -13,6 +13,9 @@ import createCache from "@emotion/cache";
 
 // Soft UI Dashboard PRO React themes
 import theme from "./assets/theme";
+import logo from "./assets/logo.png";
+
+import Sidenav from "./component/Sidenav";
 
 // Soft UI Dashboard PRO React routes
 import routes from "./routes";
@@ -42,6 +45,12 @@ export default function App() {
 
   return <ThemeProvider theme={theme}>
            <CssBaseline />
+           <Sidenav
+              color="info"
+              brand={logo}
+              brandName="Distribución de noticias"
+              routes={routes}
+            />
            <Switch>
              {getRoutes(routes)}
              <Redirect from="*" to="/dashboard" />

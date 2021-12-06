@@ -1,12 +1,8 @@
 import { useEffect } from "react";
-
-// react-router-dom components
 import { useLocation } from "react-router-dom";
 
-// prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
 
-// Soft UI Dashboard PRO React components
 import Box from "../Box";
 
 function Layout({ children }) {
@@ -31,7 +27,6 @@ function Layout({ children }) {
   );
 }
 
-// Typechecking props for the DashboardLayout
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 };

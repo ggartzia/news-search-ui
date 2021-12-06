@@ -66,10 +66,8 @@ function Medios() {
 
   return (
     <Layout>
-      <Box py={3}>
-        <Box mb={3}>
           <Box display="flex" justifyContent="space-between" alignItems="center" p={3}>
-            <Typography variant="h6">Medios utilizados</Typography>
+            <Typography variant="h4">Medios utilizados</Typography>
           </Box>
           <Box
             sx={{
@@ -83,8 +81,7 @@ function Medios() {
           >
             <Lista columns={columns} rows={rows} />
           </Box>
-        </Box>
-      </Box>
+
     </Layout>
   );
 }
