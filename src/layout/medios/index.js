@@ -1,3 +1,5 @@
+import Card from "@mui/material/Card";
+
 import Layout from "../../component/Layout";
 import Lista from "../../component/Lista";
 import Box from "../../component/Box";
@@ -66,22 +68,17 @@ function Medios() {
 
   return (
     <Layout>
-          <Box display="flex" justifyContent="space-between" alignItems="center" p={3}>
-            <Typography variant="h4">Medios utilizados</Typography>
-          </Box>
-          <Box
-            sx={{
-              "& .MuiTableRow-root:not(:last-child)": {
-                "& td": {
-                  borderBottom: ({ borders: { borderWidth, borderColor } }) =>
-                    `${borderWidth[1]} solid ${borderColor}`,
-                },
-              },
-            }}
-          >
-            <Lista columns={columns} rows={rows} />
-          </Box>
+      <Card sx={{ mx: 3, py: 2.5, px: 3 }}>
+        <Box height="100%" mt={0.5} lineHeight={1}>
+          <Typography variant="h5" fontWeight="medium">
+            Medios utilizados
+          </Typography>
+        </Box>
+      </Card>
 
+      <Box sx={{ mx: 6, py: 6, px: 2 }}>
+        <Lista columns={columns} rows={rows} />
+      </Box>
     </Layout>
   );
 }

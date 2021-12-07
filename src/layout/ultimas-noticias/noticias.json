@@ -2,7 +2,8 @@
   {"_id":"https://www.elmundo.es/espana/2021/11/06/618679b021efa0707d8b45df.html",
    "title":"Juanma Moreno Bonilla: \"La batalla interna de Madrid perjudica electoralmente a la marca PP\"",
    "paper":"El Mundo",
-   "published":"2021-11-06 21:36:00",
+   "logo": "https://pbs.twimg.com/profile_images/1254054079950659584/a7peR-0L_400x400.jpg",
+   "published":"20 minutos",
    "image":"https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2021/11/06/16362030122385_150x0.jpg",
    "tags":["Andalucía","PP","PSOE","Juan Espadas","España","Pablo Casado","Isabel Díaz Ayuso","Pedro Sánchez","Teodoro García Egea","Juan Marín","Juan Manuel Moreno Bonilla"],
    "idf":["Juanma","Moreno","Bonilla:","batalla","interna","Madrid","perjudica","electoralmente","marca","PP"]
@@ -10,7 +11,8 @@
   {"_id":"https://www.elmundo.es/espana/2021/11/08/6183c066e4d4d8996f8b4570.html",
    "title":"Romano, 12 años en prisión por violación tras el reconocimiento \"sin ninguna duda\" de las tres víctimas",
    "paper":"El Mundo",
-   "published":"2021-11-08 06:44:26",
+   "logo": "https://pbs.twimg.com/profile_images/1254054079950659584/a7peR-0L_400x400.jpg",
+   "published":"3 horas",
    "image":"https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2021/11/04/16360591316990_150x0.jpg",
    "tags":["España","Málaga","Holanda","Policía Nacional","Palma de Mallorca","Sucesos","Justicia","Agresiones sexuales"],
    "idf":["Romano,","años","prisión","violación","reconocimiento","sin","ninguna","duda","tres","víctimas"]
@@ -18,7 +20,8 @@
   {"_id":"https://www.elmundo.es/madrid/2021/11/07/6186f31bfdddff823b8b45ce.html",
    "title":"La conmovedora secuencia del perdón entre las dos madres del Montealto: \"El abrazo la liberó de la culpa\"",
    "paper":"El Mundo",
-   "published":"2021-11-07 08:56:37",
+   "logo": "https://pbs.twimg.com/profile_images/1254054079950659584/a7peR-0L_400x400.jpg",
+   "published":"1 día",
    "image":"https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2021/11/06/16362342876703_150x0.jpg",
    "tags":["HBPR","Madrid","Sucesos"]
   }

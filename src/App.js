@@ -1,9 +1,6 @@
 import { useEffect, useMemo } from "react";
-
-// react-router components
 import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 
-// @mui material components
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Icon from "@mui/material/Icon";
@@ -11,13 +8,9 @@ import Icon from "@mui/material/Icon";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 
-// Soft UI Dashboard PRO React themes
 import theme from "./assets/theme";
-import logo from "./assets/logo.png";
 
 import Sidenav from "./component/Sidenav";
-
-// Soft UI Dashboard PRO React routes
 import routes from "./routes";
 
 export default function App() {
@@ -45,12 +38,7 @@ export default function App() {
 
   return <ThemeProvider theme={theme}>
            <CssBaseline />
-           <Sidenav
-              color="info"
-              brand={logo}
-              brandName="Distribución de noticias"
-              routes={routes}
-            />
+           <Sidenav routes={routes} />
            <Switch>
              {getRoutes(routes)}
              <Redirect from="*" to="/dashboard" />
