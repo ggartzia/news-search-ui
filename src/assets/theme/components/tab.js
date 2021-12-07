@@ -13,42 +13,46 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// @mui material components
-import Fade from "@mui/material/Fade";
-
 // Soft UI Dashboard PRO React base styles
-import colors from "../base/colors";
 import typography from "../base/typography";
 import borders from "../base/borders";
+import colors from "../base/colors";
 
 // Soft UI Dashboard PRO React helper functions
 import pxToRem from "../functions/pxToRem";
 
-const { black, light } = colors;
 const { size, fontWeightRegular } = typography;
 const { borderRadius } = borders;
+const { dark } = colors;
 
 export default {
-  defaultProps: {
-    arrow: true,
-    TransitionComponent: Fade,
-  },
-
   styleOverrides: {
-    tooltip: {
-      maxWidth: pxToRem(200),
-      backgroundColor: black.main,
-      color: light.main,
-      fontSize: size.sm,
-      fontWeight: fontWeightRegular,
+    root: {
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "row",
+      flex: "1 1 auto",
       textAlign: "center",
+      maxWidth: "unset !important",
+      minWidth: "unset !important",
+      minHeight: "unset !important",
+      fontSize: size.md,
+      fontWeight: fontWeightRegular,
+      textTransform: "none",
+      lineHeight: "inherit",
+      padding: pxToRem(4),
       borderRadius: borderRadius.md,
-      opacity: 0.7,
-      padding: `${pxToRem(5)} ${pxToRem(8)} ${pxToRem(4)}`,
+      color: `${dark.main} !important`,
+      opacity: "1 !important",
+
+      "& .material-icons, .material-icons-round": {
+        marginBottom: "0 !important",
+        marginRight: pxToRem(4),
+      },
     },
 
-    arrow: {
-      color: black.main,
+    labelIcon: {
+      paddingTop: pxToRem(4),
     },
   },
 };

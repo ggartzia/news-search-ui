@@ -14,22 +14,20 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard PRO React base styles
+import colors from "../base/colors";
+import boxShadows from "../base/boxShadows";
 import borders from "../base/borders";
 
+const { white } = colors;
+const { xxl } = boxShadows;
 const { borderRadius } = borders;
 
 export default {
   styleOverrides: {
     root: {
-      transition: "all 200ms ease-in-out",
-    },
-
-    rounded: {
-      borderRadius: borderRadius.lg,
-    },
-
-    img: {
-      height: "auto",
+      backgroundColor: white.main,
+      boxShadow: xxl,
+      borderRadius: borderRadius.xl,
     },
   },
 };

@@ -14,38 +14,50 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard PRO React base styles
-import borders from "../base/borders";
 import colors from "../base/colors";
+import borders from "../base/borders";
+import boxShadows from "../base/boxShadows";
 
 // Soft UI Dashboard PRO React helper functions
 import pxToRem from "../functions/pxToRem";
 
+const { grey, white } = colors;
 const { borderRadius } = borders;
-const { light } = colors;
+const { tabsBoxShadow } = boxShadows;
 
 export default {
   styleOverrides: {
     root: {
-      height: pxToRem(3),
-      borderRadius: borderRadius.md,
-      overflow: "visible",
       position: "relative",
+      backgroundColor: grey[100],
+      borderRadius: borderRadius.lg,
+      minHeight: "unset",
+      padding: pxToRem(4),
     },
 
-    colorPrimary: {
-      backgroundColor: light.main,
+    flexContainer: {
+      height: "100%",
+      position: "relative",
+      zIndex: 10,
     },
 
-    colorSecondary: {
-      backgroundColor: light.main,
+    fixed: {
+      overflow: "unset !important",
+      overflowX: "unset !important",
     },
 
-    bar: {
-      height: pxToRem(6),
-      borderRadius: borderRadius.sm,
-      position: "absolute",
-      transform: `translate(0, ${pxToRem(-1.5)}) !important`,
-      transition: "width 0.6s ease !important",
+    vertical: {
+      "& .MuiTabs-indicator": {
+        width: "100%",
+      },
+    },
+
+    indicator: {
+      height: "100%",
+      borderRadius: borderRadius.md,
+      backgroundColor: white.main,
+      boxShadow: tabsBoxShadow.indicator,
+      transition: "all 500ms ease",
     },
   },
 };
