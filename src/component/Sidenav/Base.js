@@ -5,7 +5,7 @@ export default styled(Drawer)(({ theme }) => {
   const { palette, boxShadows, transitions } = theme;
 
   const { white } = palette;
-  const { xxl } = boxShadows;
+  const { lg } = boxShadows;
 
   // styles for the sidenav when miniSidenav={false}
   const drawerOpenStyles = () => ({
@@ -15,7 +15,7 @@ export default styled(Drawer)(({ theme }) => {
       duration: transitions.duration.shorter,
     }),
     backgroundColor: white.main,
-    boxShadow: xxl,
+    boxShadow: lg,
     border: "none",
     marginBottom: "inherit",
     left: "0",
