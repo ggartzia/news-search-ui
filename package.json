@@ -34,7 +34,8 @@
     "react-flatpickr": "3.10.7",
     "react-github-btn": "1.2.1",
     "react-router-dom": "5.2.0",
-    "react-scripts": "4.0.3"
+    "react-scripts": "4.0.3",
+    "uuid": "^8.3.2"
   },
   "browserslist": {
     "production": [

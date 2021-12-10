@@ -88,11 +88,12 @@ function obtenerDatos() {
 
 function UltimasNoticias() {
 
+  const tabs = ["Noticias", "Deportes", "Corazón"];
   const noticias = obtenerDatos();
 
   return (
     <Layout>
-      <Header />
+      <Header title="Últimas noticias" tabs={tabs} />
       <Box mt={5} mb={3}>
         <Grid container spacing={3}>
           {noticias}

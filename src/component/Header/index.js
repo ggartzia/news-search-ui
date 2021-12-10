@@ -11,11 +11,32 @@ import Tab from "@mui/material/Tab";
 import Box from "../Box";
 import Typography from "../Typography";
 
-function Header() {
+function Header({ title, tabs }) {
 
   const [tabValue, setTabValue] = useState(0);
 
   const handleSetTabValue = (event, newValue) => setTabValue(newValue);
+
+  const renderTabs = function() {
+    if (tabs && tabs.length > 0) {
+      return (
+        <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
+          <AppBar position="static">
+            <Tabs
+              orientation="horizontal"
+              value={tabValue}
+              onChange={handleSetTabValue}
+              sx={{ background: "transparent" }}
+            >
+            {tabs.map((tab) => <Tab label={tab} />)}
+            </Tabs>
+          </AppBar>
+        </Grid>
+      )
+    } else {
+      return "";
+    }
+  };
 
   return (
     <Box position="relative">
@@ -24,24 +45,11 @@ function Header() {
           <Grid item>
             <Box height="100%" mt={0.5} lineHeight={1}>
               <Typography variant="h5" fontWeight="medium">
-                Últimas noticias
+                {title}
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
-            <AppBar position="static">
-              <Tabs
-                orientation="horizontal"
-                value={tabValue}
-                onChange={handleSetTabValue}
-                sx={{ background: "transparent" }}
-              >
-                <Tab label="Noticias" />
-                <Tab label="Deportes" />
-                <Tab label="Corazón" />
-              </Tabs>
-            </AppBar>
-          </Grid>
+          {renderTabs}
         </Grid>
       </Card>
     </Box>

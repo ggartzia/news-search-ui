@@ -1,24 +1,23 @@
-import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
 
 import Layout from "../../component/Layout";
+import Header from "../../component/Header";
 import Box from "../../component/Box";
 import Typography from "../../component/Typography";
 
 function Temas() {
 
+  const tabs = ["24 h", "48 h", "1 semana"];
+  const temas = "";
+
   return (
     <Layout>
-      <Card sx={{ mx: 3, py: 2.5, px: 3 }}>
-        <Box height="100%" mt={0.5} lineHeight={1}>
-          <Typography variant="h5" fontWeight="medium">
-            Los temas más utilizados en las noticias
-          </Typography>
-        </Box>
-      </Card>
-
-      <Box sx={{ mx: 6, py: 6, px: 2 }}>
-        
-      </Box>
+    <Header title="Los temas más utilizados en las noticias" tabs={tabs} />
+    <Box mt={5} mb={3}>
+      <Grid container spacing={3}>
+        {temas}
+      </Grid>
+    </Box>
     </Layout>
   );
 }

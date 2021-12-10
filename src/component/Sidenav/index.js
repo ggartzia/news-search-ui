@@ -14,8 +14,8 @@ function Sidenav({ routes }) {
   const { pathname } = location;
   const collapseName = pathname.split("/").slice(1)[0];
 
-  const renderRoutes = routes.map(({ type, title, key, route, href }) => {
-    const selected = (collapseName === key);
+  const renderRoutes = routes.map(({ type, title, key, route }) => {
+    const selected = (collapseName === key ? 10 : 5);
     
     if (type === "link") {
       return (
@@ -24,7 +24,7 @@ function Sidenav({ routes }) {
             <Typography
               variant="button"
               fontWeight="medium"
-              pl= (selected ? {10} : {5})
+              pl={selected}
               mt={2}
               mb={1}
               ml={1}
@@ -59,7 +59,7 @@ function Sidenav({ routes }) {
       <Box pt={3} pb={1} px={4} textAlign="center">
         <Box component={NavLink} to="/" display="flex" alignItems="center">
           <Box component="img" src={logo} alt="Logo Distribucion Noticias" width="2rem" />
-          <Box sx="xl">
+          <Box sx="lg">
             <Typography component="h6" variant="button" fontWeight="medium">
               Distribución de noticias
             </Typography>

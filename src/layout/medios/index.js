@@ -1,6 +1,5 @@
-import Card from "@mui/material/Card";
-
 import Layout from "../../component/Layout";
+import Header from "../../component/Header";
 import Lista from "../../component/Lista";
 import Box from "../../component/Box";
 import Typography from "../../component/Typography";
@@ -68,14 +67,7 @@ function Medios() {
 
   return (
     <Layout>
-      <Card sx={{ mx: 3, py: 2.5, px: 3 }}>
-        <Box height="100%" mt={0.5} lineHeight={1}>
-          <Typography variant="h5" fontWeight="medium">
-            Medios utilizados
-          </Typography>
-        </Box>
-      </Card>
-
+      <Header title="Medios utilizados" />
       <Box sx={{ mx: 6, py: 6, px: 2 }}>
         <Lista columns={columns} rows={rows} />
       </Box>
