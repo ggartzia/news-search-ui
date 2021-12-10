@@ -11,7 +11,7 @@ const routes = [
     type: "link",
     title: "Últimas noticias",
     key: "ultimas-noticias",
-    route: "/",
+    route: "/ultimas-noticias",
     component: UltimasNoticias
   },
     {
