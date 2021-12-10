@@ -19,14 +19,14 @@ import boxShadows from "../base/boxShadows";
 import borders from "../base/borders";
 
 const { white } = colors;
-const { xxl } = boxShadows;
+const { lg } = boxShadows;
 const { borderRadius } = borders;
 
 export default {
   styleOverrides: {
     root: {
       backgroundColor: white.main,
-      boxShadow: xxl,
+      boxShadow: lg,
       borderRadius: borderRadius.xl,
     },
   },
