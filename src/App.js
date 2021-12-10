@@ -41,7 +41,7 @@ export default function App() {
            <Sidenav routes={routes} />
            <Switch>
              {getRoutes(routes)}
-             <Redirect from="*" to="/dashboard" />
+             <Redirect from="*" to="/ultimas-noticias" />
            </Switch>
          </ThemeProvider>;
 }
