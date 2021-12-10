@@ -21,7 +21,7 @@ import boxShadows from "../base/boxShadows";
 
 const { black, white } = colors;
 const { borderWidth, borderRadius } = borders;
-const { xxl } = boxShadows;
+const { lg } = boxShadows;
 
 export default {
   styleOverrides: {
@@ -35,7 +35,7 @@ export default {
       backgroundClip: "border-box",
       border: `${borderWidth[0]} solid ${black.main}`,
       borderRadius: borderRadius.xl,
-      boxShadow: xxl,
+      boxShadow: lg,
     },
   },
 };
