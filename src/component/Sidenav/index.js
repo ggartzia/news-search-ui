@@ -1,11 +1,7 @@
 import { useEffect } from "react";
 import { useLocation, NavLink } from "react-router-dom";
-import PropTypes from "prop-types";
 
-import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import Link from "@mui/material/Link";
-import Icon from "@mui/material/Icon";
 
 import Box from "../Box";
 import Typography from "../Typography";
@@ -18,29 +14,28 @@ function Sidenav({ routes }) {
   const { pathname } = location;
   const collapseName = pathname.split("/").slice(1)[0];
 
-  // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes.map(({ type, name, icon, title, key, route, href }) => {
-    let returnValue;
-
+  const renderRoutes = routes.map(({ type, title, key, route, href }) => {
+    const selected = (collapseName === key);
+    
     if (type === "link") {
-      returnValue = (
+      return (
         <NavLink to={route} key={key}>
           <Box>
             <Typography
               variant="button"
               fontWeight="medium"
-              pl={5}
+              pl= (selected ? {10} : {5})
               mt={2}
               mb={1}
               ml={1}
             >
-              {name}
+              {title}
             </Typography>
           </Box>
         </NavLink>
       );
-    } else if (type === "title") {
-      returnValue = (
+    } else  {
+      return (
         <Typography
           key={key}
           display="block"
@@ -57,8 +52,6 @@ function Sidenav({ routes }) {
         </Typography>
       );
     }
-
-    return returnValue;
   });
 
   return (
@@ -74,7 +67,7 @@ function Sidenav({ routes }) {
         </Box>
       </Box>
       <Divider />
-      <List>{renderRoutes}</List>
+      {renderRoutes}
     </SidenavRoot>
   );
 }
