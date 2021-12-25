@@ -14,7 +14,7 @@ const routes = [
     route: "/ultimas-noticias",
     component: UltimasNoticias
   },
-    {
+  {
     type: "link",
     title: "Noticias más comentadas",
     key: "trending",
