@@ -17,7 +17,7 @@ function Header({ title, tabs }) {
 
   const handleSetTabValue = (event, newValue) => setTabValue(newValue);
 
-  const renderTabs = function() {
+  const renderTabs = function(tabs) {
     if (tabs && tabs.length > 0) {
       return (
         <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
@@ -28,7 +28,7 @@ function Header({ title, tabs }) {
               onChange={handleSetTabValue}
               sx={{ background: "transparent" }}
             >
-            {tabs.map((tab) => <Tab label={tab} />)}
+            {tabs.map((tab) => <Tab label={tab} key={tab} />)}
             </Tabs>
           </AppBar>
         </Grid>
@@ -49,7 +49,7 @@ function Header({ title, tabs }) {
               </Typography>
             </Box>
           </Grid>
-          {renderTabs}
+          {renderTabs(tabs)}
         </Grid>
       </Card>
     </Box>

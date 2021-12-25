@@ -15,8 +15,6 @@ import Typography from "../../component/Typography";
 import colors from "../../assets/theme/base/colors";
 import pxToRem from "../../assets/theme/functions/pxToRem";
 
-import data from "./noticias.json";
-
 class UltimasNoticias extends React.Component {
 
   constructor(props) {
@@ -41,15 +39,28 @@ class UltimasNoticias extends React.Component {
 
   render() {
       const tabs = ["Noticias", "Deportes", "Corazón"];
-      const { DataisLoaded, items } = this.state;
+      const { items, DataisLoaded } = this.state;
       const { socialMediaColors } = colors;
+
+      if (!DataisLoaded) {
+        return (
+          <Layout>
+            <Header title="Últimas noticias" tabs={tabs} />
+            <Box mt={5} mb={15}>
+              <Typography variant="h5" fontWeight="medium">
+                No se han encontrado noticias
+              </Typography>
+            </Box>
+          </Layout>
+          );
+      }
 
       return (
         <Layout>
           <Header title="Últimas noticias" tabs={tabs} />
           <Box mt={5} mb={3}>
             <Grid container spacing={3}>
-              items.map((data) => {
+              items.map( (data) => {
                 <Grid item xs={12} md={6} xl={4}>
                   <Card>
                     <Box display="flex" alignItems="center" px={1} py={1} mb={1}>
