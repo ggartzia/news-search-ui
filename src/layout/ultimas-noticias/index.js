@@ -59,9 +59,10 @@ class UltimasNoticias extends React.Component {
         <Layout>
           <Header title="Últimas noticias" tabs={tabs} />
           <Box mt={5} mb={3}>
-            <Grid container spacing={3}>
-              items.map( (data) => {
-                <Grid item xs={12} md={6} xl={4}>
+            <Grid container spacing={3} key="noticias">
+              {items.map((data) => {
+                return (
+                <Grid item xs={12} md={6} xl={4} key={data._id}>
                   <Card>
                     <Box display="flex" alignItems="center" px={1} py={1} mb={1}>
                       <Box mr={2}>
@@ -119,7 +120,9 @@ class UltimasNoticias extends React.Component {
                     </Box>
                   </Card>
                 </Grid>
-              });
+                );
+              })
+            }
             </Grid>
           </Box>
         </Layout>
