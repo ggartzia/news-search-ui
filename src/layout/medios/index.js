@@ -24,25 +24,28 @@ class Medios extends React.Component {
     fetch("https://news-puller.herokuapp.com/get/media/noticias")
         .then((res) => res.json())
         .then((json) => {
-            currentState = this.state;
-            currentState.mediosNoticias = json
-            this.setState(currentState);
+            this.setState(prevState => {
+                prevState.mediosNoticias = json;          
+                return prevState;
+            });
         });
     
     fetch("https://news-puller.herokuapp.com/get/media/deportes")
         .then((res) => res.json())
         .then((json) => {
-            currentState = this.state;
-            currentState.mediosDeportes = json
-            this.setState(currentState);
+            this.setState(prevState => {
+                prevState.mediosDeportes = json;          
+                return prevState;
+            });
         });
     
     fetch("https://news-puller.herokuapp.com/get/media/corazon")
         .then((res) => res.json())
         .then((json) => {
-            currentState = this.state;
-            currentState.mediosCorazon = json
-            this.setState(currentState);
+            this.setState(prevState => {
+                prevState.mediosCorazon = json;          
+                return prevState;
+            });
         });
   }
     
