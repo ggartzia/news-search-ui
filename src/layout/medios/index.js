@@ -109,13 +109,13 @@ class Medios extends React.Component {
         <Layout>
           <Header title="Medios utilizados" />
           <Box sx={{ mx: 6, py: 6, px: 2 }}>
-            <Lista columns={columns} rows={obtenerDatos(mediosNoticias)} />
+            <Lista columns={columns} rows={this.obtenerDatos(mediosNoticias)} />
           </Box>
           <Box sx={{ mx: 6, py: 6, px: 2 }}>
-            <Lista columns={columns} rows={obtenerDatos(mediosDeportes)} />
+            <Lista columns={columns} rows={this.obtenerDatos(mediosDeportes)} />
           </Box>
            <Box sx={{ mx: 6, py: 6, px: 2 }}>
-            <Lista columns={columns} rows={obtenerDatos(mediosCorazon)} />
+            <Lista columns={columns} rows={this.obtenerDatos(mediosCorazon)} />
           </Box>
         </Layout>
       );
