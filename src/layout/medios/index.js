@@ -7,6 +7,10 @@ import Box from "../../component/Box";
 import Typography from "../../component/Typography";
 import Avatar from "../../component/Avatar";
 
+import NewspaperIcon from '@mui/icons-material/Newspaper';
+import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
 class Medios extends React.Component {
 
   constructor(props) {
@@ -19,7 +23,16 @@ class Medios extends React.Component {
       };
   }
   
-  
+  showIcon(theme) {
+    if (theme == 'noticias') {
+      return <NewspaperIcon />
+    } else if (theme == 'noticias') {
+      return <SportsBasketballIcon />
+    } else {
+      return <FavoriteIcon />
+    }
+  }
+
   componentDidMount() {
     fetch("https://news-puller.herokuapp.com/get/media/noticias")
         .then((res) => res.json())
@@ -56,7 +69,7 @@ class Medios extends React.Component {
         nombre: (
           <Box display="flex" alignItems="center" px={1} py={0.5}>
             <Box mr={2}>
-              <Avatar src={data.logo} alt={data.paper} size="sm" variant="rounded" />
+              <Avatar src={data.logo} alt={data.name} size="sm" variant="rounded" />
             </Box>
             <Box display="flex" flexDirection="column">
               <Typography variant="button" fontWeight="medium">
@@ -70,7 +83,7 @@ class Medios extends React.Component {
         ),
         tema: (
           <Typography variant="caption" color="secondary" fontWeight="medium">
-            {data.topic}
+            {showIcon(data.theme)}
           </Typography>
         ),
         noticias: (
@@ -111,13 +124,25 @@ class Medios extends React.Component {
     return (
         <Layout>
           <Header title="Medios utilizados" />
-          <Box sx={{ mx: 6, py: 6, px: 2 }}>
+
+          <Typography variant="subtitle1" fontWeight="bold" mt={4} >
+            Medios de noticias
+          </Typography>
+          <Box sx={{ mx: 3, py: 4 }}>
             <Lista columns={columns} rows={this.obtenerDatos(mediosNoticias)} />
           </Box>
-          <Box sx={{ mx: 6, py: 6, px: 2 }}>
+
+          <Typography variant="subtitle1" fontWeight="bold">
+            Medios de deportes
+          </Typography>
+          <Box sx={{ mx: 3, py: 4}}>
             <Lista columns={columns} rows={this.obtenerDatos(mediosDeportes)} />
           </Box>
-           <Box sx={{ mx: 6, py: 6, px: 2 }}>
+
+          <Typography variant="subtitle1" fontWeight="bold">
+            Medios del corazón
+          </Typography>
+          <Box sx={{ mx: 3, py: 4 }}>
             <Lista columns={columns} rows={this.obtenerDatos(mediosCorazon)} />
           </Box>
         </Layout>
