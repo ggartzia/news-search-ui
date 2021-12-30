@@ -26,7 +26,7 @@ class Medios extends React.Component {
   showIcon(theme) {
     if (theme == 'noticias') {
       return <NewspaperIcon />
-    } else if (theme == 'noticias') {
+    } else if (theme == 'deportes') {
       return <SportsBasketballIcon />
     } else {
       return <FavoriteIcon />
@@ -83,7 +83,7 @@ class Medios extends React.Component {
         ),
         tema: (
           <Typography variant="caption" color="secondary" fontWeight="medium">
-            {showIcon(data.theme)}
+            {this.showIcon(data.theme)}
           </Typography>
         ),
         noticias: (
