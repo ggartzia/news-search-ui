@@ -69,11 +69,11 @@ class Medios extends React.Component {
         nombre: (
           <Box display="flex" alignItems="center" px={1} py={0.5}>
             <Box mr={2}>
-              <Avatar src={data.logo} alt={data.name} size="sm" variant="rounded" />
+              <Avatar src={data.logo} alt={data.paper} size="sm" variant="rounded" />
             </Box>
             <Box display="flex" flexDirection="column">
               <Typography variant="button" fontWeight="medium">
-                {data.paper}
+                {data.name}
               </Typography>
               <Typography variant="caption" color="secondary">
                 {data.feed}
