@@ -61,8 +61,15 @@ class Medios extends React.Component {
             });
         });
   }
-    
-  
+
+  componentWillUnmount() {
+    this.setState({
+        mediosNoticias: [],
+        mediosDeportes: [],
+        mediosCorazon: []
+    })
+  }
+
   obtenerDatos(items) {
     return items.map( (data) => {
       return {

@@ -22,10 +22,11 @@ function New({ data }) {
     return (
       <Box
         component="a"
-        href="/ultimas-noticias/{id}"
+        href={"/ultimas-noticias/" + id}
         target="_blank"
         rel="noreferrer"
         fontSize={pxToRem(14)}
+        width={pxToRem(275)}
         lineHeight={2}>
         <Typography variant="button" pr={0.5} fontWeight="medium" >
           Noticias relacionadas
@@ -42,15 +43,13 @@ function New({ data }) {
     return (
       <Box
         component="a"
-        href="/trending/{id}"
+        href={"/trending/" + id}
         rel="noreferrer"
         fontSize={pxToRem(18)}
-        color={socialMediaColors.twitter.main}
-        pr={1}
-        pl={15}>
+        color={socialMediaColors.twitter.main}>
 
         <TwitterIcon />
-        {tweetCount}
+        {"  " + tweetCount}
       </Box>
     );
   };

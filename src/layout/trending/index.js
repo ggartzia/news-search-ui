@@ -22,26 +22,16 @@ class Trending extends Component {
           tabValue: 0,
           DataisLoaded: false
       };
+
+      this.handler(null, 0);
   }
 
   handler(event, newValue) {
-    this.setState({
-      tab: newValue
-    })
-  }
-
-  componentDidMount() {
-    this.setState({
-      tabValue: 0
-    })
-  }
-
-  componentDidUpdate() {
     let hours = "24";
 
-    if (this.state.tabValue == 1) {
+    if (newValue == 1) {
       hours = "72"
-    } else if (this.state.tabValue == 2) {
+    } else if (newValue == 2) {
       hours = "168"
     } 
 
@@ -50,6 +40,7 @@ class Trending extends Component {
         .then((json) => {
             this.setState({
                 items: json,
+                tabValue: newValue,
                 DataisLoaded: true
             });
         });

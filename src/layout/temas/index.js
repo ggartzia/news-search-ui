@@ -1,11 +1,11 @@
 import { Component } from "react";
 
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
 
 import Layout from "../../component/Layout";
 import Header from "../../component/Header";
 import Box from "../../component/Box";
+import MiniCard from "../../component/MiniCard";
 import Typography from "../../component/Typography";
 
 const tabs = ["24 h", "72 h", "1 semana"];
@@ -22,21 +22,11 @@ class Temas extends Component {
           tabValue: 0,
           DataisLoaded: false
       };
+
+      this.handler(null, 0);
   }
 
   handler(event, newValue) {
-    this.setState({
-      tab: newValue
-    })
-  }
-
-  componentDidMount() {
-    this.setState({
-      tabValue: 0
-    })
-  }
-
-  componentDidUpdate() {
     let hours = "24";
 
     if (this.state.tabValue == 1) {
@@ -50,6 +40,7 @@ class Temas extends Component {
         .then((json) => {
             this.setState({
                 items: json,
+                tabValue: newValue,
                 DataisLoaded: true
             });
         });
@@ -57,16 +48,13 @@ class Temas extends Component {
 
   renderTopic(topic) {
     return (
-      <Card>
-        <Box display="flex" flexDirection="column">
-          <Typography variant="button" fontWeight="medium">
-            {topic.name}
-          </Typography>
-          <Typography variant="caption" color="secondary">
-            Utilizado en {topic.numNews} noticias
-          </Typography>
-        </Box>
-      </Card>);
+      <Grid item xs={12} sm={6} xl={3} key={topic.name}>
+        <MiniCard
+          title={topic.name}
+          count={topic.numNews}
+          icon="emoji_events" />
+      </Grid>
+    );
   }
 
   render() {
@@ -92,9 +80,7 @@ class Temas extends Component {
           <Box mt={5} mb={3}>
             <Grid container spacing={3} key="temas">
               {items.map((data) => {
-                return (
-                  <Tema data={data} />
-                );
+                return this.renderTopic(data);
               })}
             </Grid>
           </Box>

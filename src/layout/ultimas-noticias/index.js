@@ -22,28 +22,25 @@ class UltimasNoticias extends Component {
           tabValue: 0,
           DataisLoaded: false
       };
+      
+      this.handler(null, 0);
   }
 
   handler(event, newValue) {
-    this.setState({
-      tabValue: newValue
-    })
-  }
+    let theme = "noticias";
+console.log('helloooooo ', newValue);
+    if (newValue == 1) {
+      theme = "deportes"
+    } else if (newValue == 2) {
+      theme = "corazon"
+    } 
 
-  componentDidMount() {
-    this.setState({
-      tabValue: 0
-    })
-  }
-
-  componentDidUpdate() {
-    const tabValue = tabs[this.state.tabValue].toLowerCase();
-
-    fetch('https://news-puller.herokuapp.com/get/' + tabValue +'/24')
+    fetch('https://news-puller.herokuapp.com/get/' + theme +'/24')
         .then((res) => res.json())
         .then((json) => {
             this.setState({
                 items: json,
+                tabValue: newValue,
                 DataisLoaded: true
             });
         });
