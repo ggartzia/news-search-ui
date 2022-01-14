@@ -22,13 +22,13 @@ class UltimasNoticias extends Component {
           tabValue: 0,
           DataisLoaded: false
       };
-      
+
       this.handler(null, 0);
   }
 
   handler(event, newValue) {
     let theme = "noticias";
-console.log('helloooooo ', newValue);
+    
     if (newValue == 1) {
       theme = "deportes"
     } else if (newValue == 2) {

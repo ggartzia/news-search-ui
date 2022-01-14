@@ -14,26 +14,28 @@ function Sidenav({ routes }) {
   const { pathname } = location;
   const collapseName = pathname.split("/").slice(1)[0];
 
-  const renderRoutes = routes.map(({ type, title, key, route }) => {
+  const renderRoutes = routes.map(({ type, title, key, exact, route }) => {
     const selected = (collapseName === key ? 10 : 5);
     
     if (type === "link") {
-      return (
-        <NavLink to={route} key={key}>
-          <Box>
-            <Typography
-              variant="button"
-              fontWeight="medium"
-              pl={selected}
-              mt={2}
-              mb={1}
-              ml={1}
-            >
-              {title}
-            </Typography>
-          </Box>
-        </NavLink>
-      );
+      if (exact) {
+        return (
+          <NavLink to={route} key={key}>
+            <Box>
+              <Typography
+                variant="button"
+                fontWeight="medium"
+                pl={selected}
+                mt={2}
+                mb={1}
+                ml={1}
+              >
+                {title}
+              </Typography>
+            </Box>
+          </NavLink>
+        );
+      }
     } else  {
       return (
         <Typography
@@ -52,6 +54,7 @@ function Sidenav({ routes }) {
         </Typography>
       );
     }
+    return "";
   });
 
   return (

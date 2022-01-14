@@ -25,12 +25,12 @@ export default function App() {
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
-      if (route.collapse) {
-        return getRoutes(route.collapse);
-      }
-
       if (route.route) {
-        return <Route exact path={route.route} component={route.component} key={route.key} />;
+        if (route.exact) {
+          return <Route exact path={route.route} component={route.component} key={route.key} />;
+        } else {
+          return <Route path={route.route} component={route.component} key={route.key} />;
+        }
       }
 
       return null;

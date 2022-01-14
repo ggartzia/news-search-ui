@@ -49,10 +49,17 @@ class Temas extends Component {
   renderTopic(topic) {
     return (
       <Grid item xs={12} sm={6} xl={3} key={topic.name}>
-        <MiniCard
-          title={topic.name}
-          count={topic.numNews}
-          icon="emoji_events" />
+        <Typography
+            component="a"
+            href={"/buscarTema/" + topic.name}
+            variant="caption"
+            color="secondary"
+            fontWeight="medium" > 
+          <MiniCard
+            title={topic.name}
+            count={topic.numNews}
+            icon="emoji_events" />
+        </Typography>
       </Grid>
     );
   }

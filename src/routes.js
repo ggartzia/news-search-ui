@@ -2,45 +2,84 @@ import UltimasNoticias from "./layout/ultimas-noticias";
 import Trending from "./layout/trending";
 import Medios from "./layout/medios";
 import Temas from "./layout/temas";
+import BuscarTema from "./layout/temas/BuscarTema";
 import Cuentas from "./layout/cuentas";
 
 
 const routes = [
-  { type: "title", title: "Noticias", key: "noticias" },
+  { type: "title", title: "Noticias", key: "noticiasTitulo" },
   {
     type: "link",
     title: "Últimas noticias",
-    key: "ultimas-noticias",
-    route: "/ultimas-noticias",
+    key: "noticias",
+    route: "/noticias",
+    exact: true,
     component: UltimasNoticias
   },
   {
     type: "link",
-    title: "Noticias más comentadas",
-    key: "trending",
-    route: "/trending",
-    component: Trending
+    title: "Últimas noticias",
+    key: "noticiasRelacionadas",
+    route: "/noticias/:id",
+    exact: false,
+    component: UltimasNoticias
   },
   {
     type: "link",
     title: "Medios de comunicación",
     key: "medios",
     route: "/medios",
+    exact: true,
     component: Medios
+  },
+  { type: "title", title: "Temas", key: "temasTitulo" },
+  {
+    type: "link",
+    title: "Temas más usados",
+    key: "temas",
+    route: "/temas",
+    exact: true,
+    component: Temas
   },
   {
     type: "link",
-    title: "Temas más comentados",
-    key: "temas",
-    route: "/temas",
-    component: Temas
+    title: "Buscar tema",
+    route: "/buscarTema",
+    key: "buscarTema",
+    exact: true,
+    component: BuscarTema
   },
-  { type: "title", title: "Cuentas Twitter", key: "cuentas-twitter" },
+  {
+    type: "link",
+    title: "Noticias relacionadas con",
+    route: "/buscarTema/:topic",
+    key: "temaSeleccionado",
+    exact: false,
+    component: BuscarTema
+  },
+  { type: "title", title: "Actividad Twitter", key: "trendingTitulo" },
+  {
+    type: "link",
+    title: "Noticias más comentadas",
+    key: "trending",
+    route: "/trending",
+    exact: true,
+    component: Trending
+  },
+  {
+    type: "link",
+    title: "Actividd de la noticias",
+    route: "/trending/:id",
+    key: "noticiaSeleccionada",
+    exact: false,
+    component: Trending
+  },
   {
     type: "link",
     title: "Cuentas más activas",
     key: "cuentas",
     route: "/cuentas",
+    exact: true,
     component: Cuentas
   }
 ];

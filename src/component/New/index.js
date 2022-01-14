@@ -2,6 +2,7 @@ import { forwardRef } from "react";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import Badge from "@mui/material/Badge";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
@@ -9,21 +10,31 @@ import Avatar from "../Avatar";
 import Box from "../Box";
 import Typography from "../Typography";
 
-import colors from "../../assets/theme/base/colors";
-
 import pxToRem from "../../assets/theme/functions/pxToRem";
 import findDayDifference from "../../assets/theme/functions/timeCalc";
 
 function New({ data }) {
 
-  const { socialMediaColors } = colors;
+  const renderTopic = function(topic) {
+    return (
+      <Grid item sx={{ mx: 5, py: 1 }} key={topic}>
+        <Typography
+            component="a"
+            href={"/buscarTema/" + topic}
+            variant="caption"
+            color="secondary"
+            fontWeight="medium" >
+          <Badge variant="gradient" badgeContent={topic} color="secondary" size="xs" />
+        </Typography>
+      </Grid>
+    );
+  };
 
   const noticiasRelacionadas = function(id) {
     return (
       <Box
         component="a"
         href={"/ultimas-noticias/" + id}
-        target="_blank"
         rel="noreferrer"
         fontSize={pxToRem(14)}
         width={pxToRem(275)}
@@ -46,7 +57,7 @@ function New({ data }) {
         href={"/trending/" + id}
         rel="noreferrer"
         fontSize={pxToRem(18)}
-        color={socialMediaColors.twitter.main}>
+        color="#55acee">
 
         <TwitterIcon />
         {"  " + tweetCount}
@@ -57,7 +68,13 @@ function New({ data }) {
   return (
       <Grid item xs={12} md={6} xl={4} key={data._id}>
         <Card>
-          <Box display="flex" alignItems="center" px={1} py={1} mb={1}>
+          <Box component="a"
+               href={data.fullUrl}
+               display="flex"
+               alignItems="center"
+               px={1}
+               py={1}
+               mb={1}>
             <Box mr={2}>
               <Avatar src={data.image} alt="something here" variant="square" size="xxl"/>
             </Box>
@@ -81,7 +98,9 @@ function New({ data }) {
               </Typography>
             </Box>
           </Box>
-          
+          <Grid container spacing={1} alignItems="center">
+            {data.topics.map((topic) => renderTopic(topic))}
+          </Grid>
           <Box display="flex" px={1} py={0.5}>
             {noticiasRelacionadas(data._id)}
             {twitterShare(data._id, data.tweetCount)}
