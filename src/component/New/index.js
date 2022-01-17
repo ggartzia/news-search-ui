@@ -34,7 +34,7 @@ function New({ data }) {
     return (
       <Box
         component="a"
-        href={"/ultimas-noticias/" + id}
+        href={"/noticias/" + id}
         rel="noreferrer"
         fontSize={pxToRem(14)}
         width={pxToRem(275)}
@@ -76,7 +76,7 @@ function New({ data }) {
                py={1}
                mb={1}>
             <Box mr={2}>
-              <Avatar src={data.image} alt="something here" variant="square" size="xxl"/>
+              <Avatar src={data.image} alt={data.title} variant="square" size="xxl"/>
             </Box>
             <Box display="flex" flexDirection="column">
               <Typography variant="button" fontWeight="medium">
@@ -87,7 +87,7 @@ function New({ data }) {
 
           <Box display="flex" alignItems="center" px={1} py={0.5}>
             <Box mr={2}>
-              <Avatar src={data.logo} alt={data.paper} size="sm" />
+              <Avatar src=/medio/{data.paper}.jpg alt={data.paper} size="sm" />
             </Box>
             <Box display="flex" flexDirection="column">
               <Typography variant="button" fontWeight="medium">
@@ -99,12 +99,14 @@ function New({ data }) {
             </Box>
           </Box>
           <Grid container spacing={1} alignItems="center">
-            {data.topics.map((topic) => renderTopic(topic))}
+            {data.topics.slice(0, 3).map((topic) => renderTopic(topic))}
           </Grid>
-          <Box display="flex" px={1} py={0.5}>
+          <Grid justify="space-between"
+                container 
+                spacing={24}>
             {noticiasRelacionadas(data._id)}
             {twitterShare(data._id, data.tweetCount)}
-          </Box>
+          </Grid>
         </Card>
       </Grid>
   );
