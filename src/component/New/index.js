@@ -102,12 +102,13 @@ function New({ data }) {
           <Grid container spacing={1} alignItems="center">
             {data.topics.slice(0, 3).map((topic) => renderTopic(topic))}
           </Grid>
-          <Grid justify="space-between"
-                container 
-                spacing={24}>
+          <Box display="flex"
+               px={1} py={0.5} 
+               justify="space-between"
+               spacing={24}>
             {noticiasRelacionadas(data._id)}
             {twitterShare(data._id, data.tweetCount)}
-          </Grid>
+          </Box>
         </Card>
       </Grid>
   );
