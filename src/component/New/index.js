@@ -14,7 +14,8 @@ import pxToRem from "../../assets/theme/functions/pxToRem";
 import findDayDifference from "../../assets/theme/functions/timeCalc";
 
 function New({ data }) {
-
+  const mediaLogo = `/medio/${data.paper}.jpg`;
+  
   const renderTopic = function(topic) {
     return (
       <Grid item sx={{ mx: 5, py: 1 }} key={topic}>
@@ -87,7 +88,7 @@ function New({ data }) {
 
           <Box display="flex" alignItems="center" px={1} py={0.5}>
             <Box mr={2}>
-              <Avatar src=/medio/{data.paper}.jpg alt={data.paper} size="sm" />
+              <Avatar src={mediaLogo} alt={data.paper} size="sm" />
             </Box>
             <Box display="flex" flexDirection="column">
               <Typography variant="button" fontWeight="medium">
