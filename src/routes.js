@@ -26,6 +26,14 @@ const routes = [
   },
   {
     type: "link",
+    title: "Noticias más comentadas",
+    key: "trending",
+    route: "/trending",
+    exact: true,
+    component: Trending
+  },
+  {
+    type: "link",
     title: "Medios de comunicación",
     key: "medios",
     route: "/medios",
@@ -51,7 +59,7 @@ const routes = [
   },
   {
     type: "link",
-    title: "Noticias relacionadas con",
+    title: "Noticias sobre",
     route: "/buscarTema/:topic",
     key: "temaSeleccionado",
     exact: false,
@@ -60,15 +68,7 @@ const routes = [
   { type: "title", title: "Actividad Twitter", key: "trendingTitulo" },
   {
     type: "link",
-    title: "Noticias más comentadas",
-    key: "trending",
-    route: "/trending",
-    exact: true,
-    component: Trending
-  },
-  {
-    type: "link",
-    title: "Actividd de la noticias",
+    title: "Actividad",
     route: "/trending/:id",
     key: "noticiaSeleccionada",
     exact: false,
@@ -76,7 +76,7 @@ const routes = [
   },
   {
     type: "link",
-    title: "Cuentas más activas",
+    title: "Cuentas",
     key: "cuentas",
     route: "/cuentas",
     exact: true,

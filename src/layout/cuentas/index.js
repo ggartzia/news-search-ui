@@ -1,26 +1,78 @@
-import Card from "@mui/material/Card";
+import { Component } from "react";
+
+import Grid from "@mui/material/Grid";
 
 import Layout from "../../component/Layout";
 import Box from "../../component/Box";
+import Card from "@mui/material/Card";
 import Typography from "../../component/Typography";
+import Search from "../../component/Search";
+import { Timeline } from 'react-twitter-widgets'
 
-function Cuentas() {
+const serverHost = 'https://news-puller.herokuapp.com';
 
-  return (
-    <Layout>
-      <Card sx={{ mx: 3, py: 2.5, px: 3 }}>
-        <Box height="100%" mt={0.5} lineHeight={1}>
-          <Typography variant="h5" fontWeight="medium">
-            Las cuentas más activas en Twitter
-          </Typography>
-        </Box>
-      </Card>
+class Cuentas extends Component {
 
-      <Box sx={{ mx: 6, py: 6, px: 2 }}>
-        
-      </Box>
-    </Layout>
-  );
+  constructor(props) {
+      super(props);
+
+      this.handler = this.handler.bind(this);
+
+      this.state = {
+          items: [],
+          DataisLoaded: false
+      };
+
+  }
+
+  handler(event, newValue) {
+    fetch(serverHost + '/get/news/' + newValue)
+        .then((res) => res.json())
+        .then((json) => {
+            this.setState({
+                items: json,
+                topic: newValue,
+                DataisLoaded: true
+            });
+        });
+  }
+
+  render() {
+      const { items, topic, DataisLoaded } = this.state;
+
+      let header = <Header title='Las cuentas más activas en twitter'  />
+
+      if (!DataisLoaded) {
+        return (
+          <Layout>
+            {header}
+          </Layout>
+          );
+      }
+
+      return (
+        <Layout>
+          {header}
+          <Box mt={5} mb={3}>
+            <Grid container spacing={3} key="noticias">
+              {items.map((data) => {
+                return (
+                  <Timeline
+                    dataSource={{
+                      sourceType: 'profile',
+                      screenName: data.author_id
+                    }}
+                    options={{
+                      height: '400'
+                    }}
+                  />
+                );
+              })}
+            </Grid>
+          </Box>
+        </Layout>
+      );
+    }
 }
 
 export default Cuentas;

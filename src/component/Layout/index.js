@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import PropTypes from "prop-types";
-
 import Box from "../Box";
 
 function Layout({ children }) {
@@ -26,9 +24,5 @@ function Layout({ children }) {
     </Box>
   );
 }
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 export default Layout;

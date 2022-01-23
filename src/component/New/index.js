@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import Badge from "@mui/material/Badge";
+import Chip from "@mui/material/Chip";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
@@ -18,15 +18,12 @@ function New({ data }) {
   
   const renderTopic = function(topic) {
     return (
-      <Grid item sx={{ mx: 5, py: 1 }} key={topic}>
-        <Typography
-            component="a"
-            href={"/buscarTema/" + topic}
-            variant="caption"
-            color="secondary"
-            fontWeight="medium" >
-          <Badge variant="gradient" badgeContent={topic} color="secondary" size="xs" />
-        </Typography>
+      <Grid item sx={{ mx: 0, py: 0 }} key={topic}>
+        <Chip label={topic}
+              color="secondary"
+              component="a"
+              href={"/buscarTema/" + topic}
+              sx={{ cursor: 'pointer', maxWidth: '130px' }} />
       </Grid>
     );
   };
@@ -38,7 +35,6 @@ function New({ data }) {
         href={"/noticias/" + id}
         rel="noreferrer"
         fontSize={pxToRem(14)}
-        width={pxToRem(275)}
         lineHeight={2}>
         <Typography variant="button" pr={0.5} fontWeight="medium" >
           Noticias relacionadas
@@ -57,6 +53,7 @@ function New({ data }) {
         component="a"
         href={"/trending/" + id}
         rel="noreferrer"
+        style={{float: 'right'}}
         fontSize={pxToRem(18)}
         color="#55acee">
 
@@ -77,7 +74,7 @@ function New({ data }) {
                py={1}
                mb={1}>
             <Box mr={2}>
-              <Avatar src={data.image} alt={data.title} variant="square" size="xxl"/>
+              <Avatar src={data.image} alt={data.title} variant="square" size="l"/>
             </Box>
             <Box display="flex" flexDirection="column">
               <Typography variant="button" fontWeight="medium">
@@ -88,7 +85,7 @@ function New({ data }) {
 
           <Box display="flex" alignItems="center" px={1} py={0.5}>
             <Box mr={2}>
-              <Avatar src={mediaLogo} alt={data.paper} size="sm" />
+              <Avatar src={mediaLogo} alt={data.paper} size="s" />
             </Box>
             <Box display="flex" flexDirection="column">
               <Typography variant="button" fontWeight="medium">
@@ -99,16 +96,18 @@ function New({ data }) {
               </Typography>
             </Box>
           </Box>
-          <Grid container spacing={1} alignItems="center">
+          <Grid container 
+                px={1} 
+                sx={{ justifyContent: 'space-between' }}>
             {data.topics.slice(0, 3).map((topic) => renderTopic(topic))}
           </Grid>
-          <Box display="flex"
-               px={1} py={0.5} 
-               justify="space-between"
-               spacing={24}>
+          <Grid container
+                px={2}
+                py={2} 
+                sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}>
             {noticiasRelacionadas(data._id)}
             {twitterShare(data._id, data.tweetCount)}
-          </Box>
+          </Grid>
         </Card>
       </Grid>
   );

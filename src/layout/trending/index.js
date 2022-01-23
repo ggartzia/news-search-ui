@@ -7,15 +7,17 @@ import Header from "../../component/Header";
 import Box from "../../component/Box";
 import Typography from "../../component/Typography";
 import New from "../../component/New";
+import { Tweet } from 'react-twitter-widgets'
 
-const tabs = ["24 h", "72 h", "1 semana"];
+const tabs = ['24 h', '72 h', '1 semana'];
+const serverHost = 'https://news-puller.herokuapp.com';
 
 class Trending extends Component {
 
   constructor(props) {
       super(props);
       this.id = props.match.params.id;
-
+      
       this.handler = this.handler.bind(this);
 
       this.state = {
@@ -28,15 +30,24 @@ class Trending extends Component {
   }
 
   handler(event, newValue) {
-    let hours = "24";
+    let url = ''
 
-    if (newValue == 1) {
-      hours = "72"
-    } else if (newValue == 2) {
-      hours = "168"
-    } 
+    if (this.id) {
+      url = serverHost + '/get/tweets/' + this.id
 
-    fetch("https://news-puller.herokuapp.com/get/trending/" + hours)
+    } else {
+      let hours = '24'
+
+      if (newValue == 1) {
+        hours = '72'
+      } else if (newValue == 2) {
+        hours = '168'
+      }
+
+      url = serverHost + '/get/trending/' + hours
+    }
+
+    fetch(url)
         .then((res) => res.json())
         .then((json) => {
             this.setState({
@@ -48,36 +59,51 @@ class Trending extends Component {
   }
 
   render() {
-      const { items, tabValue, DataisLoaded } = this.state;
+    const { items, tabValue, DataisLoaded } = this.state;
 
-      if (!DataisLoaded) {
-        return (
-          <Layout>
-            <Header title="Las noticias más compartidas" tabs={tabs} selected={tabValue} />
-            <Box mt={5} mb={15}>
-              <Typography variant="h5" fontWeight="medium">
-                No se han encontrado noticias
-              </Typography>
-            </Box>
-          </Layout>
-          );
-      }
+    let header = <Header title='Las noticias más compartidas' tabs={tabs} selected={tabValue} handler={this.handler} />
 
+    if (this.id) {
+      header = <Header title='Distribución de la noticia en Twitter' />
+    }
+
+    if (!DataisLoaded) {
       return (
         <Layout>
-          <Header title="Últimas noticias" tabs={tabs} selected={tabValue} handler={this.handler} />
-          <Box mt={5} mb={3}>
-            <Grid container spacing={3} key="noticias">
-              {items.map((data) => {
+          {header}
+          <Box mt={5} mb={15}>
+            <Typography variant="h5" fontWeight="medium">
+              No se han encontrado noticias
+            </Typography>
+          </Box>
+        </Layout>
+        );
+    }
+
+    return (
+      <Layout>
+        {header}
+        <Box mt={5} mb={3} px={5}>
+          <Grid container
+                spacing={2}
+                sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}
+                key="noticias">
+            {items.map((data) => {
+              if (this.id) {
+                return (
+                  <Tweet tweetId={data.id} key={data._id}/>
+                );
+              } else {
                 return (
                   <New data={data} key={data._id}/>
                 );
-              })}
-            </Grid>
-          </Box>
-        </Layout>
-      );
-    }
+              }
+            })}
+          </Grid>
+        </Box>
+      </Layout>
+    );
+  }
 }
 
 export default Trending;

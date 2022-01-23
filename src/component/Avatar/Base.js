@@ -19,35 +19,21 @@ export default styled(Avatar)(({ theme, ownerState }) => {
   let sizeValue;
 
   switch (size) {
-    case "xs":
-      sizeValue = {
-        width: pxToRem(24),
-        height: pxToRem(24),
-        fontSize: fontSize.xs,
-      };
-      break;
-    case "sm":
+    case "s":
       sizeValue = {
         width: pxToRem(36),
         height: pxToRem(36),
         fontSize: fontSize.sm,
       };
       break;
-    case "lg":
+    case "m":
       sizeValue = {
-        width: pxToRem(58),
-        height: pxToRem(58),
+        width: pxToRem(48),
+        height: pxToRem(48),
         fontSize: fontSize.sm,
       };
       break;
-    case "xl":
-      sizeValue = {
-        width: pxToRem(74),
-        height: pxToRem(74),
-        fontSize: fontSize.md,
-      };
-      break;
-    case "xxl":
+    case "l":
       sizeValue = {
         width: pxToRem(110),
         height: pxToRem(110),

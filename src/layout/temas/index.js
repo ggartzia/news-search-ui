@@ -8,7 +8,8 @@ import Box from "../../component/Box";
 import MiniCard from "../../component/MiniCard";
 import Typography from "../../component/Typography";
 
-const tabs = ["24 h", "72 h", "1 semana"];
+const tabs = ['Noticias', 'Deportes', 'Corazón'];
+const serverHost = 'https://news-puller.herokuapp.com';
 
 class Temas extends Component {
 
@@ -27,15 +28,15 @@ class Temas extends Component {
   }
 
   handler(event, newValue) {
-    let hours = "24";
-
-    if (this.state.tabValue == 1) {
-      hours = "72"
-    } else if (this.state.tabValue == 2) {
-      hours = "168"
+    let theme = 'noticias';
+    
+    if (newValue == 1) {
+      theme = 'deportes'
+    } else if (newValue == 2) {
+      theme = 'corazon'
     } 
 
-    fetch("https://news-puller.herokuapp.com/get/topics/" + hours)
+    fetch(serverHost + '/get/topics/' + theme)
         .then((res) => res.json())
         .then((json) => {
             this.setState({
@@ -66,12 +67,14 @@ class Temas extends Component {
 
   render() {
       const { items, tabValue, DataisLoaded } = this.state;
-      const headline = "Los temas más utilizados en las noticias"
+      const headline = 'Los temas más utilizados en las noticias'
+
+      let header = <Header title='Los temas más utilizados en las noticias' tabs={tabs} selected={tabValue} handler={this.handler} />
 
       if (!DataisLoaded) {
         return (
           <Layout>
-            <Header title={headline} tabs={tabs} selected={tabValue} />
+            {header}
             <Box mt={5} mb={15}>
               <Typography variant="h5" fontWeight="medium">
                 No se han encontrado temas
@@ -83,7 +86,7 @@ class Temas extends Component {
 
       return (
         <Layout>
-          <Header title={headline} tabs={tabs} selected={tabValue} handler={this.handler} />
+          {header}
           <Box mt={5} mb={3}>
             <Grid container spacing={3} key="temas">
               {items.map((data) => {

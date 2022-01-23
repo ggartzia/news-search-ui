@@ -9,6 +9,8 @@ import Typography from "../../component/Typography";
 import Search from "../../component/Search";
 import New from "../../component/New";
 
+const serverHost = 'https://news-puller.herokuapp.com';
+
 class BuscarTema extends Component {
 
   constructor(props) {
@@ -16,23 +18,22 @@ class BuscarTema extends Component {
 
       this.handler = this.handler.bind(this);
 
+      this.topic = props.match.params.topic;
+
       this.state = {
           items: [],
           topic: null,
           DataisLoaded: false
       };
 
-      const loadTopic = props.match.params.topic;
-
-      if (loadTopic != null) {
-        this.handler(null, loadTopic);
+      if (this.topic != null) {
+        this.handler(null, this.topic);
       }
 
   }
 
   handler(event, newValue) {
-    console.log("helloooo", newValue);
-    fetch("https://news-puller.herokuapp.com/get/news/" + newValue)
+    fetch(serverHost + '/get/news/' + newValue)
         .then((res) => res.json())
         .then((json) => {
             this.setState({
@@ -45,29 +46,25 @@ class BuscarTema extends Component {
 
   render() {
       const { items, topic, DataisLoaded } = this.state;
+      const title = this.topic ? this.topic : 'Buscar tema...'
+
+      const search = (
+        <Card>
+          <Search title={title} onChange={this.handler} />
+        </Card>
+        )
 
       if (!DataisLoaded) {
         return (
           <Layout>
-            <Card>
-                <Search title="Buscar tema..." onChange={this.handler} />
-            </Card>
-
-            <Box mt={5} mb={15}>
-              <Typography variant="h5" fontWeight="medium">
-                No se han encontrado noticias sobre {topic}
-              </Typography>
-            </Box>
+            {search}
           </Layout>
           );
       }
 
       return (
         <Layout>
-          <Card>
-            <Search title="Buscar tema..." handler={this.handler} />
-          </Card>
-          
+          {search}
           <Box mt={5} mb={3}>
             <Grid container spacing={3} key="noticias">
               {items.map((data) => {

@@ -1,8 +1,5 @@
 import { useMemo } from "react";
 
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
 // uuid is a library for generating unique id
 import { v4 as uuidv4 } from "uuid";
 
@@ -79,7 +76,7 @@ function Lista({ columns, rows }) {
           >
             <Box display="flex" alignItems="center" py={0.5} px={1}>
               <Box mr={2}>
-                <Avatar src={row[name][0]} name={row[name][1]} variant="rounded" size="sm" />
+                <Avatar src={row[name][0]} name={row[name][1]} variant="rounded" size="s" />
               </Box>
               <Typography variant="button" fontWeight="medium" sx={{ width: "max-content" }}>
                 {row[name][1]}
@@ -133,12 +130,6 @@ function Lista({ columns, rows }) {
 Lista.defaultProps = {
   columns: [],
   rows: [{}],
-};
-
-// Typechecking props for the Table
-Lista.propTypes = {
-  columns: PropTypes.arrayOf(PropTypes.object),
-  rows: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Lista;

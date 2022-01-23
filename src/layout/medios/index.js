@@ -11,6 +11,9 @@ import NewspaperIcon from '@mui/icons-material/Newspaper';
 import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
+const serverHost = 'https://news-puller.herokuapp.com';
+const apiEndpoint = serverHost + '/get/media';
+
 class Medios extends React.Component {
 
   constructor(props) {
@@ -34,7 +37,7 @@ class Medios extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://news-puller.herokuapp.com/get/media/noticias")
+    fetch(apiEndpoint + '/noticias')
         .then((res) => res.json())
         .then((json) => {
             this.setState(prevState => {
@@ -43,7 +46,7 @@ class Medios extends React.Component {
             });
         });
     
-    fetch("https://news-puller.herokuapp.com/get/media/deportes")
+    fetch(apiEndpoint + '/deportes')
         .then((res) => res.json())
         .then((json) => {
             this.setState(prevState => {
@@ -52,7 +55,7 @@ class Medios extends React.Component {
             });
         });
     
-    fetch("https://news-puller.herokuapp.com/get/media/corazon")
+    fetch(apiEndpoint + '/corazon')
         .then((res) => res.json())
         .then((json) => {
             this.setState(prevState => {
@@ -72,11 +75,14 @@ class Medios extends React.Component {
 
   obtenerDatos(items) {
     return items.map( (data) => {
+      const execute = `${serverHost}/fetch/${data.paper}`
+      const mediaLogo = `/medio/${data.paper}.jpg`;
+
       return {
         nombre: (
           <Box display="flex" alignItems="center" px={1} py={0.5}>
             <Box mr={2}>
-              <Avatar src={data.logo} alt={data.paper} size="sm" variant="rounded" />
+              <Avatar src={mediaLogo} alt={data.paper} size="s" variant="rounded" />
             </Box>
             <Box display="flex" flexDirection="column">
               <Typography variant="button" fontWeight="medium">
@@ -106,7 +112,7 @@ class Medios extends React.Component {
         accion: (
           <Typography
             component="a"
-            href="#"
+            href={execute}
             variant="caption"
             color="secondary"
             fontWeight="medium" >

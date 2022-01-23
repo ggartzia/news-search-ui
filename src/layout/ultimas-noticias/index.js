@@ -8,12 +8,14 @@ import Box from "../../component/Box";
 import Typography from "../../component/Typography";
 import New from "../../component/New";
 
-const tabs = ["Noticias", "Deportes", "Corazón"];
+const tabs = ['Noticias', 'Deportes', 'Corazón'];
+const serverHost = 'https://news-puller.herokuapp.com';
 
 class UltimasNoticias extends Component {
 
   constructor(props) {
       super(props);
+      this.id = props.match.params.id;
 
       this.handler = this.handler.bind(this);
 
@@ -27,15 +29,22 @@ class UltimasNoticias extends Component {
   }
 
   handler(event, newValue) {
-    let theme = "noticias";
-    
-    if (newValue == 1) {
-      theme = "deportes"
-    } else if (newValue == 2) {
-      theme = "corazon"
-    } 
+    let url = ''
 
-    fetch('https://news-puller.herokuapp.com/get/' + theme +'/24')
+    if (this.id) {
+      url = serverHost + '/get/relatedNews/' + this.id
+    } else {
+      let theme = 'noticias';
+      
+      if (newValue == 1) {
+        theme = 'deportes'
+      } else if (newValue == 2) {
+        theme = 'corazon'
+      } 
+      url = serverHost + '/get/' + theme +'/24'
+    }
+
+    fetch(url)
         .then((res) => res.json())
         .then((json) => {
             this.setState({
@@ -49,10 +58,16 @@ class UltimasNoticias extends Component {
   render() {
     const { items, tabValue, DataisLoaded } = this.state;
 
+    let header = <Header title='Últimas noticias' tabs={tabs} selected={tabValue} handler={this.handler} />
+
+    if (this.id) {
+      header = <Header title='Noticias relacionadas' />
+    }
+
     if (!DataisLoaded) {
       return (
         <Layout>
-          <Header title="Últimas noticias" tabs={tabs} selected={tabValue} />
+          {header}
           <Box mt={5} mb={15}>
             <Typography variant="h5" fontWeight="medium">
               No se han encontrado noticias
@@ -64,7 +79,7 @@ class UltimasNoticias extends Component {
 
     return (
       <Layout>
-        <Header title="Últimas noticias" tabs={tabs} selected={tabValue} handler={this.handler} />
+        {header}
         <Box mt={5} mb={3}>
           <Grid container spacing={3} key="noticias">
             {items.map((data) => {
