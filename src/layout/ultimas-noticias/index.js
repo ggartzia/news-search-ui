@@ -32,7 +32,7 @@ class UltimasNoticias extends Component {
     let url = ''
 
     if (this.id) {
-      url = serverHost + '/get/relatedNews/' + this.id
+      url = serverHost + '/get/relatedNews/' + this.id + '/page/0'
     } else {
       let theme = 'noticias';
       
@@ -41,7 +41,7 @@ class UltimasNoticias extends Component {
       } else if (newValue == 2) {
         theme = 'corazon'
       } 
-      url = serverHost + '/get/' + theme +'/24'
+      url = serverHost + '/get/' + theme +'/24/page/0'
     }
 
     fetch(url)

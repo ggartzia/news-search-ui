@@ -33,7 +33,7 @@ class BuscarTema extends Component {
   }
 
   handler(event, newValue) {
-    fetch(serverHost + '/get/news/' + newValue)
+    fetch(serverHost + '/get/news/' + newValue + '/page/0')
         .then((res) => res.json())
         .then((json) => {
             this.setState({

@@ -1,6 +1,11 @@
 import React, { Fragment, Component } from "react";
 import { Waypoint } from "react-waypoint";
 import MUIDataTable from "mui-datatables";
+import Grid from "@mui/material/Grid";
+
+import { Tweet } from 'react-twitter-widgets'
+
+const serverHost = 'https://news-puller.herokuapp.com';
 
 class Tweets extends Component {
   constructor(props) {
@@ -17,7 +22,7 @@ class Tweets extends Component {
   }
 
   getTweets(pageNum) {
-    const url = serverHost + '/get/tweets/' + this.id 
+    const url = serverHost + '/get/tweets/' + this.id + '/page/' + pageNum
     console.log( '/page/', pageNum)
 
     fetch(url)

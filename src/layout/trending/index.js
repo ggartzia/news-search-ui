@@ -33,7 +33,7 @@ class Trending extends Component {
     let url = ''
 
     if (this.id) {
-      url = serverHost + '/get/tweets/' + this.id
+      url = serverHost + '/get/tweets/' + this.id + '/page/0'
 
     } else {
       let hours = '24'
@@ -44,7 +44,7 @@ class Trending extends Component {
         hours = '168'
       }
 
-      url = serverHost + '/get/trending/' + hours
+      url = serverHost + '/get/trending/' + hours + '/page/0'
     }
 
     fetch(url)
