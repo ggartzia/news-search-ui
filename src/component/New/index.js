@@ -18,11 +18,11 @@ function New({ data }) {
   
   const renderTopic = function(topic) {
     return (
-      <Grid item sx={{ mx: 0, py: 0 }} key={topic}>
-        <Chip label={topic}
+      <Grid item sx={{ mx: 0, py: 0 }} key={topic.name}>
+        <Chip label={topic.name}
               color="secondary"
               component="a"
-              href={"/buscarTema/" + topic}
+              href={"/buscarTema/" + topic.name}
               sx={{ cursor: 'pointer', maxWidth: '130px', textTransform: 'capitalize' }} />
       </Grid>
     );
