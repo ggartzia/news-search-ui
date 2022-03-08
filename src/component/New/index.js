@@ -23,7 +23,7 @@ function New({ data }) {
               color="secondary"
               component="a"
               href={"/buscarTema/" + topic}
-              sx={{ cursor: 'pointer', maxWidth: '130px' }} />
+              sx={{ cursor: 'pointer', maxWidth: '130px', textTransform: 'capitalize' }} />
       </Grid>
     );
   };
