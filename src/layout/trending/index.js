@@ -91,11 +91,11 @@ class Trending extends Component {
             {items.map((data) => {
               if (this.id) {
                 return (
-                  <Tweet tweetId={data.id} key={data._id}/>
+                  <Tweet tweetId={data.id} key={data.id}/>
                 );
               } else {
                 return (
-                  <New data={data} key={data._id}/>
+                  <New data={data} key={data.id}/>
                 );
               }
             })}
