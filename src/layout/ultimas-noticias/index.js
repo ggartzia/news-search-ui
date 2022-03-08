@@ -84,7 +84,7 @@ class UltimasNoticias extends Component {
           <Grid container spacing={3} key="noticias">
             {items.map((data) => {
               return (
-                <New data={data} key={data._id}/>
+                <New data={data} key={data.id}/>
               );
             })}
           </Grid>
