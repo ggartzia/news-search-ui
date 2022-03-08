@@ -58,13 +58,13 @@ function New({ data }) {
         color="#55acee">
 
         <TwitterIcon />
-        {"  " + tweetCount}
+        {"  " + (tweetCount || 0)}
       </Box>
     );
   };
 
   return (
-      <Grid item xs={12} md={6} xl={4} key={data._id}>
+      <Grid item xs={12} md={6} xl={4} key={data.id}>
         <Card>
           <Box component="a"
                href={data.fullUrl}
@@ -105,8 +105,8 @@ function New({ data }) {
                 px={2}
                 py={2} 
                 sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}>
-            {noticiasRelacionadas(data._id)}
-            {twitterShare(data._id, data.tweetCount)}
+            {noticiasRelacionadas(data.id)}
+            {twitterShare(data.id, data.tweetCount)}
           </Grid>
         </Card>
       </Grid>
