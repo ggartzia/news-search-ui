@@ -1,12 +1,12 @@
-import { Component } from "react";
+import { Component } from 'react';
 
+import InfiniteScroll from 'react-infinite-scroll-component';
 import Grid from "@mui/material/Grid";
-
-import Layout from "../../component/Layout";
-import Header from "../../component/Header";
-import Box from "../../component/Box";
-import Typography from "../../component/Typography";
-import New from "../../component/New";
+import Layout from '../../component/Layout';
+import Header from '../../component/Header';
+import Box from '../../component/Box';
+import Typography from '../../component/Typography';
+import New from '../../component/New';
 
 const tabs = ['Noticias', 'Deportes', 'Corazón'];
 const serverHost = 'https://news-puller.herokuapp.com';
@@ -15,48 +15,62 @@ class UltimasNoticias extends Component {
 
   constructor(props) {
       super(props);
-      this.id = props.match.params.id;
-
-      this.handler = this.handler.bind(this);
 
       this.state = {
-          items: [],
-          tabValue: 0,
-          DataisLoaded: false
+        id: props.match.params.id,
+        items: [],
+        tabValue: 0,
+        next: 0
       };
 
-      this.handler(null, 0);
+      this.handler = this.handler.bind(this);
+      this.loadMore = this.loadMore.bind(this);
   }
 
-  handler(event, newValue) {
-    let url = ''
+  handler(event, tab) {
+    this.setState({
+      id: this.state.id,
+      items:[],
+      tabValue: tab,
+      next: 0
+    }, this.loadMore);
+  }
 
-    if (this.id) {
-      url = serverHost + '/get/relatedNews/' + this.id + '/page/0'
+  componentDidMount() {
+    this.loadMore()
+  }
+
+  loadMore() {
+    let url = serverHost + '/get/'
+    const { next, tabValue, id, items } = this.state;
+
+    if (id) {
+      url += 'relatedNews/' + id + '/page/' + next
     } else {
       let theme = 'noticias';
       
-      if (newValue == 1) {
+      if (tabValue == 1) {
         theme = 'deportes'
-      } else if (newValue == 2) {
+      } else if (tabValue == 2) {
         theme = 'corazon'
       } 
-      url = serverHost + '/get/' + theme +'/24/page/0'
+      url += theme +'/24/page/' + next
     }
 
     fetch(url)
         .then((res) => res.json())
         .then((json) => {
-            this.setState({
-                items: json,
-                tabValue: newValue,
-                DataisLoaded: true
-            });
+          this.setState({
+            items: items.concat(json),
+            id: id,
+            tabValue: tabValue,
+            next: next + 1
+          })
         });
   }
 
   render() {
-    const { items, tabValue, DataisLoaded } = this.state;
+    const { items, tabValue } = this.state;
 
     let header = <Header title='Últimas noticias' tabs={tabs} selected={tabValue} handler={this.handler} />
 
@@ -64,30 +78,24 @@ class UltimasNoticias extends Component {
       header = <Header title='Noticias relacionadas' />
     }
 
-    if (!DataisLoaded) {
-      return (
-        <Layout>
-          {header}
-          <Box mt={5} mb={15}>
-            <Typography variant="h5" fontWeight="medium">
-              No se han encontrado noticias
-            </Typography>
-          </Box>
-        </Layout>
-        );
-    }
-
     return (
       <Layout>
         {header}
         <Box mt={5} mb={3}>
-          <Grid container spacing={3} key="noticias">
-            {items.map((data) => {
-              return (
+          <InfiniteScroll
+            data-testid="news-infinite-scroll"
+            pageStart={0}
+            dataLength={items?.length}
+            next={this.loadMore}
+            loader={<Typography variant="h5" fontWeight="medium">Buscando noticias...</Typography>}
+            hasMore={true}
+          >
+            <Grid container spacing={3} key="noticias">
+              {items?.map((data) => (
                 <New data={data} key={data.id}/>
-              );
-            })}
-          </Grid>
+              ))}
+            </Grid>
+          </InfiniteScroll>
         </Box>
       </Layout>
     );

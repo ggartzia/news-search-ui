@@ -58,7 +58,7 @@ class Temas extends Component {
             fontWeight="medium" > 
           <MiniCard
             title={topic.name}
-            count={topic.numNews}
+            count={topic.usage}
             icon="emoji_events" />
         </Typography>
       </Grid>

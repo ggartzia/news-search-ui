@@ -16,14 +16,13 @@ class Trending extends Component {
 
   constructor(props) {
       super(props);
-      this.id = props.match.params.id;
       
       this.handler = this.handler.bind(this);
 
       this.state = {
+          id: props.match.params.id,
           items: [],
-          tabValue: 0,
-          DataisLoaded: false
+          tabValue: 0
       };
 
       this.handler(null, 0);
@@ -32,8 +31,8 @@ class Trending extends Component {
   handler(event, newValue) {
     let url = ''
 
-    if (this.id) {
-      url = serverHost + '/get/tweets/' + this.id + '/page/0'
+    if (this.state.id) {
+      url = serverHost + '/get/tweets/' + this.state.id + '/page/0'
 
     } else {
       let hours = '24'
@@ -51,33 +50,20 @@ class Trending extends Component {
         .then((res) => res.json())
         .then((json) => {
             this.setState({
+                id: this.state.id,
                 items: json,
-                tabValue: newValue,
-                DataisLoaded: true
+                tabValue: newValue
             });
         });
   }
 
   render() {
-    const { items, tabValue, DataisLoaded } = this.state;
+    const { id, items, tabValue } = this.state;
 
     let header = <Header title='Las noticias más compartidas' tabs={tabs} selected={tabValue} handler={this.handler} />
 
     if (this.id) {
       header = <Header title='Distribución de la noticia en Twitter' />
-    }
-
-    if (!DataisLoaded) {
-      return (
-        <Layout>
-          {header}
-          <Box mt={5} mb={15}>
-            <Typography variant="h5" fontWeight="medium">
-              No se han encontrado noticias
-            </Typography>
-          </Box>
-        </Layout>
-        );
     }
 
     return (
@@ -89,13 +75,13 @@ class Trending extends Component {
                 sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}
                 key="noticias">
             {items.map((data) => {
-              if (this.id) {
+              if (id) {
                 return (
-                  <Tweet tweetId={data.id} key={data.id}/>
+                  <Tweet tweetId={data._id.toString()} key={data._id}/>
                 );
               } else {
                 return (
-                  <New data={data} key={data.id}/>
+                  <New data={data} key={data._id}/>
                 );
               }
             })}
