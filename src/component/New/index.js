@@ -17,12 +17,13 @@ function New({ data }) {
   const mediaLogo = `/medio/${data.paper}.jpg`;
   
   const renderTopic = function(topic) {
+    const name = topic.name || topic;
     return (
-      <Grid item sx={{ mx: 0, py: 0 }} key={topic.name}>
-        <Chip label={topic.name}
+      <Grid item sx={{ mx: 0, py: 0 }} key={name}>
+        <Chip label={name}
               color="secondary"
               component="a"
-              href={"/buscarTema/" + topic.name}
+              href={"/buscarTema/" + name}
               sx={{ cursor: 'pointer', maxWidth: '130px', textTransform: 'capitalize' }} />
       </Grid>
     );
@@ -64,8 +65,8 @@ function New({ data }) {
   };
 
   return (
-      <Grid item xs={12} md={6} xl={4} key={data.id}>
-        <Card>
+      <Grid item ml={3} mt={3} mb={3} key={data.id}>
+        <Card style={{width: "340px"}}>
           <Box component="a"
                href={data.fullUrl}
                display="flex"

@@ -15,7 +15,7 @@ function Sidenav({ routes }) {
   const collapseName = pathname.split("/").slice(1)[0];
 
   const renderRoutes = routes.map(({ type, title, key, exact, route }) => {
-    const selected = (collapseName === key ? 10 : 5);
+    const selected = (collapseName === key ? "italic" : "normal");
     
     if (type === "link") {
       if (exact) {
@@ -25,7 +25,8 @@ function Sidenav({ routes }) {
               <Typography
                 variant="button"
                 fontWeight="medium"
-                pl={selected}
+                fontStyle={selected}
+                pl={5}
                 mt={2}
                 mb={1}
                 ml={1}

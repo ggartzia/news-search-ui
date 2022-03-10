@@ -1,12 +1,12 @@
 import { Component } from "react";
 
+import InfiniteScroll from 'react-infinite-scroll-component';
 import Grid from "@mui/material/Grid";
 
 import Layout from "../../component/Layout";
+import Header from "../../component/Header";
 import Box from "../../component/Box";
-import Card from "@mui/material/Card";
 import Typography from "../../component/Typography";
-import Search from "../../component/Search";
 import { Timeline } from 'react-twitter-widgets'
 
 const serverHost = 'https://news-puller.herokuapp.com';
@@ -14,47 +14,51 @@ const serverHost = 'https://news-puller.herokuapp.com';
 class Cuentas extends Component {
 
   constructor(props) {
-      super(props);
+    super(props);
 
-      this.handler = this.handler.bind(this);
+    this.state = {
+      items: [],
+      next: 0
+    };
 
-      this.state = {
-          items: [],
-          DataisLoaded: false
-      };
-
+    this.handler = this.handler.bind(this);
+    this.loadMore = this.loadMore.bind(this);
   }
 
-  handler(event, newValue) {
-    fetch(serverHost + '/get/news/' + newValue + '/page/0')
-        .then((res) => res.json())
-        .then((json) => {
-            this.setState({
-                items: json,
-                topic: newValue,
-                DataisLoaded: true
-            });
+  componentDidMount() {
+    this.loadMore()
+  }
+
+  loadMore() {
+    const url = serverHost + '/get/users/page/' + next
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          items: items.concat(json),
+          next: next + 1
         });
+      });
   }
 
   render() {
-      const { items, topic, DataisLoaded } = this.state;
+    const { items } = this.state;
 
-      let header = <Header title='Las cuentas más activas en twitter'  />
+    let header = <Header title='Las cuentas más activas en twitter'  />
 
-      if (!DataisLoaded) {
-        return (
-          <Layout>
-            {header}
-          </Layout>
-          );
-      }
-
-      return (
-        <Layout>
-          {header}
-          <Box mt={5} mb={3}>
-            <Grid container spacing={3} key="noticias">
+    return (
+      <Layout>
+        {header}
+        <Box mt={5} mb={3} px={5}>
+          <InfiniteScroll
+            data-testid="users-infinite-scroll"
+            pageStart={0}
+            dataLength={items?.length}
+            next={this.loadMore}
+            loader={<Typography variant="h5" fontWeight="medium">Buscando...</Typography>}
+            hasMore={true}
+          >
+            <Grid container spacing={3} key="users">
               {items.map((data) => {
                 return (
                   <Timeline
@@ -69,10 +73,11 @@ class Cuentas extends Component {
                 );
               })}
             </Grid>
-          </Box>
-        </Layout>
-      );
-    }
+          </InfiniteScroll>
+        </Box>
+      </Layout>
+    );
+  }
 }
 
 export default Cuentas;

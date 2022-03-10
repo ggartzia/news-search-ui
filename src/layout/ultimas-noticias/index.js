@@ -81,7 +81,7 @@ class UltimasNoticias extends Component {
     return (
       <Layout>
         {header}
-        <Box mt={5} mb={3}>
+        <Box mt={3}>
           <InfiniteScroll
             data-testid="news-infinite-scroll"
             pageStart={0}
@@ -90,7 +90,7 @@ class UltimasNoticias extends Component {
             loader={<Typography variant="h5" fontWeight="medium">Buscando noticias...</Typography>}
             hasMore={true}
           >
-            <Grid container spacing={3} key="noticias">
+            <Grid container key="noticias">
               {items?.map((data) => (
                 <New data={data} key={data.id}/>
               ))}

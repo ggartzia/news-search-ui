@@ -1,16 +1,15 @@
 // @mui material components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
 
 import Box from "../Box";
 import Typography from "../Typography";
 
-function MiniCard({ title, count, icon }) {
+function MiniCard({ title, count }) {
   return (
     <Card>
       <Box bgColor="white" variant="gradient">
-        <Box p={2}>
+        <Box p={2} style={{width: "220px"}}>
           <Grid container alignItems="center">
             <Grid item xs={8}>
               <Box ml={0} lineHeight={1}>
@@ -19,14 +18,6 @@ function MiniCard({ title, count, icon }) {
                   fontWeight="bold"
                   color="dark">
                   {title}
-                </Typography>
-                <Typography
-                  variant="button"
-                  color="text"
-                  opacity={1}
-                  textTransform="capitalize"
-                  fontWeight="medium">
-                  Utilizado en {count} noticias
                 </Typography>
               </Box>
             </Grid>
@@ -38,15 +29,14 @@ function MiniCard({ title, count, icon }) {
                 width="3rem"
                 height="3rem"
                 marginLeft="auto"
+                fontWeight="bold"
                 borderRadius="md"
                 display="flex"
                 justifyContent="center"
                 alignItems="center"
                 shadow="md"
               >
-                <Icon fontSize="small" color="inherit">
-                  {icon}
-                </Icon>
+                {count}
               </Box>
             </Grid>
           </Grid>

@@ -1,5 +1,6 @@
 import { Component } from "react";
 
+import InfiniteScroll from 'react-infinite-scroll-component';
 import Grid from "@mui/material/Grid";
 
 import Layout from "../../component/Layout";
@@ -16,45 +17,60 @@ class Trending extends Component {
 
   constructor(props) {
       super(props);
-      
-      this.handler = this.handler.bind(this);
 
       this.state = {
           id: props.match.params.id,
           items: [],
-          tabValue: 0
+          tabValue: 0,
+          next: 0
       };
 
-      this.handler(null, 0);
+      this.handler = this.handler.bind(this);
+      this.loadMore = this.loadMore.bind(this);
   }
 
-  handler(event, newValue) {
-    let url = ''
+  handler(event, tab) {
+    this.setState({
+      id: this.state.id,
+      items:[],
+      tabValue: tab,
+      next: 0
+    }, this.loadMore);
+  }
 
-    if (this.state.id) {
-      url = serverHost + '/get/tweets/' + this.state.id + '/page/0'
+  componentDidMount() {
+    this.loadMore()
+  }
+
+  loadMore() {
+    let url = serverHost + '/get';
+    const { next, tabValue, id, items } = this.state;
+
+    if (id) {
+      url += '/tweets/' + id + '/page/' + next
 
     } else {
       let hours = '24'
 
-      if (newValue == 1) {
+      if (tabValue == 1) {
         hours = '72'
-      } else if (newValue == 2) {
+      } else if (tabValue == 2) {
         hours = '168'
       }
 
-      url = serverHost + '/get/trending/' + hours + '/page/0'
+      url += '/trending/' + hours + '/page/' + next
     }
 
     fetch(url)
-        .then((res) => res.json())
-        .then((json) => {
-            this.setState({
-                id: this.state.id,
-                items: json,
-                tabValue: newValue
-            });
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          items: items.concat(json),
+          id: id,
+          tabValue: tabValue,
+          next: next + 1
         });
+      });
   }
 
   render() {
@@ -69,23 +85,29 @@ class Trending extends Component {
     return (
       <Layout>
         {header}
-        <Box mt={5} mb={3} px={5}>
-          <Grid container
-                spacing={2}
-                sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}
-                key="noticias">
-            {items.map((data) => {
-              if (id) {
-                return (
-                  <Tweet tweetId={data._id.toString()} key={data._id}/>
-                );
-              } else {
-                return (
-                  <New data={data} key={data._id}/>
-                );
-              }
-            })}
-          </Grid>
+        <Box mt={2}>
+          <InfiniteScroll
+            data-testid="news-infinite-scroll"
+            pageStart={0}
+            dataLength={items?.length}
+            next={this.loadMore}
+            loader={<Typography variant="h5" fontWeight="medium">Buscando...</Typography>}
+            hasMore={true}
+          >
+            <Grid container key="noticias">
+              {items.map((data) => {
+                if (id) {
+                  return (
+                    <Tweet tweetId={data._id.toString()} key={data._id}/>
+                  );
+                } else {
+                  return (
+                    <New data={data} key={data.id}/>
+                  );
+                }
+              })}
+            </Grid>
+          </InfiniteScroll>
         </Box>
       </Layout>
     );
