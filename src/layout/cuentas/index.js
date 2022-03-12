@@ -2,12 +2,13 @@ import { Component } from "react";
 
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import Avatar from "@mui/material/Avatar";
 
 import Layout from "../../component/Layout";
 import Header from "../../component/Header";
 import Box from "../../component/Box";
 import Typography from "../../component/Typography";
-import { Timeline } from 'react-twitter-widgets'
 
 const serverHost = 'https://news-puller.herokuapp.com';
 
@@ -21,7 +22,6 @@ class Cuentas extends Component {
       next: 0
     };
 
-    this.handler = this.handler.bind(this);
     this.loadMore = this.loadMore.bind(this);
   }
 
@@ -30,7 +30,9 @@ class Cuentas extends Component {
   }
 
   loadMore() {
-    const url = serverHost + '/get/users/page/' + next
+    const { next, items } = this.state;
+    const url = serverHost + '/get/users/page/' + next;
+
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
@@ -41,6 +43,34 @@ class Cuentas extends Component {
       });
   }
 
+  renderUser(data) {
+    return (
+      <Grid item ml={3} mt={3} mb={3} key={data.id}>
+        <Card style={{width: "330px"}}>
+          <Box component="a"
+               href={"/cuenta/" + data.id}
+               display="flex"
+               alignItems="center"
+               px={1}
+               py={1}
+               mb={1}>
+            <Box mr={2}>
+              <Avatar src={data.image} alt={data.name} sx={{ width: 56, height: 56 }} />
+            </Box>
+            <Box display="flex" flexDirection="column">
+              <Typography variant="button" fontWeight="medium">
+                {data.name}
+              </Typography>
+              <Typography variant="caption" color="secondary">
+                {data.tweets} noticias compartidas
+              </Typography>
+            </Box>
+          </Box>
+        </Card>
+      </Grid>
+    );
+  }
+
   render() {
     const { items } = this.state;
 
@@ -49,7 +79,7 @@ class Cuentas extends Component {
     return (
       <Layout>
         {header}
-        <Box mt={5} mb={3} px={5}>
+        <Box mt={5} mb={3} ml={1}>
           <InfiniteScroll
             data-testid="users-infinite-scroll"
             pageStart={0}
@@ -58,19 +88,9 @@ class Cuentas extends Component {
             loader={<Typography variant="h5" fontWeight="medium">Buscando...</Typography>}
             hasMore={true}
           >
-            <Grid container spacing={3} key="users">
+            <Grid container spacing={1} key="users">
               {items.map((data) => {
-                return (
-                  <Timeline
-                    dataSource={{
-                      sourceType: 'profile',
-                      screenName: data.author_id
-                    }}
-                    options={{
-                      height: '400'
-                    }}
-                  />
-                );
+                return this.renderUser(data);
               })}
             </Grid>
           </InfiniteScroll>

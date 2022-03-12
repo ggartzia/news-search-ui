@@ -44,12 +44,14 @@ class Temas extends Component {
     const { next, tabValue, items } = this.state;
     
     if (tabValue == 1) {
-      url += 'deportes'
+      url += 'deportes';
     } else if (tabValue == 2) {
-      url += 'corazon'
+      url += 'corazon';
     } else {
-      url += 'noticias'
+      url += 'noticias';
     }
+
+    url += '/page/' + next;
 
     fetch(url)
       .then((res) => res.json())

@@ -4,14 +4,13 @@ import { useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 // @mui material components
-import { Table as MuiTable } from "@mui/material";
+import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 
 // Soft UI Dashboard PRO React components
 import Box from "../Box";
-import Avatar from "../Avatar";
 import Typography from "../Typography";
 
 // Soft UI Dashboard PRO React base styles
@@ -64,28 +63,7 @@ function Lista({ columns, rows }) {
     const rowKey = `row-${key}`;
 
     const tableRow = columns.map(({ name, align }) => {
-      let template;
-
-      if (Array.isArray(row[name])) {
-        template = (
-          <Box
-            key={uuidv4()}
-            component="td"
-            p={1}
-            borderBottom={row.hasBorder ? `${borderWidth[1]} solid ${light.main}` : null}
-          >
-            <Box display="flex" alignItems="center" py={0.5} px={1}>
-              <Box mr={2}>
-                <Avatar src={row[name][0]} name={row[name][1]} variant="rounded" size="s" />
-              </Box>
-              <Typography variant="button" fontWeight="medium" sx={{ width: "max-content" }}>
-                {row[name][1]}
-              </Typography>
-            </Box>
-          </Box>
-        );
-      } else {
-        template = (
+      return (
           <Box
             key={uuidv4()}
             component="td"
@@ -103,9 +81,6 @@ function Lista({ columns, rows }) {
             </Typography>
           </Box>
         );
-      }
-
-      return template;
     });
 
     return <TableRow key={rowKey}>{tableRow}</TableRow>;
@@ -114,12 +89,12 @@ function Lista({ columns, rows }) {
   return useMemo(
     () => (
       <TableContainer>
-        <MuiTable>
+        <Table>
           <Box component="thead">
             <TableRow>{renderColumns}</TableRow>
           </Box>
           <TableBody>{renderRows}</TableBody>
-        </MuiTable>
+        </Table>
       </TableContainer>
     ),
     [columns, rows]

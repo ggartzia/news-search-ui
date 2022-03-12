@@ -3,10 +3,10 @@ import { forwardRef } from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Chip from "@mui/material/Chip";
+import Avatar from "@mui/material/Avatar";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-import Avatar from "../Avatar";
 import Box from "../Box";
 import Typography from "../Typography";
 
@@ -71,11 +71,11 @@ function New({ data }) {
                href={data.fullUrl}
                display="flex"
                alignItems="center"
-               px={1}
-               py={1}
+               px={2}
+               py={2}
                mb={1}>
             <Box mr={2}>
-              <Avatar src={data.image} alt={data.title} variant="square" size="l"/>
+              <Avatar src={data.image} alt={data.title} variant="square" sx={{ width: 100, height: 100 }} />
             </Box>
             <Box display="flex" flexDirection="column">
               <Typography variant="button" fontWeight="medium">

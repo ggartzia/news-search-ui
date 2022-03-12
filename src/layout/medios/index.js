@@ -5,8 +5,8 @@ import Header from "../../component/Header";
 import Lista from "../../component/Lista";
 import Box from "../../component/Box";
 import Typography from "../../component/Typography";
-import Avatar from "../../component/Avatar";
 
+import Avatar from "@mui/material/Avatar";
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -82,7 +82,7 @@ class Medios extends React.Component {
         nombre: (
           <Box display="flex" alignItems="center" px={1} py={0.5}>
             <Box mr={2}>
-              <Avatar src={mediaLogo} alt={data.paper} size="s" variant="rounded" />
+              <Avatar src={mediaLogo} alt={data.paper} sx={{ width: 32, height: 32 }} />
             </Box>
             <Box display="flex" flexDirection="column">
               <Typography variant="button" fontWeight="medium">
