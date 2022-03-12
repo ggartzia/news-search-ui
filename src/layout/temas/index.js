@@ -2,11 +2,11 @@ import { Component } from "react";
 
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
 
 import Layout from "../../component/Layout";
 import Header from "../../component/Header";
 import Box from "../../component/Box";
-import MiniCard from "../../component/MiniCard";
 import Typography from "../../component/Typography";
 
 const tabs = ['Noticias', 'Deportes', 'Corazón'];
@@ -72,10 +72,42 @@ class Temas extends Component {
             href={"/buscarTema/" + topic.name}
             variant="caption"
             color="secondary"
-            fontWeight="medium" > 
-          <MiniCard
-            title={topic.name}
-            count={topic.usage} />
+            fontWeight="medium" >
+          <Card>
+            <Box bgColor="white" variant="gradient">
+              <Box p={2} style={{width: "220px"}}>
+                <Grid container alignItems="center">
+                  <Grid item xs={8}>
+                    <Box ml={0} lineHeight={1}>
+                      <Typography
+                        variant="h5"
+                        fontWeight="bold"
+                        color="dark">
+                        {topic.name}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Box
+                      variant="gradient"
+                      bgColor="info"
+                      color="white"
+                      width="3rem"
+                      height="3rem"
+                      marginLeft="auto"
+                      borderRadius="md"
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                      shadow="md"
+                    >
+                      {topic.usage}
+                    </Box>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Box>
+          </Card>
         </Typography>
       </Grid>
     );
