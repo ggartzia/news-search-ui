@@ -18,7 +18,6 @@ import { createTheme } from "@mui/material/styles";
 
 // Soft UI Dashboard PRO React base styles
 import colors from "./base/colors";
-import breakpoints from "./base/breakpoints";
 import typography from "./base/typography";
 import boxShadows from "./base/boxShadows";
 import borders from "./base/borders";
@@ -42,7 +41,6 @@ import container from "./components/container";
 import svgIcon from "./components/svgIcon";
 
 export default createTheme({
-  breakpoints: { ...breakpoints },
   palette: { ...colors },
   typography: { ...typography },
   boxShadows: { ...boxShadows },

@@ -1,30 +1,9 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v2.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-/**
-  The boxShadow() function helps you to create a box shadow for an element
- */
-
-// Soft UI Dashboard PRO React helper functions
-import pxToRem from "./pxToRem";
 
 function boxShadow(offset = [], radius = [], color, inset = "") {
   const [x, y] = offset;
   const [blur, spread] = radius;
 
-  return `${inset} ${pxToRem(x)} ${pxToRem(y)} ${pxToRem(blur)} ${pxToRem(spread)} ${color}`;
+  return `${inset} ${x / 16}rem ${y / 16}rem ${blur / 16}rem ${spread / 16}rem ${color}`;
 }
 
 export default boxShadow;

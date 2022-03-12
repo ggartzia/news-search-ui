@@ -1,37 +1,13 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v3.0.0
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// Soft UI Dashboard PRO React base styles
-import breakpoints from "../base/breakpoints";
-
-// Soft UI Dashboard PRO React helper functions
-import pxToRem from "../functions/pxToRem";
-
-const {
-  values: { sm, md, lg, xl, xxl },
-} = breakpoints;
-
-const SM = `@media (min-width: ${sm}px)`;
-const MD = `@media (min-width: ${md}px)`;
-const LG = `@media (min-width: ${lg}px)`;
-const XL = `@media (min-width: ${xl}px)`;
-const XXL = `@media (min-width: ${xxl}px)`;
+const SM = "@media (min-width: 576px)";
+const MD = "@media (min-width: 768px)";
+const LG = "@media (min-width: 992px)";
+const XL = "@media (min-width: 1200px)";
+const XXL = "@media (min-width: 1400px)";
 
 const sharedClasses = {
-  paddingRight: `${pxToRem(24)} !important`,
-  paddingLeft: `${pxToRem(24)} !important`,
+  paddingRight: "1.5rem !important",
+  paddingLeft: "1.5rem !important",
   marginRight: "auto !important",
   marginLeft: "auto !important",
   width: "100% !important",

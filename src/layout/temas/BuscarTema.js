@@ -3,7 +3,6 @@ import { Component } from "react";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Grid from "@mui/material/Grid";
 
-import Layout from "../../component/Layout";
 import Box from "../../component/Box";
 import Card from "@mui/material/Card";
 import Typography from "../../component/Typography";
@@ -69,25 +68,25 @@ class BuscarTema extends Component {
 
     if (!topic) {
       return (
-        <Layout>
+        <Box sx={{ p: 2, position: "relative", marginLeft: "17.125rem"}}>
           {searchBox}
-        </Layout>
+        </Box>
       );
     }
 
     return (
-      <Layout>
+      <Box sx={{ p: 2, position: "relative", marginLeft: "17.125rem"}}>
         {searchBox}
         <Box mt={5} mb={3}>
           <InfiniteScroll
-            data-testid="topic-news-infinite-scroll"
+            data-testid="infinite-scroll"
             pageStart={0}
             dataLength={items?.length}
             next={this.search}
             loader={<Typography variant="h5" fontWeight="medium">Buscando...</Typography>}
             hasMore={true}
           >
-            <Grid container spacing={3} key="noticias">
+            <Grid container spacing={1} key="noticias">
               {items.map((data) => {
                 return (
                   <New data={data} key={data.id}/>
@@ -96,7 +95,7 @@ class BuscarTema extends Component {
             </Grid>
           </InfiniteScroll>
         </Box>
-      </Layout>
+      </Box>
     );
   }
 }

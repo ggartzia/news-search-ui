@@ -65,7 +65,7 @@ function New({ data }) {
   };
 
   return (
-      <Grid item ml={3} mt={3} mb={3} key={data.id}>
+      <Grid item ml={3} mt={2} mb={2} key={data.id}>
         <Card style={{width: "340px"}}>
           <Box component="a"
                href={data.fullUrl}
