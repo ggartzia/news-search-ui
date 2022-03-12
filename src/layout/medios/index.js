@@ -2,9 +2,9 @@ import React from "react";
 
 import Layout from "../../component/Layout";
 import Header from "../../component/Header";
-import Lista from "../../component/Lista";
 import Box from "../../component/Box";
 import Typography from "../../component/Typography";
+import Lista from "./Lista";
 
 import Avatar from "@mui/material/Avatar";
 import NewspaperIcon from '@mui/icons-material/Newspaper';

@@ -10,8 +10,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 
 // Soft UI Dashboard PRO React components
-import Box from "../Box";
-import Typography from "../Typography";
+import Box from "../../component/Box";
+import Typography from "../../component/Typography";
 
 // Soft UI Dashboard PRO React base styles
 import colors from "../../assets/theme/base/colors";
