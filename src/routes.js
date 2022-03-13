@@ -1,5 +1,7 @@
-import UltimasNoticias from "./layout/ultimas-noticias";
-import Trending from "./layout/trending";
+import Latest from "./layout/news/Latest";
+import Related from "./layout/news/Related";
+import Tweets from "./layout/news/Tweets";
+import Trending from "./layout/news/Trending";
 import Medios from "./layout/medios";
 import Temas from "./layout/temas";
 import BuscarTema from "./layout/temas/BuscarTema";
@@ -14,7 +16,7 @@ const routes = [
     key: "noticias",
     route: "/noticias",
     exact: true,
-    component: UltimasNoticias
+    component: Latest
   },
   {
     type: "link",
@@ -22,7 +24,7 @@ const routes = [
     key: "noticiasRelacionadas",
     route: "/noticias/:id",
     exact: false,
-    component: UltimasNoticias
+    component: Related
   },
   {
     type: "link",
@@ -72,7 +74,7 @@ const routes = [
     route: "/trending/:id",
     key: "noticiaSeleccionada",
     exact: false,
-    component: Trending
+    component: Tweets
   },
   {
     type: "link",

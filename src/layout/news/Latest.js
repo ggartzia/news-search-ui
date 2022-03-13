@@ -6,12 +6,12 @@ import Layout from '../../component/Layout';
 import Header from '../../component/Header';
 import Box from '../../component/Box';
 import Typography from '../../component/Typography';
-import New from '../../component/New';
+import NewList from '../../component/New/NewList';
 
 const tabs = ['Noticias', 'Deportes', 'Corazón'];
 const serverHost = 'https://news-puller.herokuapp.com';
 
-class UltimasNoticias extends Component {
+class Latest extends Component {
 
   constructor(props) {
       super(props);
@@ -92,7 +92,7 @@ class UltimasNoticias extends Component {
           >
             <Grid container key="noticias">
               {items?.map((data) => (
-                <New data={data} key={data.id}/>
+                <NewList data={data} key={data.id}/>
               ))}
             </Grid>
           </InfiniteScroll>
@@ -102,4 +102,4 @@ class UltimasNoticias extends Component {
   }
 }
 
-export default UltimasNoticias;
+export default Latest;

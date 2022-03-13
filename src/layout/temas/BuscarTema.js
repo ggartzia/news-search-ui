@@ -7,7 +7,7 @@ import Box from "../../component/Box";
 import Card from "@mui/material/Card";
 import Typography from "../../component/Typography";
 import Search from "../../component/Search";
-import New from "../../component/New";
+import NewList from "../../component/New/NewList";
 
 const serverHost = 'https://news-puller.herokuapp.com';
 
@@ -89,7 +89,7 @@ class BuscarTema extends Component {
             <Grid container spacing={1} key="noticias">
               {items.map((data) => {
                 return (
-                  <New data={data} key={data.id}/>
+                  <NewList data={data} key={data.id}/>
                 );
               })}
             </Grid>
