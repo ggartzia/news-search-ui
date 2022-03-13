@@ -1,11 +1,10 @@
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Grid from "@mui/material/Grid";
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Box from "../Box";
-import Typography from "../Typography";
 
-function Layout({ header, loadMore, items, render }) {
-
+function DataScroll({ header, loadMore, items, render }) {
   return (
     <Box sx={{ p: 3, position: "relative", marginLeft: "17.125rem"}}>
       {header}
@@ -15,7 +14,10 @@ function Layout({ header, loadMore, items, render }) {
             pageStart={0}
             dataLength={items?.length}
             next={loadMore}
-            loader={<Typography variant="h5" fontWeight="medium">Buscando noticias...</Typography>}
+            loader={<Box sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
+                         mt={10} >
+                      <CircularProgress color="secondary" />
+                    </Box>}
             hasMore={true}
           >
             <Grid container key="noticias">
@@ -28,4 +30,4 @@ function Layout({ header, loadMore, items, render }) {
   );
 }
 
-export default Layout;
+export default DataScroll;

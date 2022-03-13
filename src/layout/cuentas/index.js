@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
 
-import Layout from "../../component/Layout";
+import DataScroll from "../../component/DataScroll";
 import Header from "../../component/Header";
 import Box from "../../component/Box";
 import Typography from "../../component/Typography";
@@ -78,7 +78,7 @@ class Cuentas extends Component {
     let header = <Header title='Las cuentas más activas en twitter'  />
 
     return (
-      <Layout
+      <DataScroll
         header={header}
         loadMore={this.loadMore}
         items={items}

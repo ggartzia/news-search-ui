@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import Layout from "../../component/Layout";
+import DataScroll from "../../component/DataScroll";
 import Header from "../../component/Header";
 import Topic from "../../component/Topic";
 
@@ -71,7 +71,7 @@ class Temas extends Component {
       const header = <Header title='Los temas más utilizados en las noticias' tabs={tabs} selected={tabValue} handler={this.handler} />
 
       return (
-        <Layout
+        <DataScroll
           header={header}
           loadMore={this.loadMore}
           items={items}

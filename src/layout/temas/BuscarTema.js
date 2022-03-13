@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import Layout from "../../component/Layout";
+import DataScroll from "../../component/DataScroll";
 import Box from "../../component/Box";
 import Card from "@mui/material/Card";
 import Search from "../../component/Search";
@@ -80,7 +80,7 @@ class BuscarTema extends Component {
     }
 
     return (
-      <Layout
+      <DataScroll
         header={searchBox}
         loadMore={this.search}
         items={items}

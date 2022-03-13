@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import Layout from "../../component/Layout";
+import DataScroll from "../../component/DataScroll";
 import New from "../../component/New";
 import NewList from "../../component/New/NewList";
 
@@ -64,7 +64,7 @@ class Related extends Component {
     const header = <New data={selectedNew} />
 
     return (
-      <Layout
+      <DataScroll
         header={header}
         loadMore={this.loadMore}
         items={items}

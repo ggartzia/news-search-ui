@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import Layout from "../../component/Layout";
+import DataScroll from "../../component/DataScroll";
 import Header from "../../component/Header";
 import NewList from "../../component/New/NewList";
 
@@ -74,7 +74,7 @@ class Trending extends Component {
                            selected={tabValue}
                            handler={this.handler} />
     return (
-      <Layout
+      <DataScroll
         header={header}
         loadMore={this.loadMore}
         items={items}
