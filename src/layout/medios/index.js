@@ -1,6 +1,5 @@
 import React from "react";
 
-import Layout from "../../component/Layout";
 import Header from "../../component/Header";
 import Box from "../../component/Box";
 import Typography from "../../component/Typography";
@@ -135,30 +134,30 @@ class Medios extends React.Component {
     const { mediosNoticias, mediosDeportes, mediosCorazon } = this.state;
     
     return (
-        <Layout>
+        <Box sx={{ p: 3, position: "relative", marginLeft: "17.125rem"}}>
           <Header title="Medios utilizados" />
 
-          <Typography variant="subtitle1" fontWeight="bold" mt={4} >
+          <Typography variant="subtitle1" fontWeight="bold" mt={4} ml={4} >
             Medios de noticias
           </Typography>
           <Box sx={{ mx: 3, py: 4 }}>
             <Lista columns={columns} rows={this.obtenerDatos(mediosNoticias)} />
           </Box>
 
-          <Typography variant="subtitle1" fontWeight="bold">
+          <Typography variant="subtitle1" fontWeight="bold" ml={4} >
             Medios de deportes
           </Typography>
           <Box sx={{ mx: 3, py: 4}}>
             <Lista columns={columns} rows={this.obtenerDatos(mediosDeportes)} />
           </Box>
 
-          <Typography variant="subtitle1" fontWeight="bold">
+          <Typography variant="subtitle1" fontWeight="bold" ml={4} >
             Medios del corazón
           </Typography>
           <Box sx={{ mx: 3, py: 4 }}>
             <Lista columns={columns} rows={this.obtenerDatos(mediosCorazon)} />
           </Box>
-        </Layout>
+        </Box>
       );
   }
 }

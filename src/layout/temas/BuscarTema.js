@@ -1,11 +1,8 @@
 import { Component } from "react";
 
-import InfiniteScroll from 'react-infinite-scroll-component';
-import Grid from "@mui/material/Grid";
-
+import Layout from "../../component/Layout";
 import Box from "../../component/Box";
 import Card from "@mui/material/Card";
-import Typography from "../../component/Typography";
 import Search from "../../component/Search";
 import NewList from "../../component/New/NewList";
 
@@ -56,6 +53,14 @@ class BuscarTema extends Component {
       });
   }
 
+  renderItems(items) {
+    return items.map((data) => {
+        return (
+          <NewList data={data} key={data.id}/>
+        );
+      });
+  }
+
   render() {
     const { items, topic } = this.state;
     const title = topic ? topic : 'Buscar tema...'
@@ -75,27 +80,12 @@ class BuscarTema extends Component {
     }
 
     return (
-      <Box sx={{ p: 2, position: "relative", marginLeft: "17.125rem"}}>
-        {searchBox}
-        <Box mt={5} mb={3}>
-          <InfiniteScroll
-            data-testid="infinite-scroll"
-            pageStart={0}
-            dataLength={items?.length}
-            next={this.search}
-            loader={<Typography variant="h5" fontWeight="medium">Buscando...</Typography>}
-            hasMore={true}
-          >
-            <Grid container spacing={1} key="noticias">
-              {items.map((data) => {
-                return (
-                  <NewList data={data} key={data.id}/>
-                );
-              })}
-            </Grid>
-          </InfiniteScroll>
-        </Box>
-      </Box>
+      <Layout
+        header={searchBox}
+        loadMore={this.search}
+        items={items}
+        render={this.renderItems}
+        />
     );
   }
 }

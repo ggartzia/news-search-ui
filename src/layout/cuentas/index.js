@@ -1,6 +1,5 @@
 import { Component } from "react";
 
-import InfiniteScroll from 'react-infinite-scroll-component';
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
@@ -43,32 +42,34 @@ class Cuentas extends Component {
       });
   }
 
-  renderUser(data) {
-    return (
-      <Grid item ml={3} mt={3} mb={3} key={data.id}>
-        <Card style={{width: "330px"}}>
-          <Box component="a"
-               href={"/cuenta/" + data.id}
-               display="flex"
-               alignItems="center"
-               px={1}
-               py={1}
-               mb={1}>
-            <Box mr={2}>
-              <Avatar src={data.image} alt={data.name} sx={{ width: 56, height: 56 }} />
+  renderItems(items) {
+    return items.map((data) => {
+      return (
+        <Grid item ml={3} mr={2} mt={3} mb={3} key={data.id}>
+          <Card style={{width: "330px"}}>
+            <Box component="a"
+                 href={"/cuenta/" + data.id}
+                 display="flex"
+                 alignItems="center"
+                 px={1}
+                 py={1}
+                 mb={1}>
+              <Box mr={2}>
+                <Avatar src={data.image} alt={data.name} sx={{ width: 56, height: 56 }} />
+              </Box>
+              <Box display="flex" flexDirection="column">
+                <Typography variant="button" fontWeight="medium">
+                  {data.name}
+                </Typography>
+                <Typography variant="caption" color="secondary">
+                  {data.tweets} noticias compartidas
+                </Typography>
+              </Box>
             </Box>
-            <Box display="flex" flexDirection="column">
-              <Typography variant="button" fontWeight="medium">
-                {data.name}
-              </Typography>
-              <Typography variant="caption" color="secondary">
-                {data.tweets} noticias compartidas
-              </Typography>
-            </Box>
-          </Box>
-        </Card>
-      </Grid>
-    );
+          </Card>
+        </Grid>
+      );
+    });
   }
 
   render() {
@@ -77,25 +78,12 @@ class Cuentas extends Component {
     let header = <Header title='Las cuentas más activas en twitter'  />
 
     return (
-      <Layout>
-        {header}
-        <Box mt={5} mb={3} ml={1}>
-          <InfiniteScroll
-            data-testid="users-infinite-scroll"
-            pageStart={0}
-            dataLength={items?.length}
-            next={this.loadMore}
-            loader={<Typography variant="h5" fontWeight="medium">Buscando...</Typography>}
-            hasMore={true}
-          >
-            <Grid container spacing={1} key="users">
-              {items.map((data) => {
-                return this.renderUser(data);
-              })}
-            </Grid>
-          </InfiniteScroll>
-        </Box>
-      </Layout>
+      <Layout
+        header={header}
+        loadMore={this.loadMore}
+        items={items}
+        render={this.renderItems}
+        />
     );
   }
 }

@@ -1,11 +1,7 @@
 import { Component } from "react";
 
-import InfiniteScroll from 'react-infinite-scroll-component';
-import Grid from "@mui/material/Grid";
-
+import Layout from "../../component/Layout";
 import Header from "../../component/Header";
-import Box from "../../component/Box";
-import Typography from "../../component/Typography";
 import NewList from "../../component/New/NewList";
 
 const tabs = ['24 h', '72 h', '1 semana'];
@@ -62,34 +58,28 @@ class Trending extends Component {
       });
   }
 
+  renderItems(items) {
+    return items.map((data) => {
+        return (
+          <NewList data={data} key={data.id}/>
+        );
+      });
+  }
+
   render() {
     const { items, tabValue } = this.state;
 
+    const header = <Header title='Las noticias más compartidas'
+                           tabs={tabs}
+                           selected={tabValue}
+                           handler={this.handler} />
     return (
-      <Box sx={{ p: 3, position: "relative", marginLeft: "17.125rem"}} >
-        <Header title='Las noticias más compartidas'
-                tabs={tabs}
-                selected={tabValue}
-                handler={this.handler} />
-        <Box mt={2}>
-          <InfiniteScroll
-            data-testid="news-infinite-scroll"
-            pageStart={0}
-            dataLength={items?.length}
-            next={this.loadMore}
-            loader={<Typography variant="h5" fontWeight="medium">Buscando...</Typography>}
-            hasMore={true}
-          >
-            <Grid container key="noticias">
-              {items.map((data) => {
-                return (
-                  <NewList data={data} key={data.id}/>
-                );
-              })}
-            </Grid>
-          </InfiniteScroll>
-        </Box>
-      </Box>
+      <Layout
+        header={header}
+        loadMore={this.loadMore}
+        items={items}
+        render={this.renderItems}
+        />
     );
   }
 }

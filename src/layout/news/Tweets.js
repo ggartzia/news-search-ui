@@ -1,11 +1,6 @@
 import { Component } from "react";
 
-import InfiniteScroll from 'react-infinite-scroll-component';
-import Grid from "@mui/material/Grid";
-
 import Layout from "../../component/Layout";
-import Box from "../../component/Box";
-import Typography from "../../component/Typography";
 import New from "../../component/New";
 import { Tweet } from 'react-twitter-widgets'
 
@@ -56,31 +51,26 @@ class Tweets extends Component {
       });
   }
 
+  renderItems(items) {
+    return items.map((data) => {
+        return (
+          <Tweet tweetId={data._id.toString()} key={data._id}/>
+        );
+      });
+  }
+
   render() {
     const { selectedNew, items } = this.state;
 
+    const header = <New data={selectedNew} />
+
     return (
-      <Layout>
-        <New data={selectedNew} />
-        <Box mt={2}>
-          <InfiniteScroll
-            data-testid="news-infinite-scroll"
-            pageStart={0}
-            dataLength={items?.length}
-            next={this.loadMore}
-            loader={<Typography variant="h5" fontWeight="medium">Buscando...</Typography>}
-            hasMore={true}
-          >
-            <Grid container key="noticias">
-              {items.map((data) => {
-                return (
-                  <Tweet tweetId={data._id.toString()} key={data._id}/>
-                );
-              })}
-            </Grid>
-          </InfiniteScroll>
-        </Box>
-      </Layout>
+      <Layout
+        header={header}
+        loadMore={this.loadMore}
+        items={items}
+        render={this.renderItems}
+        />
     );
   }
 }
