@@ -5,8 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
-
-import Box from "../Box";
+import Box from '@mui/material/Box';
 
 const useStyles = makeStyles(theme => ({}));
 

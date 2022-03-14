@@ -1,21 +1,19 @@
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import CircularProgress from '@mui/material/CircularProgress';
 
-import Box from "../Box";
-
 function DataScroll({ header, loadMore, items, render }) {
   return (
-    <Box sx={{ p: 3, position: "relative", marginLeft: "17.125rem"}}>
+    <Box sx={{ p: 3, marginLeft: "17.125rem"}}>
       {header}
-      <Box mt={3}>
+      <Box mt={3} sx={{ height: "%100", overflowY: "hidden" }} >
           <InfiniteScroll
             data-testid="news-infinite-scroll"
             pageStart={0}
             dataLength={items?.length}
             next={loadMore}
-            loader={<Box sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
-                         mt={10} >
+            loader={<Box sx={{ display: "flex", p: 3, alignItems: "center", flexDirection: "column" }}>
                       <CircularProgress color="secondary" />
                     </Box>}
             hasMore={true}

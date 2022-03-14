@@ -22,8 +22,7 @@ function NewList({ data }) {
                display="flex"
                alignItems="center"
                px={2}
-               py={2}
-               mb={1}>
+               py={2}>
             <Box mr={2}>
               <Avatar src={data.image}
                       alt={data.title}
@@ -37,7 +36,7 @@ function NewList({ data }) {
             </Box>
           </Box>
 
-          <Box display="flex" alignItems="center" px={1} py={0.5}>
+          <Box display="flex" alignItems="center" px={1} mb={1}>
             <Box mr={2}>
               <Avatar src={mediaLogo} alt={data.paper} size="s" />
             </Box>
@@ -57,7 +56,8 @@ function NewList({ data }) {
           </Grid>
           <Grid container
                 px={2}
-                py={2} 
+                pt={1} 
+                pb={0.5} 
                 sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}>
             {noticiasRelacionadas(data.id)}
             {twitterShare(data.id, data.tweetCount)}

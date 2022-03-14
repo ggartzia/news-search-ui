@@ -1,9 +1,9 @@
 import { Component } from "react";
 
-import DataScroll from "../../component/DataScroll";
-import Box from "../../component/Box";
 import Card from "@mui/material/Card";
+import Box from "@mui/material/Box";
 import Search from "../../component/Search";
+import DataScroll from "../../component/DataScroll";
 import NewList from "../../component/New/NewList";
 
 const serverHost = 'https://news-puller.herokuapp.com';
@@ -21,7 +21,6 @@ class BuscarTema extends Component {
 
     this.handler = this.handler.bind(this);
     this.search = this.search.bind(this);
-
   }
 
   handler(event, newTopic) {
@@ -67,13 +66,13 @@ class BuscarTema extends Component {
 
     const searchBox = (
       <Card>
-        <Search title={title} onChange={this.handler} />
+        <Search title={title} handler={this.handler} />
       </Card>
     );
 
     if (!topic) {
       return (
-        <Box sx={{ p: 2, position: "relative", marginLeft: "17.125rem"}}>
+        <Box sx={{ py: 2.5, px: 5, marginLeft: "17.125rem"}}>
           {searchBox}
         </Box>
       );

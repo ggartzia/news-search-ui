@@ -58,6 +58,22 @@ export function twitterShare (id, tweetCount) {
   );
 }
 
+function TextReduced(text, length) {
+    if (text == null) {
+        return "";
+    }
+
+    if (text.length <= length) {
+        return text;
+    }
+
+    text = text.substring(0, length);
+    const last = text.lastIndexOf(" ");
+    text = text.substring(0, last);
+
+    return text + "...";
+}
+
 export function findDayDifference(published) {
   if (published != undefined) {
     const date1 = new Date(published);
@@ -85,7 +101,7 @@ export default function New({ data }) {
     const mediaLogo = `/medio/${data.paper}.jpg`;
 
     return (
-        <Grid item ml={3} mb={2} key={data.id}>
+        <Grid item px={2} key={data.id}>
           <Card>
             <Box component="a"
                  href={data.fullUrl}
@@ -97,11 +113,11 @@ export default function New({ data }) {
                 <Avatar src={data.image} alt={data.title} variant="square" sx={{ width: 100, height: 100 }} />
               </Box>
               <Box display="flex" flexDirection="column">
-                <Typography variant="button" fontWeight="medium">
+                <Typography variant="button" fontWeight="medium" mb={1}>
                   {data.title}
                 </Typography>
                 <Typography variant="caption" color="secondary">
-                  {data.description}
+                  {TextReduced(data.description, 750)}
                 </Typography>
               </Box>
             </Box>
@@ -120,17 +136,10 @@ export default function New({ data }) {
               </Box>
             </Box>
             <Grid container 
-                  mt={2}
                   px={2} 
+                  py={2}
                   sx={{ justifyContent: 'space-between' }}>
-              {data.topics.map((topic) => renderTopic(topic))}
-            </Grid>
-            <Grid container
-                  px={2}
-                  py={2} 
-                  sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}>
-              {noticiasRelacionadas(data.id)}
-              {twitterShare(data.id, data.tweetCount)}
+              {data.topics.slice(0, 10).map((topic) => renderTopic(topic))}
             </Grid>
           </Card>
         </Grid>
