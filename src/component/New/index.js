@@ -139,7 +139,7 @@ export default function New({ data }) {
                   px={2} 
                   py={2}
                   sx={{ justifyContent: 'space-between' }}>
-              {data.topics.slice(0, 10).map((topic) => renderTopic(topic))}
+              {data.topics.map((topic) => renderTopic(topic))}
             </Grid>
           </Card>
         </Grid>

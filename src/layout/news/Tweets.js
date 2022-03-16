@@ -1,7 +1,10 @@
 import { Component } from "react";
 
+import Box from '@mui/material/Box';
+
 import DataScroll from "../../component/DataScroll";
 import New from "../../component/New";
+import Chart from "../../component/TweetChart/Chart";
 import { Tweet } from 'react-twitter-widgets'
 
 const serverHost = 'https://news-puller.herokuapp.com';
@@ -14,6 +17,7 @@ class Tweets extends Component {
 	  this.state = {
       id: props.match.params.id,
 	  	selectedNew: {},
+      chart: [],
 	  	items: [],
       next: 0
 	  };
@@ -29,11 +33,20 @@ class Tweets extends Component {
       .then((json) => {
         this.setState({
           selectedNew: json,
+        });
+
+        return fetch(serverHost + '/get/tweets/' + json.id);
+      })
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          selectedNew: this.state.selectedNew,
+          chart: Chart(json),
           items: [],
           next: 0
         });
       })
-      .then(this.loadMore);
+      //.then(this.loadMore);
   }
 
   loadMore() {
@@ -60,9 +73,14 @@ class Tweets extends Component {
   }
 
   render() {
-    const { selectedNew, items } = this.state;
+    const { selectedNew, chart, items } = this.state;
 
-    const header = <New data={selectedNew} />
+    const header = (
+      <Box>
+        <New data={selectedNew} />
+        {chart}
+      </ Box>
+    )
 
     return (
       <DataScroll
