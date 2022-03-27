@@ -37,16 +37,15 @@ class Related extends Component {
   }
 
   loadMore() {
-    const { next, selectedNew, items } = this.state;
-    const url = serverHost + '/get/relatedNews/' + selectedNew.id + '/page/' + next;
+    const { mainNew, items } = this.state;
+    const url = serverHost + '/get/related/' + mainNew.id;
 
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
         this.setState({
           items: items.concat(json),
-          selectedNew: selectedNew,
-          next: next + 1
+          mainNew: mainNew
         });
       });
   }
@@ -60,13 +59,12 @@ class Related extends Component {
   }
 
   render() {
-    const { selectedNew, items } = this.state;
-    const header = <New data={selectedNew} />
+    const { mainNew, items } = this.state;
+    const header = <New data={mainNew} />
 
     return (
       <DataScroll
         header={header}
-        loadMore={this.loadMore}
         items={items}
         render={this.renderItems}
         />

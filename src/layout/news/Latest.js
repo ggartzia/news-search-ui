@@ -41,7 +41,7 @@ class Latest extends Component {
     const { next, tabValue, id, items } = this.state;
 
     if (id) {
-      url += 'relatedNews/' + id + '/page/' + next
+      url += 'related/' + id + '/page/' + next
     } else {
       let theme = 'noticias';
       

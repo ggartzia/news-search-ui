@@ -4,8 +4,8 @@ import Box from '@mui/material/Box';
 
 import DataScroll from "../../component/DataScroll";
 import New from "../../component/New";
-import Chart from "../../component/TweetChart/Chart";
-import { Tweet } from 'react-twitter-widgets'
+import TweetChart from "../../component/TweetChart";
+import Post from "../../component/Post";
 
 const serverHost = 'https://news-puller.herokuapp.com';
 
@@ -41,12 +41,12 @@ class Tweets extends Component {
       .then((json) => {
         this.setState({
           selectedNew: this.state.selectedNew,
-          chart: Chart(json),
+          chart: json,
           items: [],
           next: 0
         });
       })
-      //.then(this.loadMore);
+      .then(this.loadMore);
   }
 
   loadMore() {
@@ -67,7 +67,7 @@ class Tweets extends Component {
   renderItems(items) {
     return items.map((data) => {
         return (
-          <Tweet tweetId={data._id.toString()} key={data._id}/>
+          <Post data={data} />
         );
       });
   }
@@ -78,7 +78,7 @@ class Tweets extends Component {
     const header = (
       <Box>
         <New data={selectedNew} />
-        {chart}
+        <TweetChart data={chart} />
       </ Box>
     )
 
