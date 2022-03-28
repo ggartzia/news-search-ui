@@ -1,38 +1,44 @@
-import React, {forwardRef} from 'react'
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import RepeatIcon from "@mui/icons-material/Repeat";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PublishIcon from "@mui/icons-material/Publish";
 
-const Post = forwardRef((data, ref) => {
+import Box from "../Box";
+import Typography from "../Typography";
+
+function Post({ data }) {
   return (
-    <div className="post" key={data._id}>
-      <div className="post__avatar">
-        <Avatar src={data.image} />
-      </div>
-      <div className="post__body">
-        <div className="post__header">
-          <div className="post__headerText">
-            <h3>
-              {data.name}{" "} 
-              <span className="post__headerSpecial">
-                @{data.screen_name} 
-              </span>
-            </h3>
-          </div>
-          <div className="post__headerDescription">
-            <p>{data.text}</p>
-          </div>
-        </div>
-        <div className="post__footer">
+    <Card key={data._id}>
+      <Box mr={2}>
+        <Avatar src={data.image} alt={data.screen_name} />
+      </Box>
+      <Box display="flex" flexDirection="column">
+        <Grid item px={2}>
+          <Box display="flex" flexDirection="column">
+            <Typography variant="button" fontWeight="medium" mb={1}>
+                {data.name}{" "}
+            </Typography>
+            <Typography variant="caption" color="secondary">
+              @{data.screen_name} 
+            </Typography>
+          </Box>
+          <Box display="flex" flexDirection="column">
+            <Typography variant="caption" color="secondary">
+              {data.text}
+            </Typography>
+          </Box>
+        </Grid>
+        <Grid item px={2}>
           <ChatBubbleOutlineIcon fontSize="small" />
           <RepeatIcon fontSize="small" />
           <FavoriteBorderIcon fontSize="small" />
           <PublishIcon fontSize="small" />
-        </div>
-      </div>
-    </div>
+        </Grid>
+      </Box>
+    </Card>
   );
 })
 
