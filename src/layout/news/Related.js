@@ -13,9 +13,8 @@ class Related extends Component {
 
 	  this.state = {
       id: props.match.params.id,
-	  	selectedNew: {},
-	  	items: [],
-      next: 0
+	  	mainNew: {},
+	  	items: []
 	  };
 
     this.loadMore = this.loadMore.bind(this);
@@ -28,9 +27,8 @@ class Related extends Component {
       .then((res) => res.json())
       .then((json) => {
         this.setState({
-          selectedNew: json,
-          items: [],
-          next: 0
+          mainNew: json,
+          items: []
         });
       })
       .then(this.loadMore);
@@ -44,7 +42,7 @@ class Related extends Component {
       .then((res) => res.json())
       .then((json) => {
         this.setState({
-          items: items.concat(json),
+          items: json,
           mainNew: mainNew
         });
       });

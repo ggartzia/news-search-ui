@@ -67,7 +67,7 @@ class Tweets extends Component {
   renderItems(items) {
     return items.map((data) => {
         return (
-          <Post data={data} />
+          <Post data={data} key={data._id}/>
         );
       });
   }
@@ -78,7 +78,7 @@ class Tweets extends Component {
     const header = (
       <Box>
         <New data={selectedNew} />
-        <TweetChart data={chart} />
+        <TweetChart data={chart} published={selectedNew.published} />
       </ Box>
     )
 
