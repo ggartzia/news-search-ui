@@ -26,8 +26,7 @@ function Post({ data }) {
           sx={{ maxWidth: 330,
                 marginLeft: 3,
                 marginRight: 2,
-                marginTop: 3,
-                marginBotton: 3 }} >
+                marginTop: 3 }} >
       <Box component="a"
            href={twitterHost + data.screen_name}
            target="_blank"

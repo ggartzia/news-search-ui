@@ -25,6 +25,7 @@ class Temas extends Component {
   handler(event, tab) {
     this.setState({
       items:[],
+      total: 100,
       tabValue: tab,
       next: 0
     }, this.loadMore);
@@ -36,7 +37,7 @@ class Temas extends Component {
 
   loadMore() {
     let url = serverHost + '/get/topics/';
-    const { next, tabValue, items } = this.state;
+    const { next, tabValue, items, total } = this.state;
     
     if (tabValue == 1) {
       url += 'deportes';
@@ -53,6 +54,7 @@ class Temas extends Component {
       .then((json) => {
         this.setState({
           items: items.concat(json),
+          total: total,
           tabValue: tabValue,
           next: next + 1
         });
@@ -66,7 +68,7 @@ class Temas extends Component {
   }
 
   render() {
-      const { items, tabValue } = this.state;
+      const { items, total, tabValue } = this.state;
 
       const header = <Header title='Los temas más utilizados en las noticias' tabs={tabs} selected={tabValue} handler={this.handler} />
 
@@ -75,6 +77,7 @@ class Temas extends Component {
           header={header}
           loadMore={this.loadMore}
           items={items}
+          total={total}
           render={this.renderItems}
           />
       );

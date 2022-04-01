@@ -18,6 +18,7 @@ class Cuentas extends Component {
 
     this.state = {
       items: [],
+      total: 100,
       next: 0
     };
 
@@ -29,7 +30,7 @@ class Cuentas extends Component {
   }
 
   loadMore() {
-    const { next, items } = this.state;
+    const { next, items, total } = this.state;
     const url = serverHost + '/get/users/page/' + next;
 
     fetch(url)
@@ -37,6 +38,7 @@ class Cuentas extends Component {
       .then((json) => {
         this.setState({
           items: items.concat(json),
+          total: total,
           next: next + 1
         });
       });
@@ -82,6 +84,7 @@ class Cuentas extends Component {
         header={header}
         loadMore={this.loadMore}
         items={items}
+        total={total}
         render={this.renderItems}
         />
     );

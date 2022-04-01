@@ -18,6 +18,7 @@ class Tweets extends Component {
       id: props.match.params.id,
 	  	selectedNew: {},
       chart: [],
+      total: 100,
 	  	items: [],
       next: 0
 	  };
@@ -42,6 +43,7 @@ class Tweets extends Component {
         this.setState({
           selectedNew: this.state.selectedNew,
           chart: json,
+          total: json.length,
           items: [],
           next: 0
         });
@@ -50,7 +52,7 @@ class Tweets extends Component {
   }
 
   loadMore() {
-    const { next, selectedNew, items } = this.state;
+    const { next, selectedNew, items, total } = this.state;
     const url = serverHost + '/get/tweets/' + selectedNew.id + '/page/' + next;
 
     fetch(url)
@@ -58,6 +60,7 @@ class Tweets extends Component {
       .then((json) => {
         this.setState({
           items: items.concat(json),
+          total: total,
           selectedNew: selectedNew,
           next: next + 1
         });
@@ -73,7 +76,7 @@ class Tweets extends Component {
   }
 
   render() {
-    const { selectedNew, chart, items } = this.state;
+    const { selectedNew, chart, items, total } = this.state;
 
     const header = (
       <Box>
@@ -87,6 +90,7 @@ class Tweets extends Component {
         header={header}
         loadMore={this.loadMore}
         items={items}
+        total={total}
         render={this.renderItems}
         />
     );

@@ -27,6 +27,7 @@ class Latest extends Component {
     this.setState({
       id: this.state.id,
       items:[],
+      total: 100,
       tabValue: tab,
       next: 0
     }, this.loadMore);
@@ -38,7 +39,7 @@ class Latest extends Component {
 
   loadMore() {
     let url = serverHost + '/get/'
-    const { next, tabValue, id, items } = this.state;
+    const { next, tabValue, id, items, total } = this.state;
 
     if (id) {
       url += 'related/' + id + '/page/' + next
@@ -58,6 +59,7 @@ class Latest extends Component {
         .then((json) => {
           this.setState({
             items: items.concat(json),
+            total: total,
             id: id,
             tabValue: tabValue,
             next: next + 1
@@ -74,7 +76,7 @@ class Latest extends Component {
   }
 
   render() {
-    const { items, tabValue } = this.state;
+    const { items, total, tabValue } = this.state;
 
     let header = <Header title='Últimas noticias'
                          tabs={tabs}
@@ -86,6 +88,7 @@ class Latest extends Component {
         header={header}
         loadMore={this.loadMore}
         items={items}
+        total={total}
         render={this.renderItems}
         />
     );

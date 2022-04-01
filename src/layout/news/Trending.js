@@ -25,6 +25,7 @@ class Trending extends Component {
   handler(event, tab) {
     this.setState({
       items:[],
+      total: 100,
       tabValue: tab,
       next: 0
     }, this.loadMore);
@@ -35,7 +36,7 @@ class Trending extends Component {
   }
 
   loadMore() {
-    const { next, tabValue, items } = this.state;
+    const { next, tabValue, items, total } = this.state;
 
     let hours = '24'
 
@@ -52,6 +53,7 @@ class Trending extends Component {
       .then((json) => {
         this.setState({
           items: items.concat(json),
+          total: total,
           tabValue: tabValue,
           next: next + 1
         });
@@ -67,7 +69,7 @@ class Trending extends Component {
   }
 
   render() {
-    const { items, tabValue } = this.state;
+    const { items, total, tabValue } = this.state;
 
     const header = <Header title='Las noticias más compartidas'
                            tabs={tabs}
@@ -78,6 +80,7 @@ class Trending extends Component {
         header={header}
         loadMore={this.loadMore}
         items={items}
+        total={total}
         render={this.renderItems}
         />
     );

@@ -26,6 +26,7 @@ class BuscarTema extends Component {
   handler(event, newTopic) {
     this.setState({
       items:[],
+      total: 100,
       topic: newTopic,
       next: 0
     }, this.search);
@@ -38,7 +39,7 @@ class BuscarTema extends Component {
   }
 
   search() {
-    const { next, topic, items } = this.state;
+    const { next, topic, items, total } = this.state;
     let url = serverHost + '/get/news/' + topic + '/page/' + next;
 
     fetch(url)
@@ -46,6 +47,7 @@ class BuscarTema extends Component {
       .then((json) => {
         this.setState({
           items: items.concat(json),
+          total: total,
           topic: topic,
           next: next + 1
         });
@@ -61,7 +63,7 @@ class BuscarTema extends Component {
   }
 
   render() {
-    const { items, topic } = this.state;
+    const { items, total, topic } = this.state;
     const title = topic ? topic : 'Buscar tema...'
 
     const searchBox = (
@@ -83,6 +85,7 @@ class BuscarTema extends Component {
         header={searchBox}
         loadMore={this.search}
         items={items}
+        total={total}
         render={this.renderItems}
         />
     );
