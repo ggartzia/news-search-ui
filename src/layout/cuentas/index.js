@@ -47,8 +47,8 @@ class Cuentas extends Component {
   renderItems(items) {
     return items.map((data) => {
       return (
-        <Grid item ml={3} mr={2} mt={3} mb={3} key={data.id}>
-          <Card style={{width: "330px"}}>
+        <Grid item ml={3} mr={2} mt={3} mb={3}>
+          <Card style={{width: "330px"}} key={data.id}>
             <Box component="a"
                  href={"/cuenta/" + data.id}
                  display="flex"
@@ -75,7 +75,7 @@ class Cuentas extends Component {
   }
 
   render() {
-    const { items } = this.state;
+    const { items, total } = this.state;
 
     let header = <Header title='Las cuentas más activas en twitter'  />
 
