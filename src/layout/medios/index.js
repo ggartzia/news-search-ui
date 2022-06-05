@@ -99,8 +99,13 @@ class Medios extends React.Component {
           </Typography>
         ),
         noticias: (
-          <Typography variant="caption" color="secondary" fontWeight="medium">
-            {data.numeroNoticias}
+          <Typography
+            component="a"
+            href={"/medio/" + data.paper}
+            variant="caption"
+            color="secondary"
+            fontWeight="medium" >
+            Ver {data.numeroNoticias} noticias
           </Typography>
         ),
         actualizacion: (

@@ -42,6 +42,14 @@ const routes = [
     exact: true,
     component: Medios
   },
+  {
+    type: "link",
+    title: "Noticias del medio",
+    key: "medios",
+    route: "/medio/:paper",
+    exact: false,
+    component: Latest
+  },
   { type: "title", title: "Temas", key: "temasTitulo" },
   {
     type: "link",
@@ -83,6 +91,14 @@ const routes = [
     route: "/cuentas",
     exact: true,
     component: Cuentas
+  },
+  {
+    type: "link",
+    title: "Cuentas",
+    key: "cuentas",
+    route: "/cuenta/:user",
+    exact: false,
+    component: Tweets
   }
 ];
 

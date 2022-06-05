@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import DataScroll from "../../component/DataScroll";
 import New from "../../component/New";
 import Post from "../../component/Post";
+import User from "../../component/User";
 
 const serverHost = 'https://news-puller.herokuapp.com';
 
@@ -14,8 +15,8 @@ class Tweets extends Component {
     super(props);
 
 	  this.state = {
-      id: props.match.params.id,
-      selectedNew: {},
+      id: props.match.params.user,
+      selectedUser: {},
       total: 100,
       items: [],
       next: 0
@@ -25,24 +26,26 @@ class Tweets extends Component {
   }
 
   componentDidMount() {
-    const url = serverHost + '/get/new/' + this.state.id;
+    const url = serverHost + '/get/user/' + this.state.id;
 
     fetch(url)
-      .then((res) => res.json())
-      .then((json) => {
-        this.setState({
-          selectedNew: json,
-          total: 100,
-          items: [],
-          next: 0
-        });
-      })
-      .then(this.loadMore);
+    .then((res) => res.json())
+    .then((json) => {
+      this.setState({
+        id: this.state.id,
+        selectedUser: json,
+        total: 100,
+        items: [],
+        next: 0
+      });
+    })
+    .then(this.loadMore);
   }
 
   loadMore() {
-    const { next, selectedNew, items, total } = this.state;
-    const url = serverHost + '/get/tweets/' + selectedNew.id + '/page/' + next;
+    
+    const { id, next, selectedUser, items, total } = this.state;
+    const url = serverHost + '/get/tweets/user/' + id + '/page/' + next;
 
     fetch(url)
       .then((res) => res.json())
@@ -65,11 +68,11 @@ class Tweets extends Component {
   }
 
   render() {
-    const { selectedNew, items, total } = this.state;
+    const { selectedUser, items, total } = this.state;
 
     const header = (
       <Box>
-        <New data={selectedNew} />
+        <User data={selectedUser} />
       </ Box>
     )
 
