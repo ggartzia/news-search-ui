@@ -9,52 +9,40 @@ import User from "../../component/User";
 
 const serverHost = 'https://news-puller.herokuapp.com';
 
-class Tweets extends Component {
+class UserTweets extends Component {
 
   constructor(props) {
     super(props);
 
 	  this.state = {
       id: props.match.params.user,
-      selectedUser: {},
-      total: 100,
+      user: {},
+      total: 0,
       items: [],
-      next: 0
+      page: 0
     };
 
     this.loadMore = this.loadMore.bind(this);
   }
 
   componentDidMount() {
-    const url = serverHost + '/get/user/' + this.state.id;
-
-    fetch(url)
-    .then((res) => res.json())
-    .then((json) => {
-      this.setState({
-        id: this.state.id,
-        selectedUser: json,
-        total: 100,
-        items: [],
-        next: 0
-      });
-    })
-    .then(this.loadMore);
+    this.loadMore();
   }
 
   loadMore() {
     
-    const { id, next, selectedUser, items, total } = this.state;
-    const url = serverHost + '/get/tweets/user/' + id + '/page/' + next;
+    const { id, page, items } = this.state;
+    const url = serverHost + '/get/tweets/user/' + id + '/page/' + page;
 
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
         this.setState({
-          items: items.concat(json),
-          total: total,
-          selectedNew: selectedNew,
-          next: next + 1
+          id: id,
+          items: items.concat(json.items),
+          total: json.total,
+          user: json.user,
+          page: page + 1
         });
       });
   }
@@ -68,11 +56,11 @@ class Tweets extends Component {
   }
 
   render() {
-    const { selectedUser, items, total } = this.state;
+    const { user, items, total } = this.state;
 
     const header = (
       <Box>
-        <User data={selectedUser} />
+        <User data={user} />
       </ Box>
     )
 
@@ -88,4 +76,4 @@ class Tweets extends Component {
   }
 }
 
-export default Tweets;
+export default UserTweets;

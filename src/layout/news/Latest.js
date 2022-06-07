@@ -13,10 +13,10 @@ class Latest extends Component {
       super(props);
 
       this.state = {
-        id: props.match.params.id,
         items: [],
+        total: 0,
         tabValue: 0,
-        next: 0
+        page: 0
       };
 
       this.handler = this.handler.bind(this);
@@ -25,11 +25,10 @@ class Latest extends Component {
 
   handler(event, tab) {
     this.setState({
-      id: this.state.id,
       items:[],
-      total: 100,
+      total: 0,
       tabValue: tab,
-      next: 0
+      page: 0
     }, this.loadMore);
   }
 
@@ -39,31 +38,22 @@ class Latest extends Component {
 
   loadMore() {
     let url = serverHost + '/get/'
-    const { next, tabValue, id, items, total } = this.state;
+    const { page, tabValue, items } = this.state;
 
-    if (id) {
-      url += 'related/' + id + '/page/' + next
-    } else {
-      let theme = 'noticias';
+    let theme = 'noticias';
       
-      if (tabValue == 1) {
-        theme = 'deportes'
-      } else if (tabValue == 2) {
-        theme = 'corazon'
-      } 
-      url += theme +'/24/page/' + next
-    }
+    if (tabValue == 1) {
+      theme = 'deportes'
+    } else if (tabValue == 2) {
+      theme = 'corazon'
+    } 
+    url += theme +'/24/page/' + page
 
     fetch(url)
         .then((res) => res.json())
         .then((json) => {
-          this.setState({
-            items: items.concat(json),
-            total: total,
-            id: id,
-            tabValue: tabValue,
-            next: next + 1
-          })
+          json.tabValue = tabValue;
+          this.setState(json)
         });
   }
 

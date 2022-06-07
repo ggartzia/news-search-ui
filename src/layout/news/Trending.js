@@ -15,7 +15,8 @@ class Trending extends Component {
       this.state = {
           items: [],
           tabValue: 0,
-          next: 0
+          total: 0,
+          page: 0
       };
 
       this.handler = this.handler.bind(this);
@@ -25,9 +26,9 @@ class Trending extends Component {
   handler(event, tab) {
     this.setState({
       items:[],
-      total: 100,
       tabValue: tab,
-      next: 0
+      total: 0,
+      page: 0
     }, this.loadMore);
   }
 
@@ -36,7 +37,7 @@ class Trending extends Component {
   }
 
   loadMore() {
-    const { next, tabValue, items, total } = this.state;
+    const { page, tabValue } = this.state;
 
     let hours = '24'
 
@@ -46,17 +47,13 @@ class Trending extends Component {
       hours = '168'
     }
 
-    const url = serverHost + '/get/trending/' + hours + '/page/' + next
+    const url = serverHost + '/get/trending/' + hours + '/page/' + page
 
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
-        this.setState({
-          items: items.concat(json),
-          total: total,
-          tabValue: tabValue,
-          next: next + 1
-        });
+        json.tabValue = tabValue;
+        this.setState(json);
       });
   }
 

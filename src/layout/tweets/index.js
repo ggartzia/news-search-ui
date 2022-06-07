@@ -15,43 +15,32 @@ class Tweets extends Component {
 
 	  this.state = {
       id: props.match.params.id,
-      selectedNew: {},
-      total: 100,
+      new: {},
+      total: 0,
       items: [],
-      next: 0
+      page: 0
     };
 
     this.loadMore = this.loadMore.bind(this);
   }
 
   componentDidMount() {
-    const url = serverHost + '/get/new/' + this.state.id;
-
-    fetch(url)
-      .then((res) => res.json())
-      .then((json) => {
-        this.setState({
-          selectedNew: json,
-          total: 100,
-          items: [],
-          next: 0
-        });
-      })
-      .then(this.loadMore);
+    this.loadMore();
   }
 
   loadMore() {
-    const { next, selectedNew, items, total } = this.state;
-    const url = serverHost + '/get/tweets/' + selectedNew.id + '/page/' + next;
+    const { id, page, items } = this.state;
+    const url = serverHost + '/get/tweets/' + id + '/page/' + page;
 
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
         this.setState({
-          items: items.concat(json),
-          total: total,
-          selectedNew: selectedNew,
-          next: next + 1
+          id: id,
+          items: items.concat(json.items),
+          total: json.total,
+          new: json.new,
+          next: page + 1
         });
       });
   }
@@ -65,11 +54,11 @@ class Tweets extends Component {
   }
 
   render() {
-    const { selectedNew, items, total } = this.state;
+    const { new, items, total } = this.state;
 
     const header = (
       <Box>
-        <New data={selectedNew} />
+        <New data={new} />
       </ Box>
     )
 

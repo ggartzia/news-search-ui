@@ -21,32 +21,16 @@ class Related extends Component {
   }
 
   componentDidMount() {
-    const url = serverHost + '/get/new/' + this.state.id;
-
-    fetch(url)
-      .then((res) => res.json())
-      .then((json) => {
-        this.setState({
-          mainNew: json,
-          items: [],
-          total: 100
-        });
-      })
-      .then(this.loadMore);
+    this.loadMore();
   }
 
   loadMore() {
-    const { mainNew, items, total } = this.state;
-    const url = serverHost + '/get/related/' + mainNew.id;
+    const url = serverHost + '/get/related/' + this.state.id;
 
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
-        this.setState({
-          items: json,
-          total: total,
-          mainNew: mainNew
-        });
+        this.setState(json);
       });
   }
 
