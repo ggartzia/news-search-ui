@@ -48,7 +48,7 @@ const routes = [
     type: "link",
     title: "Noticias del medio",
     key: "medios",
-    route: "/medios/:paper",
+    route: "/medios/:medio",
     exact: false,
     component: MediaNews
   },

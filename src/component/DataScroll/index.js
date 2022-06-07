@@ -16,11 +16,6 @@ function DataScroll({ header, loadMore, items, total, render }) {
             loader={<Box sx={{ display: "flex", p: 3, alignItems: "center", flexDirection: "column" }}>
                       <CircularProgress color="secondary" />
                     </Box>}
-            endMessage={
-              <p style={{ textAlign: 'center' }}>
-                <b>Has llegado al final</b>
-              </p>
-            }
             hasMore={items?.length < total}
           >
             <Grid container key="noticias">
