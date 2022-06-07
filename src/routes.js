@@ -3,7 +3,7 @@ import Related from "./layout/news/Related";
 import Tweets from "./layout/tweets";
 import Trending from "./layout/news/Trending";
 import Medios from "./layout/medios";
-import MediaNews from "./layout/medios/MediaNews"
+import MediaNews from "./layout/medios/News"
 import Temas from "./layout/temas";
 import BuscarTema from "./layout/temas/BuscarTema";
 import Cuentas from "./layout/cuentas";
