@@ -1,11 +1,13 @@
 import Latest from "./layout/news/Latest";
 import Related from "./layout/news/Related";
-import Tweets from "./layout/news/Tweets";
+import Tweets from "./layout/tweets";
 import Trending from "./layout/news/Trending";
 import Medios from "./layout/medios";
+import MediaNews from "./layout/medios/MediaNews"
 import Temas from "./layout/temas";
 import BuscarTema from "./layout/temas/BuscarTema";
 import Cuentas from "./layout/cuentas";
+import UserTweets from "./layout/tweets/UserTweets";
 
 
 const routes = [
@@ -46,9 +48,9 @@ const routes = [
     type: "link",
     title: "Noticias del medio",
     key: "medios",
-    route: "/medio/:paper",
+    route: "/medios/:paper",
     exact: false,
-    component: Latest
+    component: MediaNews
   },
   { type: "title", title: "Temas", key: "temasTitulo" },
   {
@@ -96,9 +98,9 @@ const routes = [
     type: "link",
     title: "Cuentas",
     key: "cuentas",
-    route: "/cuenta/:user",
+    route: "/cuentas/:user",
     exact: false,
-    component: Tweets
+    component: UserTweets
   }
 ];
 

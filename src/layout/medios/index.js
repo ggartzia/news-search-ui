@@ -101,7 +101,7 @@ class Medios extends React.Component {
         noticias: (
           <Typography
             component="a"
-            href={"/medio/" + data.paper}
+            href={"/medios/" + data.paper}
             variant="caption"
             color="secondary"
             fontWeight="medium" >
