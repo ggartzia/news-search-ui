@@ -16,7 +16,8 @@ class BuscarTema extends Component {
     this.state = {
       items: [],
       topic: props.match.params.topic,
-      next: 0
+      total: 0,
+      page: 0
     };
 
     this.handler = this.handler.bind(this);
@@ -24,11 +25,12 @@ class BuscarTema extends Component {
   }
 
   handler(event, newTopic) {
+    console.log("what is going on", this.state, newTopic)
     this.setState({
       items:[],
-      total: 100,
       topic: newTopic,
-      next: 0
+      total: 0,
+      page: 0
     }, this.search);
   }
 
@@ -39,17 +41,17 @@ class BuscarTema extends Component {
   }
 
   search() {
-    const { next, topic, items, total } = this.state;
-    let url = serverHost + '/get/news/' + topic + '/page/' + next;
+    const { page, topic, items } = this.state;
+    let url = serverHost + '/get/news/' + topic + '/page/' + page;
 
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
         this.setState({
-          items: items.concat(json),
-          total: total,
+          items: items.concat(json.items),
+          total: json.total,
           topic: topic,
-          next: next + 1
+          page: page + 1
         });
       });
   }

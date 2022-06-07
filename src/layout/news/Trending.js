@@ -37,7 +37,7 @@ class Trending extends Component {
   }
 
   loadMore() {
-    const { page, tabValue } = this.state;
+    const { page, tabValue, items } = this.state;
 
     let hours = '24'
 
@@ -52,8 +52,12 @@ class Trending extends Component {
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
-        json.tabValue = tabValue;
-        this.setState(json);
+        this.setState({
+            tabValue: tabValue,
+            total: json.total,
+            items: items.concat(json.items),
+            page: page + 1
+          });
       });
   }
 

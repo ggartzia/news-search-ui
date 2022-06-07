@@ -14,8 +14,9 @@ class Temas extends Component {
 
     this.state = {
       items: [],
+      total: 0,
       tabValue: 0,
-      next: 0
+      page: 0
     };
 
     this.handler = this.handler.bind(this);
@@ -25,9 +26,9 @@ class Temas extends Component {
   handler(event, tab) {
     this.setState({
       items:[],
-      total: 100,
+      total: 0,
       tabValue: tab,
-      next: 0
+      page: 0
     }, this.loadMore);
   }
 
@@ -37,7 +38,7 @@ class Temas extends Component {
 
   loadMore() {
     let url = serverHost + '/get/topics/';
-    const { next, tabValue, items, total } = this.state;
+    const { page, tabValue, items } = this.state;
     
     if (tabValue == 1) {
       url += 'deportes';
@@ -47,16 +48,16 @@ class Temas extends Component {
       url += 'noticias';
     }
 
-    url += '/page/' + next;
+    url += '/page/' + page;
 
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
         this.setState({
-          items: items.concat(json),
-          total: total,
+          items: items.concat(json.items),
+          total: json.total,
           tabValue: tabValue,
-          next: next + 1
+          page: page + 1
         });
       });
   }

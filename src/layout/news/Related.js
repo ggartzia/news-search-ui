@@ -13,24 +13,23 @@ class Related extends Component {
 
 	  this.state = {
       id: props.match.params.id,
-	  	mainNew: {},
+	  	article: {},
 	  	items: []
 	  };
-
-    this.loadMore = this.loadMore.bind(this);
+    
   }
 
   componentDidMount() {
-    this.loadMore();
-  }
-
-  loadMore() {
     const url = serverHost + '/get/related/' + this.state.id;
 
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
-        this.setState(json);
+        this.setState({
+          items: json.items,
+          total: json.total,
+          article: json.new
+        });
       });
   }
 
@@ -43,8 +42,8 @@ class Related extends Component {
   }
 
   render() {
-    const { mainNew, items, total } = this.state;
-    const header = <New data={mainNew} />
+    const { article, items, total } = this.state;
+    const header = <New data={article} />
 
     return (
       <DataScroll

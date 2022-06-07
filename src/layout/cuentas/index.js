@@ -13,8 +13,8 @@ class Cuentas extends Component {
 
     this.state = {
       items: [],
-      total: 100,
-      next: 0
+      total: 0,
+      page: 0
     };
 
     this.loadMore = this.loadMore.bind(this);
@@ -25,16 +25,16 @@ class Cuentas extends Component {
   }
 
   loadMore() {
-    const { next, items, total } = this.state;
-    const url = serverHost + '/get/users/page/' + next;
+    const { page, items } = this.state;
+    const url = serverHost + '/get/users/page/' + page;
 
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
         this.setState({
-          items: items.concat(json),
-          total: total,
-          next: next + 1
+          items: items.concat(json.items),
+          total: json.total,
+          page: page + 1
         });
       });
   }

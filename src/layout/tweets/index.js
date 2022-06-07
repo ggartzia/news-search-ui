@@ -15,7 +15,7 @@ class Tweets extends Component {
 
 	  this.state = {
       id: props.match.params.id,
-      new: {},
+      article: {},
       total: 0,
       items: [],
       page: 0
@@ -39,8 +39,8 @@ class Tweets extends Component {
           id: id,
           items: items.concat(json.items),
           total: json.total,
-          new: json.new,
-          next: page + 1
+          article: json.new,
+          page: page + 1
         });
       });
   }
@@ -54,11 +54,11 @@ class Tweets extends Component {
   }
 
   render() {
-    const { new, items, total } = this.state;
+    const { article, items, total } = this.state;
 
     const header = (
       <Box>
-        <New data={new} />
+        <New data={article} />
       </ Box>
     )
 

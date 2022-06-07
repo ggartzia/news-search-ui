@@ -12,7 +12,7 @@ class MediaNews extends Component {
       super(props);
 
       this.state = {
-        media: props.match.params.medio,
+        medio: props.match.params.medio,
         total: 0,
         items: [],
         page: 0
@@ -26,13 +26,18 @@ class MediaNews extends Component {
   }
 
   loadMore() {
-    const { page, media } = this.state;
-    const url = serverHost + '/get/media/' + media + '/news/page/' + page;
+    const { page, medio, items } = this.state;
+    const url = serverHost + '/get/media/' + medio + '/news/page/' + page;
 
     fetch(url)
         .then((res) => res.json())
         .then((json) => {
-          this.setState(json)
+          this.setState({
+            medio: medio,
+            total: json.total,
+            items: items.concat(json.items),
+            page: page + 1
+          });
         });
   }
 
@@ -45,8 +50,8 @@ class MediaNews extends Component {
   }
 
   render() {
-    const { items, total, media } = this.state;
-    const title = `Últimas noticias de ${media}`;
+    const { items, total, medio } = this.state;
+    const title = `Últimas noticias de ${medio}`;
 
     let header = <Header title={title}  />
 

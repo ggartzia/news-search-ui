@@ -52,8 +52,12 @@ class Latest extends Component {
     fetch(url)
         .then((res) => res.json())
         .then((json) => {
-          json.tabValue = tabValue;
-          this.setState(json)
+          this.setState({
+            tabValue: tabValue,
+            total: json.total,
+            items: items.concat(json.items),
+            page: page + 1
+          });
         });
   }
 
