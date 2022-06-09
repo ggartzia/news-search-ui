@@ -102,7 +102,7 @@ export default function New({ data }) {
 
     return (
         <Grid item px={2} key={data.id}>
-          <Card>
+          <Card sx={{ margin: 3 }}>
             <Box component="a"
                  href={data.fullUrl}
                  display="flex"

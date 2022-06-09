@@ -25,7 +25,8 @@ function Post({ data }) {
     <Card key={data._id}
           sx={{ maxWidth: 330,
                 marginLeft: 3,
-                marginRight: 2,
+                marginRight: 3,
+                marginBottom: 3,
                 marginTop: 3 }} >
       <Box component="a"
            href={twitterHost + data.screen_name}
