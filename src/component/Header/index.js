@@ -40,7 +40,7 @@ class Header extends Component {
   render() {
     return (
       <Box position="relative">
-        <Card sx={{ ml: 3, py: 2, px: 3, width: "95%"" }}>
+        <Card sx={{ ml: 3, py: 2, px: 3, width: "95%" }}>
           <Grid container spacing={3} alignItems="center">
             <Grid item>
               <Box height="100%" mt={0.5} lineHeight={1}>
