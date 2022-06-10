@@ -15,8 +15,8 @@ function NewList({ data }) {
   const mediaLogo = `/medio/${data.paper}.jpg`;
 
   return (
-      <Grid item ml={3} mt={2} mb={2} key={data.id}>
-        <Card style={{width: "340px"}}>
+      <Grid item ml={3} mt={2} mb={2} style={{width: "30%"}} key={data.id}>
+        <Card>
           <Box component="a"
                href={data.fullUrl}
                display="flex"

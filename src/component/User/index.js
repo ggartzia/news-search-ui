@@ -7,8 +7,8 @@ import Typography from "../Typography";
 
 function User({ data }) {
   return (
-     <Grid item ml={3} mr={2} mt={3} mb={3}>
-       <Card style={{width: "330px"}} key={data.id}>
+     <Grid item ml={3} mt={3} mb={3} style={{width: "30%"}}>
+       <Card key={data.id}>
          <Box component="a"
               href={"/cuentas/" + data.id}
               display="flex"
