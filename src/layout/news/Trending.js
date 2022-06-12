@@ -47,7 +47,7 @@ class Trending extends Component {
       hours = '168'
     }
 
-    const url = serverHost + '/get/trending/' + hours + '/page/' + page
+    const url = serverHost + '/get/trending/' + hours + '/page/' + page;
 
     fetch(url)
       .then((res) => res.json())

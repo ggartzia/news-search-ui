@@ -3,9 +3,13 @@ import Card from "@mui/material/Card";
 import Box from "../Box";
 import Typography from "../Typography";
 
+function capitalize(text) {
+  return text.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
+}
+
 function Topic({ topic }) {
   return (
-    <Grid item ml={3} mr={4} mt={2} mb={2} key={topic.name}>
+    <Grid item sx={{ mx: 2, my: 3, width: "20%" }} key={topic.name}>
         <Typography
             component="a"
             href={"/buscarTema/" + topic.name}
@@ -14,7 +18,7 @@ function Topic({ topic }) {
             fontWeight="medium" >
           <Card>
             <Box bgColor="white" variant="gradient">
-              <Box p={2} style={{width: "220px"}}>
+              <Box p={2}>
                 <Grid container alignItems="center">
                   <Grid item xs={8}>
                     <Box ml={0} lineHeight={1}>
@@ -22,7 +26,7 @@ function Topic({ topic }) {
                         variant="h5"
                         fontWeight="bold"
                         color="dark">
-                        {topic.name}
+                        {capitalize(topic.name)}
                       </Typography>
                     </Box>
                   </Grid>
