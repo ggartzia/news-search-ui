@@ -4,10 +4,10 @@ import Box from "../Box";
 import Typography from "../Typography";
 
 function capitalize(text) {
-  if text.length > 3 {
+  if (text.length > 3) {
     return text.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
   }
-  
+
   return text.toUpperCase();
 }
 
