@@ -4,7 +4,11 @@ import Box from "../Box";
 import Typography from "../Typography";
 
 function capitalize(text) {
-  return text.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
+  if text.length > 3 {
+    return text.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
+  }
+  
+  return text.toUpperCase();
 }
 
 function Topic({ topic }) {

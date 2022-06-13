@@ -49,8 +49,8 @@ const Search = forwardRef(({ title, handler, ...rest }, ref) => {
 
   return (
     <Box mt={1} mb={1}>
-      <SearchWrapper>
-        <IconButton className={classes.iconButton} aria-label="search" onClick={handler}>
+      <SearchWrapper onClick={handler}>
+        <IconButton className={classes.iconButton} aria-label="search">
           <SearchIcon />
         </IconButton>
         <StyledInputBase

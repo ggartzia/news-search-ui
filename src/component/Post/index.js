@@ -25,11 +25,11 @@ const tweetLike = twitterActions + '/like?tweet_id='
 
 function show_sentiment(rating) {
   if (rating == 'neutral') {
-    return <SentimentNeutralIcon fontSize="small" color="info" style={{ float: 'right' }} />
+    return <SentimentNeutralIcon color="info" />
   } else if (rating == 'positive') {
-    return <SentimentVerySatisfiedIcon fontSize="small" color="success" style={{ float: 'right' }} />
+    return <SentimentVerySatisfiedIcon color="success" />
   } else if (rating == 'negative') {
-    return <SentimentVeryDissatisfiedIcon fontSize="small" color="error" style={{ float: 'right' }} />
+    return <SentimentVeryDissatisfiedIcon color="error" />
   } else {
     return '';
   }
@@ -38,11 +38,7 @@ function show_sentiment(rating) {
 function Post({ data }) {
   return (
     <Card key={data._id}
-          sx={{ maxWidth: 330,
-                marginLeft: 3,
-                marginRight: 3,
-                marginBottom: 3,
-                marginTop: 3 }} >
+          sx={{ width: '28%', margin: 3 }} >
       <Box component="a"
            href={twitterHost + data.screen_name}
            target="_blank"
@@ -53,9 +49,10 @@ function Post({ data }) {
             <Avatar src={data.image} alt={data.screen_name} />
           }
           title={data.name}
-          subheader={"@" + data.screen_name}
+          action={show_sentiment(data.rating)}
+          header={"@" + data.screen_name}
         />
-        {show_sentiment(data.rating)}
+        
       </Box>
       <CardContent>
         <Typography variant="body2"
