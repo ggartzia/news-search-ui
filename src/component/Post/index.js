@@ -12,6 +12,9 @@ import IconButton from '@mui/material/IconButton';
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import RepeatIcon from "@mui/icons-material/Repeat";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import SentimentNeutralIcon from '@mui/icons-material/SentimentNeutral';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
 
 const twitterHost = 'https://twitter.com/'
@@ -19,6 +22,18 @@ const twitterActions =  twitterHost + 'intent'
 const tweetReply = twitterActions + '/tweet?in_reply_to='
 const tweetRetweet = twitterActions + '/retweet?tweet_id='
 const tweetLike = twitterActions + '/like?tweet_id='
+
+function show_sentiment(rating) {
+  if (rating == 'neutral') {
+    return <SentimentNeutralIcon fontSize="small" color="info" style={{ float: 'right' }} />
+  } else if (rating == 'positive') {
+    return <SentimentVerySatisfiedIcon fontSize="small" color="success" style={{ float: 'right' }} />
+  } else if (rating == 'negative') {
+    return <SentimentVeryDissatisfiedIcon fontSize="small" color="error" style={{ float: 'right' }} />
+  } else {
+    return '';
+  }
+}
 
 function Post({ data }) {
   return (
@@ -40,6 +55,7 @@ function Post({ data }) {
           title={data.name}
           subheader={"@" + data.screen_name}
         />
+        {show_sentiment(data.rating)}
       </Box>
       <CardContent>
         <Typography variant="body2"
