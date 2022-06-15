@@ -11,7 +11,7 @@ export function capitalize(text) {
   return text.toUpperCase();
 }
 
-export function Topic({ topic }) {
+export default function Topic({ topic }) {
   return (
     <Grid item sx={{ margin: 3, width: "20%" }} key={topic.name}>
         <Typography
