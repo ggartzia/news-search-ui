@@ -75,6 +75,7 @@ class Medios extends React.Component {
   obtenerDatos(items) {
     return items.map( (data) => {
       const mediaLogo = `/medio/${data._id}.jpg`;
+      const twitter = 'https://twitter.com/' + data.twitter_name;
 
       return {
         nombre: (
@@ -86,8 +87,12 @@ class Medios extends React.Component {
               <Typography variant="button" fontWeight="medium">
                 {data.name}
               </Typography>
-              <Typography variant="caption" color="secondary">
-                {data.feed}
+              <Typography 
+                component="a"
+                href={twitter}
+                variant="caption"
+                color="secondary">
+                {twitter}
               </Typography>
             </Box>
           </Box>

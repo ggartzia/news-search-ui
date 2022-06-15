@@ -27,7 +27,16 @@ class Tweets extends Component {
   }
 
   componentDidMount() {
-    this.loadMore();
+    const url = serverHost + '/get/tweets/' + this.state.id;
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          id: this.state.id,
+          chart: json
+        });
+      })
+      .then(this.loadMore);
   }
 
   loadMore() {
