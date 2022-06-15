@@ -9,15 +9,17 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import Box from "../Box";
 import Typography from "../Typography";
+import { capitalize } from "../Topic";
+
 
 export function renderTopic (topic) {
-  const name = topic.name || topic;
+  const topicName = capitalize(topic);
   return (
-    <Grid item sx={{ mx: 0, py: 0 }} key={name}>
-      <Chip label={name}
+    <Grid item sx={{ mx: 0, py: 0 }} key={topicName}>
+      <Chip label={topicName}
             color="secondary"
             component="a"
-            href={"/buscarTema/" + name}
+            href={"/buscarTema/" + topicName}
             sx={{ cursor: 'pointer', maxWidth: '130px', textTransform: 'capitalize' }} />
     </Grid>
   );

@@ -12,10 +12,12 @@ import IconButton from '@mui/material/IconButton';
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import RepeatIcon from "@mui/icons-material/Repeat";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
-import SentimentNeutralIcon from '@mui/icons-material/SentimentNeutral';
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
+import SentimentVerySatisfiedOutlinedIcon from '@mui/icons-material/SentimentVerySatisfiedOutlined'; //happy
+import SentimentSatisfiedOutlinedIcon from '@mui/icons-material/SentimentSatisfiedOutlined'; //relax
+import SentimentNeutralOutlinedIcon from '@mui/icons-material/SentimentNeutralOutlined'; //none
+import SentimentDissatisfiedOutlinedIcon from '@mui/icons-material/SentimentDissatisfiedOutlined'; //sad
+import SentimentVeryDissatisfiedOutlinedIcon from '@mui/icons-material/SentimentVeryDissatisfiedOutlined'; //angry
 
 const twitterHost = 'https://twitter.com/'
 const twitterActions =  twitterHost + 'intent'
@@ -24,12 +26,16 @@ const tweetRetweet = twitterActions + '/retweet?tweet_id='
 const tweetLike = twitterActions + '/like?tweet_id='
 
 function show_sentiment(rating) {
-  if (rating == 'neutral') {
-    return <SentimentNeutralIcon color="info" />
-  } else if (rating == 'positive') {
-    return <SentimentVerySatisfiedIcon color="success" />
-  } else if (rating == 'negative') {
-    return <SentimentVeryDissatisfiedIcon color="error" />
+  if (rating == 'none') {
+    return <SentimentNeutralOutlinedIcon color="info" />
+  } else if (rating == 'happy') {
+    return <SentimentVerySatisfiedOutlinedIcon color="success" />
+  } else if (rating == 'relax') {
+    return <SentimentSatisfiedOutlinedIcon color="info" />
+  } else if (rating == 'sad') {
+    return <SentimentDissatisfiedOutlinedIcon color="warning" />
+  } else if (rating == 'angry') {
+    return <SentimentVeryDissatisfiedOutlinedIcon color="error" />
   } else {
     return '';
   }

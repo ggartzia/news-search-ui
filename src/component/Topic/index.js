@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import Box from "../Box";
 import Typography from "../Typography";
 
-function capitalize(text) {
+export function capitalize(text) {
   if (text.length > 3) {
     return text.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
   }
@@ -11,9 +11,9 @@ function capitalize(text) {
   return text.toUpperCase();
 }
 
-function Topic({ topic }) {
+export function Topic({ topic }) {
   return (
-    <Grid item sx={{ mx: 2, my: 3, width: "20%" }} key={topic.name}>
+    <Grid item sx={{ margin: 3, width: "20%" }} key={topic.name}>
         <Typography
             component="a"
             href={"/buscarTema/" + topic.name}
@@ -59,5 +59,3 @@ function Topic({ topic }) {
       </Grid>
       );
 }
-
-export default Topic;

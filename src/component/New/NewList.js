@@ -59,8 +59,8 @@ function NewList({ data }) {
                 pt={1} 
                 pb={0.5} 
                 sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}>
-            {noticiasRelacionadas(data.id)}
-            {twitterShare(data.id, data.tweetCount)}
+            {noticiasRelacionadas(data._id)}
+            {twitterShare(data._id, data.tweetCount)}
           </Grid>
         </Card>
       </Grid>
