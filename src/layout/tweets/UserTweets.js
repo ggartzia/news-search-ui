@@ -50,7 +50,7 @@ class UserTweets extends Component {
   renderItems(items) {
     return items.map((data) => {
         return (
-          <Post data={data.user} key={data.user._id}/>
+          <Post data={data} key={data._id}/>
         );
       });
   }
