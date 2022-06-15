@@ -2,6 +2,7 @@ import { Component } from "react";
 
 import Box from '@mui/material/Box';
 
+import TweetChart from "../../component/TweetChart";
 import DataScroll from "../../component/DataScroll";
 import New from "../../component/New";
 import Post from "../../component/Post";
@@ -18,6 +19,7 @@ class Tweets extends Component {
       article: {},
       total: 0,
       items: [],
+      chart: [],
       page: 0
     };
 
@@ -29,7 +31,7 @@ class Tweets extends Component {
   }
 
   loadMore() {
-    const { id, page, items } = this.state;
+    const { id, page, items, chart } = this.state;
     const url = serverHost + '/get/tweets/' + id + '/page/' + page;
 
     fetch(url)
@@ -40,6 +42,7 @@ class Tweets extends Component {
           items: items.concat(json.items),
           total: json.total,
           article: json.new,
+          chart: chart,
           page: page + 1
         });
       });
@@ -54,11 +57,12 @@ class Tweets extends Component {
   }
 
   render() {
-    const { article, items, total } = this.state;
+    const { article, items, chart, total } = this.state;
 
     const header = (
       <Box>
         <New data={article} />
+        <TweetChart data={chart} published={article.published} />
       </ Box>
     )
 

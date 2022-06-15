@@ -74,14 +74,13 @@ class Medios extends React.Component {
 
   obtenerDatos(items) {
     return items.map( (data) => {
-      const execute = `${serverHost}/fetch/${data.paper}`
-      const mediaLogo = `/medio/${data.paper}.jpg`;
+      const mediaLogo = `/medio/${data._id}.jpg`;
 
       return {
         nombre: (
           <Box display="flex" alignItems="center" px={1} py={0.5}>
             <Box mr={2}>
-              <Avatar src={mediaLogo} alt={data.paper} sx={{ width: 32, height: 32 }} />
+              <Avatar src={mediaLogo} alt={data._id} sx={{ width: 32, height: 32 }} />
             </Box>
             <Box display="flex" flexDirection="column">
               <Typography variant="button" fontWeight="medium">
@@ -101,7 +100,7 @@ class Medios extends React.Component {
         noticias: (
           <Typography
             component="a"
-            href={"/medios/" + data.paper}
+            href={"/medios/" + data._id}
             variant="caption"
             color="secondary"
             fontWeight="medium" >
@@ -111,16 +110,6 @@ class Medios extends React.Component {
         actualizacion: (
           <Typography variant="caption" color="secondary" fontWeight="medium">
             {data.actualizacion}
-          </Typography>
-        ),
-        accion: (
-          <Typography
-            component="a"
-            href={execute}
-            variant="caption"
-            color="secondary"
-            fontWeight="medium" >
-            Ejecutar
           </Typography>
         )
       };
@@ -132,8 +121,7 @@ class Medios extends React.Component {
       { name: "nombre", align: "left" },
       { name: "tema", align: "left" },
       { name: "noticias", align: "center" },
-      { name: "actualizacion", align: "center" },
-      { name: "accion", align: "center" },
+      { name: "actualizacion", align: "center" }
     ];
     
     const { mediosNoticias, mediosDeportes, mediosCorazon } = this.state;
