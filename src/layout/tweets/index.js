@@ -27,11 +27,25 @@ class Tweets extends Component {
   }
 
   componentDidMount() {
-    this.loadMore();
+    const url = serverHost + '/get/tweets/' + this.state.id;
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          id: this.state.id,
+          total: json.total,
+          article: json.new,
+          chart: json.chart,
+          items: [],
+          page: 0
+        });
+      })
+      .then(this.loadMore);
   }
 
   loadMore() {
-    const { id, page, items, chart } = this.state;
+    const { id, page, items, chart, total, article } = this.state;
     const url = serverHost + '/get/tweets/' + id + '/page/' + page;
 
     fetch(url)
@@ -39,10 +53,10 @@ class Tweets extends Component {
       .then((json) => {
         this.setState({
           id: id,
-          items: items.concat(json.items),
-          total: json.total,
-          article: json.new,
-          chart: json.chart,
+          total: total,
+          article: article,
+          chart: chart,
+          items: items.concat(json),
           page: page + 1
         });
       });
