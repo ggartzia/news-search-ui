@@ -10,7 +10,7 @@ function User({ data }) {
      <Grid item ml={3} mt={3} mb={3} style={{width: "30%"}}>
        <Card key={data.id}>
          <Box component="a"
-              href={"/cuentas/" + data.id}
+              href={"/cuentas/" + data.name}
               display="flex"
               alignItems="center"
               px={1}
