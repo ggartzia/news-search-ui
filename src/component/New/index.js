@@ -55,7 +55,7 @@ export function twitterShare (id, tweetCount) {
       color="#55acee">
 
       <TwitterIcon />
-      {"  " + (tweetCount || 0)}
+      {"  " + (tweetCount - 1)}
     </Box>
   );
 }
