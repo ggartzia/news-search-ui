@@ -1,4 +1,5 @@
 import React from "react";
+import moment from 'moment';
 
 import Header from "../../component/Header";
 import Box from "../../component/Box";
@@ -6,12 +7,13 @@ import Typography from "../../component/Typography";
 import Lista from "./Lista";
 
 import Avatar from "@mui/material/Avatar";
-import NewspaperIcon from '@mui/icons-material/Newspaper';
-import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const serverHost = 'https://news-puller.herokuapp.com';
 const apiEndpoint = serverHost + '/get/media';
+
+function timeStamp(date) {
+  return moment(date).format('DD MMM YYYY HH:MM:SS');
+}
 
 class Medios extends React.Component {
 
@@ -23,16 +25,6 @@ class Medios extends React.Component {
           mediosDeportes: [],
           mediosCorazon: []
       };
-  }
-  
-  showIcon(theme) {
-    if (theme == 'noticias') {
-      return <NewspaperIcon />
-    } else if (theme == 'deportes') {
-      return <SportsBasketballIcon />
-    } else {
-      return <FavoriteIcon />
-    }
   }
 
   componentDidMount() {
@@ -74,33 +66,29 @@ class Medios extends React.Component {
 
   obtenerDatos(items) {
     return items.map( (data) => {
-      const mediaLogo = `/medio/${data._id}.jpg`;
-      const twitter = 'https://twitter.com/' + data.twitter_name;
+      const mediaLogo = `/medio/${data.media[0]._id}.jpg`;
+      const twitter = 'https://twitter.com/' + data.media[0].twitter_name;
 
       return {
         nombre: (
-          <Box display="flex" alignItems="center" px={1} py={0.5}>
+          <Box display="flex"
+               alignItems="center"
+               px={1}
+               py={0.5}
+               component="a"
+               href={twitter}>
             <Box mr={2}>
-              <Avatar src={mediaLogo} alt={data._id} sx={{ width: 32, height: 32 }} />
+              <Avatar src={mediaLogo} alt={data.media[0]._id} sx={{ width: 32, height: 32 }} />
             </Box>
             <Box display="flex" flexDirection="column">
               <Typography variant="button" fontWeight="medium">
-                {data.name}
+                {data.media[0].name}
               </Typography>
-              <Typography 
-                component="a"
-                href={twitter}
-                variant="caption"
-                color="secondary">
+              <Typography variant="caption" color="secondary">
                 {twitter}
               </Typography>
             </Box>
           </Box>
-        ),
-        tema: (
-          <Typography variant="caption" color="secondary" fontWeight="medium">
-            {this.showIcon(data.theme)}
-          </Typography>
         ),
         noticias: (
           <Typography
@@ -109,12 +97,22 @@ class Medios extends React.Component {
             variant="caption"
             color="secondary"
             fontWeight="medium" >
-            Ver {data.numeroNoticias} noticias
+            Ver {data.news} noticias
+          </Typography>
+        ),
+        tweets: (
+          <Typography
+            component="a"
+            href={"/medios/" + data._id}
+            variant="caption"
+            color="secondary"
+            fontWeight="medium">
+            {data.totalRetweet} retweets y {data.totalReply} comentarios
           </Typography>
         ),
         actualizacion: (
           <Typography variant="caption" color="secondary" fontWeight="medium">
-            {data.actualizacion}
+            {timeStamp(data.published)}
           </Typography>
         )
       };
@@ -124,8 +122,8 @@ class Medios extends React.Component {
   render() {
     const columns = [
       { name: "nombre", align: "left" },
-      { name: "tema", align: "left" },
-      { name: "noticias", align: "center" },
+      { name: "noticias", align: "left" },
+      { name: "tweets", align: "center" },
       { name: "actualizacion", align: "center" }
     ];
     
@@ -133,9 +131,7 @@ class Medios extends React.Component {
     
     return (
         <Box sx={{ p: 3, position: "relative", marginLeft: "17.125rem"}}>
-          <Header title="Medios utilizados" />
-
-          <Typography variant="subtitle1" fontWeight="bold" mt={4} ml={4} >
+          <Typography variant="subtitle1" fontWeight="bold" mt={1} ml={4} >
             Medios de noticias
           </Typography>
           <Box sx={{ mx: 3, py: 4 }}>

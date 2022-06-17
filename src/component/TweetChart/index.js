@@ -26,7 +26,7 @@ function timeStamp(date) {
 function groupBy(data) {
   const groups = data.reduce((acc, item) => {
     const d = moment(item.created_at);
-    const hour = d.format('DD MMM YYYY HH:00:00');
+    const hour = d.format('DD MMM YYYY HH:MM:00');
     const time =  moment(hour).format('x');
 
     acc[hour] = acc[hour] || {'time': time, 'hour': hour, 'count': 0};
@@ -40,7 +40,7 @@ function groupBy(data) {
 
 function TweetChart({ data, published }) {
   const chart_data = groupBy(data);
-
+  console.log("??????", chart_data);
   return (
     <Box mt={5} mb={1}>
       <ResponsiveContainer width="95%"

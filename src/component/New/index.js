@@ -6,6 +6,10 @@ import Chip from "@mui/material/Chip";
 import Avatar from "@mui/material/Avatar";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import IconButton from '@mui/material/IconButton';
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import RepeatIcon from "@mui/icons-material/Repeat";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import Box from "../Box";
 import Typography from "../Typography";
@@ -20,7 +24,7 @@ export function renderTopic (topic) {
             color="secondary"
             component="a"
             href={"/buscarTema/" + topicName}
-            sx={{ cursor: 'pointer', maxWidth: '130px', textTransform: 'capitalize' }} />
+            sx={{ cursor: 'pointer', maxWidth: '120px', textTransform: 'capitalize' }} />
     </Grid>
   );
 }
@@ -33,29 +37,35 @@ export function noticiasRelacionadas (id) {
       rel="noreferrer"
       fontSize="0.875rem"
       lineHeight={2}>
-      <Typography variant="button" pr={0.5} fontWeight="medium" >
-        Noticias relacionadas
-      </Typography>
 
-      <Typography variant="span" fontSize="large" verticalAlign="sub" >
+      <Typography variant="span" fontSize="large" verticalAlign="sub" mr={2}>
         <AddCircleIcon />
+      </Typography>
+      <Typography variant="button" pr={0.5} fontWeight="medium" >
+        Ver otras noticias relacionadas
       </Typography>
     </Box>
   );
 }
 
-export function twitterShare (id, tweetCount) {
+export function twitterShare (data) {
   return (
-    <Box
-      component="a"
-      href={"/trending/" + id}
-      rel="noreferrer"
-      style={{float: 'right'}}
-      fontSize="1.125rem"
-      color="#55acee">
-
-      <TwitterIcon />
-      {"  " + (tweetCount - 1)}
+    <Box sx={{flex: "0 0 100%"}}
+         component="a"
+         href={"/trending/" + data._id}
+         rel="noreferrer">
+      <IconButton sx={{width: "33%"}}>
+        <ChatBubbleOutlineIcon fontSize="small" />
+        {data.reply_count}
+      </IconButton>
+      <IconButton sx={{width: "33%"}}>
+        <RepeatIcon fontSize="small" />
+        {data.retweet_count}
+      </IconButton>
+      <IconButton sx={{width: "33%"}}>
+        <FavoriteBorderIcon fontSize="small" />
+        {data.favorite_count}
+      </IconButton>
     </Box>
   );
 }
@@ -103,7 +113,7 @@ export default function New({ data }) {
     const mediaLogo = `/medio/${data.paper}.jpg`;
 
     return (
-        <Grid item px={2} key={data.id}>
+        <Grid item px={2} key={data._id}>
           <Card sx={{ margin: 3 }}>
             <Box component="a"
                  href={data.fullUrl}

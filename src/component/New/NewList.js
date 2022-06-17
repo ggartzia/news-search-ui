@@ -15,7 +15,7 @@ function NewList({ data }) {
   const mediaLogo = `/medio/${data.paper}.jpg`;
 
   return (
-      <Grid item ml={3} mt={2} mb={2} style={{width: "30%"}} key={data.id}>
+      <Grid item ml={3} mt={2} mb={2} style={{width: "30%"}} key={data._id}>
         <Card>
           <Box component="a"
                href={data.fullUrl}
@@ -55,12 +55,12 @@ function NewList({ data }) {
             {data.topics.slice(0, 3).map((topic) => renderTopic(topic))}
           </Grid>
           <Grid container
-                px={2}
+                px={4}
                 pt={1} 
                 pb={0.5} 
-                sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                >
             {noticiasRelacionadas(data._id)}
-            {twitterShare(data._id, data.tweetCount)}
+            {twitterShare(data)}
           </Grid>
         </Card>
       </Grid>
