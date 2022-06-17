@@ -44,7 +44,7 @@ class MediaNews extends Component {
   renderItems(items) {
     return items.map((data) => {
         return (
-          <NewList data={data} key={data.id}/>
+          <NewList data={data} key={data._id}/>
         );
       });
   }

@@ -42,7 +42,7 @@ class Cuentas extends Component {
   renderItems(items) {
     return items.map((data) => {
       return (
-        <User data={data} />
+        <User data={data} key={data._id} />
       );
     });
   }

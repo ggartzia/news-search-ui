@@ -7,7 +7,7 @@ import Typography from "../Typography";
 
 function User({ data }) {
   return (
-     <Grid item ml={3} mt={3} mb={3} style={{width: "30%"}} key={data.id}>
+     <Grid item ml={3} mt={3} mb={3} style={{width: "30%"}} key={data._id}>
        <Card>
          <Box component="a"
               href={"/cuentas/" + data.screen_name}

@@ -55,7 +55,7 @@ function NewList({ data }) {
             {data.topics.slice(0, 3).map((topic) => renderTopic(topic))}
           </Grid>
           <Grid container
-                px={4}
+                px={3}
                 pt={1} 
                 pb={0.5} 
                 >

@@ -64,7 +64,7 @@ class Temas extends Component {
 
   renderItems(items) {
     return items.map((topic) => {
-      return <Topic topic={topic} />
+      return <Topic topic={topic} key={topic.name} />
     });
   }
 
