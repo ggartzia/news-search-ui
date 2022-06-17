@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import moment from 'moment';
 
 import Box from '@mui/material/Box';
 
@@ -10,37 +9,16 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  Legend,
   ResponsiveContainer
 } from 'recharts';
 
-function formatXAxis(tickItem) {
-  return moment(tickItem).format('DD MMM YYYY hh A');
+function formatXAxis(date) {
+  let d = (date ? new Date(date) : new Date());
+  return d.getHours() + ":" + d.getMinutes();
 }
-
-function timeStamp(date) {
-  const d = (date == null) ? moment(date) : moment();
-  const hour = d.format('DD MMM YYYY HH:00:00');
-  return moment(hour).format('x');
-}
-
-function groupBy(data) {
-  const groups = data.reduce((acc, item) => {
-    const d = moment(item.created_at);
-    const hour = d.format('DD MMM YYYY HH:MM:00');
-    const time =  moment(hour).format('x');
-
-    acc[hour] = acc[hour] || {'time': time, 'hour': hour, 'count': 0};
-    acc[hour].count += 1
-
-    return acc;
-  }, {});
-
-  return Object.keys(groups).map((key) => groups[key]);
-};
 
 function TweetChart({ data, published }) {
-  const chart_data = groupBy(data);
-  console.log("??????", chart_data);
   return (
     <Box mt={5} mb={1}>
       <ResponsiveContainer width="95%"
@@ -48,13 +26,14 @@ function TweetChart({ data, published }) {
         <LineChart
           width={800}
           height={400}
-          data={chart_data}
+          data={data}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis allowDataOverflow dataKey='time' domain="[timeStamp(published), timeStamp(null)]" type="number" tickFormatter={formatXAxis}/>
-          <YAxis allowDataOverflow dataKey="count" domain="[0, dataMax+5]" type="number" yAxisId="1" />
+          <XAxis dataKey="_id" domain="[formatXAxis(published), formatXAxis(null)]" tickFormatter={formatXAxis} />
+          <YAxis dataKey="actividad" />
           <Tooltip />
-          <Line yAxisId="1" type="natural" dataKey="count" stroke="#8884d8" animationDuration={100} />
+          <Legend />
+          <Line type="natural" dataKey="actividad" stroke="#8884d8" animationDuration={100} />
         </LineChart>
       </ResponsiveContainer>
     </Box>

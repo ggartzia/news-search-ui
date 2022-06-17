@@ -1,5 +1,4 @@
 import React from "react";
-import moment from 'moment';
 
 import Header from "../../component/Header";
 import Box from "../../component/Box";
@@ -12,7 +11,18 @@ const serverHost = 'https://news-puller.herokuapp.com';
 const apiEndpoint = serverHost + '/get/media';
 
 function timeStamp(date) {
-  return moment(date).format('DD MMM YYYY HH:MM:SS');
+  var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear(),
+      time = [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
+
+  if (month.length < 2) 
+    month = '0' + month;
+  if (day.length < 2) 
+    day = '0' + day;
+
+  return [year, month, day, time].join('-');
 }
 
 class Medios extends React.Component {
