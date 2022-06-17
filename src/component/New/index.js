@@ -14,6 +14,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Box from "../Box";
 import Typography from "../Typography";
 import { capitalize } from "../Topic";
+import EmotionChart from "../../component/Chart/EmotionChart";
 
 
 export function renderTopic (topic) {
@@ -108,13 +109,15 @@ export function findDayDifference(published) {
   return "0 segundos";
 }
 
-export default function New({ data }) {
+export default function New({ data, emotions }) {
   if (Object.keys(data).length != 0) {
     const mediaLogo = `/medio/${data.paper}.jpg`;
+    const showEmotions = (emotions.length > 2);
+    const graph = (showEmotions ? <EmotionChart data={emotions} /> : '');
 
     return (
-        <Grid item px={2} key={data._id}>
-          <Card sx={{ margin: 3 }}>
+        <Grid container px={2} key={data._id}>
+          <Card sx={{ margin: 3, width: (showEmotions ? "45%" : "100%") }}>
             <Box component="a"
                  href={data.fullUrl}
                  display="flex"
@@ -154,6 +157,8 @@ export default function New({ data }) {
               {data.topics.map((topic) => renderTopic(topic))}
             </Grid>
           </Card>
+
+          {graph}
         </Grid>
     );
   } else {

@@ -12,17 +12,17 @@ const apiEndpoint = serverHost + '/get/media';
 
 function timeStamp(date) {
   var d = new Date(date),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear(),
-      time = [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
+      pretty = function(time) {
+          time = '' + time;
+          if (time.length < 2) return '0' + time;
+          else return time;
+      },
+      time = [pretty(d.getHours()), pretty(d.getMinutes()), pretty(d.getSeconds())].join(':');
 
-  if (month.length < 2) 
-    month = '0' + month;
-  if (day.length < 2) 
-    day = '0' + day;
-
-  return [year, month, day, time].join('-');
+  return [d.getFullYear(),
+          pretty(d.getMonth() + 1),
+          pretty(d.getDate()), 
+          time].join('-');
 }
 
 class Medios extends React.Component {

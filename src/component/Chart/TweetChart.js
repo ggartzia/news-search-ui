@@ -1,5 +1,3 @@
-import React, { PureComponent } from 'react';
-
 import Box from '@mui/material/Box';
 
 import {
@@ -14,11 +12,18 @@ import {
 } from 'recharts';
 
 function formatXAxis(date) {
-  let d = (date ? new Date(date) : new Date());
-  return d.getHours() + ":" + d.getMinutes();
+  var d = (date ? new Date(date) : new Date()),
+      pretty = function(time) {
+          time = '' + time;
+          if (time.length < 2) return '0' + time;
+          else return time;
+      };
+
+  return pretty(d.getHours()) + ":" + pretty(d.getMinutes());
 }
 
 function TweetChart({ data, published }) {
+  var maxValue = Math.max(...data.map((x) => x.count));
   return (
     <Box mt={5} mb={1}>
       <ResponsiveContainer width="95%"
@@ -30,7 +35,7 @@ function TweetChart({ data, published }) {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="_id" domain="[formatXAxis(published), formatXAxis(null)]" tickFormatter={formatXAxis} />
-          <YAxis dataKey="actividad" />
+          <YAxis dataKey="actividad" domain="[0, maxValue]" />
           <Tooltip />
           <Legend />
           <Line type="natural" dataKey="actividad" stroke="#8884d8" animationDuration={100} />

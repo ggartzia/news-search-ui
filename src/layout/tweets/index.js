@@ -2,7 +2,7 @@ import { Component } from "react";
 
 import Box from '@mui/material/Box';
 
-import TweetChart from "../../component/TweetChart";
+import TweetChart from "../../component/Chart/TweetChart";
 import DataScroll from "../../component/DataScroll";
 import New from "../../component/New";
 import Post from "../../component/Post";
@@ -20,6 +20,7 @@ class Tweets extends Component {
       total: 0,
       items: [],
       chart: [],
+      emotions: [],
       page: 0
     };
 
@@ -28,6 +29,28 @@ class Tweets extends Component {
 
   componentDidMount() {
     const url = serverHost + '/get/tweets/' + this.state.id;
+    const data = [
+      {
+        rating: 'Neutral',
+        value: 120
+      },
+      {
+        rating: 'Contento',
+        value: 98
+      },
+      {
+        rating: 'Relajado',
+        value: 86
+      },
+      {
+        rating: 'Triste',
+        value: 99
+      },
+      {
+        rating: 'Enfadado',
+        value: 85
+      }
+    ];
 
     fetch(url)
       .then((res) => res.json())
@@ -37,6 +60,7 @@ class Tweets extends Component {
           total: json.total,
           article: json.new,
           chart: json.chart,
+          emotions: data,
           items: [],
           page: 0
         });
@@ -45,7 +69,7 @@ class Tweets extends Component {
   }
 
   loadMore() {
-    const { id, page, items, chart, total, article } = this.state;
+    const { id, page, items, chart, emotions, total, article } = this.state;
     const url = serverHost + '/get/tweets/' + id + '/page/' + page;
 
     fetch(url)
@@ -56,6 +80,7 @@ class Tweets extends Component {
           total: total,
           article: article,
           chart: chart,
+          emotions: emotions,
           items: items.concat(json),
           page: page + 1
         });
@@ -71,16 +96,11 @@ class Tweets extends Component {
   }
 
   render() {
-    const { article, items, chart, total } = this.state;
-    let graph = '';
-
-    if (chart.length > 2) {
-      graph = <TweetChart data={chart} published={article.published} />
-    }
-
+    const { article, items, chart, emotions, total } = this.state;
+    const graph = (total > 2 ? <TweetChart data={chart} published={article.published} /> : '');
     const header = (
       <Box>
-        <New data={article} />
+        <New data={article} emotions={emotions}/>
         {graph}
       </ Box>
     )
