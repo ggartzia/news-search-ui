@@ -76,9 +76,10 @@ class Tweets extends Component {
   render() {
     const { article, items, chart, emotions, total } = this.state;
     const graph = (total > 2 ? <TweetChart data={chart} published={article.published} /> : '');
+    const graphEmotion = (total > 2 ? emotions : undefined) 
     const header = (
       <Box>
-        <New data={article} emotions={emotions}/>
+        <New data={article} emotions={graphEmotion}/>
         {graph}
       </ Box>
     )

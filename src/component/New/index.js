@@ -112,12 +112,11 @@ export function findDayDifference(published) {
 export default function New({ data, emotions }) {
   if (Object.keys(data).length != 0) {
     const mediaLogo = `/medio/${data.paper}.jpg`;
-    const showEmotions = (emotions?.length > 0);
-    const graph = (showEmotions ? <EmotionChart data={emotions} /> : '');
+    const graph = (emotions ? <EmotionChart data={emotions} /> : '');
 
     return (
         <Grid container px={2} key={data._id}>
-          <Card sx={{ margin: 3, width: (showEmotions ? "45%" : "100%") }}>
+          <Card sx={{ margin: 3, width: (emotions ? "45%" : "100%") }}>
             <Box component="a"
                  href={data.fullUrl}
                  display="flex"
@@ -154,7 +153,7 @@ export default function New({ data, emotions }) {
                   px={2} 
                   py={2}
                   sx={{ justifyContent: 'space-between' }}>
-              {data.topics.map((topic) => renderTopic(topic, showEmotions))}
+              {data.topics.map((topic) => renderTopic(topic, emotions))}
             </Grid>
           </Card>
 

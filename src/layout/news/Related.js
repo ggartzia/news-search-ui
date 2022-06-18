@@ -26,7 +26,7 @@ class Related extends Component {
   }
 
   loadMore() {
-    const { id, page } = this.state;
+    const { id, page, items } = this.state;
     const url = serverHost + '/get/related/' + id + '/page/' + page;
 
     fetch(url)
@@ -34,7 +34,7 @@ class Related extends Component {
       .then((json) => {
         this.setState({
           id: id,
-          items: json.items,
+          items: items.concat(json.items),
           total: json.total,
           article: json.new,
           page: page + 1
