@@ -2,7 +2,10 @@ import { Component } from "react";
 
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
-import Search from "../../component/Search";
+import IconButton from '@material-ui/core/IconButton'
+import SearchIcon from '@mui/icons-material/Search';
+import InputBase from '@mui/material/InputBase';
+
 import DataScroll from "../../component/DataScroll";
 import NewList from "../../component/New/NewList";
 
@@ -24,8 +27,9 @@ class BuscarTema extends Component {
     this.search = this.search.bind(this);
   }
 
-  handler(event, newTopic) {
-    console.log("what is going on", this.state, newTopic)
+  handler(event) {
+    var newTopic = event.target.value;
+
     this.setState({
       items:[],
       topic: newTopic,
@@ -42,24 +46,26 @@ class BuscarTema extends Component {
 
   search() {
     const { page, topic, items } = this.state;
-    let url = serverHost + '/get/news/' + topic + '/page/' + page;
+    if (topic) {
+      let url = serverHost + '/get/news/' + topic.toLowerCase() + '/page/' + page;
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((json) => {
-        this.setState({
-          items: items.concat(json.items),
-          total: json.total,
-          topic: topic,
-          page: page + 1
+      fetch(url)
+        .then((res) => res.json())
+        .then((json) => {
+          this.setState({
+            items: items.concat(json.items),
+            total: json.total,
+            topic: topic,
+            page: page + 1
+          });
         });
-      });
+    }
   }
 
   renderItems(items) {
     return items.map((data) => {
         return (
-          <NewList data={data} key={data.id}/>
+          <NewList data={data} key={data._id}/>
         );
       });
   }
@@ -69,18 +75,19 @@ class BuscarTema extends Component {
     const title = topic ? topic : 'Buscar tema...'
 
     const searchBox = (
-      <Card>
-        <Search title={title} handler={this.handler} />
+      <Card sx={{ ml: 1}}>
+        <Box my={1} mx={2}>
+            <IconButton aria-label="search">
+              <SearchIcon />
+            </IconButton>
+            <InputBase
+              onChange={this.handler}
+              placeholder={title}
+              inputProps={{ 'aria-label': 'search' }}
+            />
+        </Box>
       </Card>
     );
-
-    if (!topic) {
-      return (
-        <Box sx={{ py: 2.5, px: 5, marginLeft: "17.125rem"}}>
-          {searchBox}
-        </Box>
-      );
-    }
 
     return (
       <DataScroll
