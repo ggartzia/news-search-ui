@@ -38,7 +38,7 @@ class Tweets extends Component {
           total: json.total,
           article: json.new,
           chart: json.chart,
-          emotions: json.emotion,
+          emotions: json.emotions,
           items: [],
           page: 0
         });

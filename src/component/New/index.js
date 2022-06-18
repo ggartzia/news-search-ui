@@ -112,7 +112,7 @@ export function findDayDifference(published) {
 export default function New({ data, emotions }) {
   if (Object.keys(data).length != 0) {
     const mediaLogo = `/medio/${data.paper}.jpg`;
-    const showEmotions = (emotions?.length > 2);
+    const showEmotions = (emotions?.length > 0);
     const graph = (showEmotions ? <EmotionChart data={emotions} /> : '');
 
     return (
