@@ -23,7 +23,7 @@ function EmotionChart({ data }) {
     let all_emotions = EMOTIONS.map((e) => {
                             let emotion = search_value(e.id);
                             if (emotion) {
-                              e.value = emotion['value'];
+                              e.value = emotion['value'] + 1;
                             }
                             return e;
                           });
