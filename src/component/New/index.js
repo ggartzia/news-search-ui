@@ -17,7 +17,7 @@ import { capitalize } from "../Topic";
 import EmotionChart from "../../component/Chart/EmotionChart";
 
 
-export function renderTopic (topic) {
+export function renderTopic (topic, smallContainer) {
   const topicName = capitalize(topic);
   return (
     <Grid item sx={{ mx: 0, py: 0 }} key={topicName}>
@@ -25,7 +25,7 @@ export function renderTopic (topic) {
             color="secondary"
             component="a"
             href={"/buscarTema/" + topicName}
-            sx={{ cursor: 'pointer', maxWidth: '120px', textTransform: 'capitalize' }} />
+            sx={{ mx: (smallContainer ? 2 : 0), cursor: 'pointer', maxWidth: '150px', textTransform: 'capitalize' }} />
     </Grid>
   );
 }
@@ -112,7 +112,7 @@ export function findDayDifference(published) {
 export default function New({ data, emotions }) {
   if (Object.keys(data).length != 0) {
     const mediaLogo = `/medio/${data.paper}.jpg`;
-    const showEmotions = (emotions.length > 2);
+    const showEmotions = (emotions?.length > 2);
     const graph = (showEmotions ? <EmotionChart data={emotions} /> : '');
 
     return (
@@ -154,7 +154,7 @@ export default function New({ data, emotions }) {
                   px={2} 
                   py={2}
                   sx={{ justifyContent: 'space-between' }}>
-              {data.topics.map((topic) => renderTopic(topic))}
+              {data.topics.map((topic) => renderTopic(topic, showEmotions))}
             </Grid>
           </Card>
 

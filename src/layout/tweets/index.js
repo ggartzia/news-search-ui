@@ -29,28 +29,6 @@ class Tweets extends Component {
 
   componentDidMount() {
     const url = serverHost + '/get/tweets/' + this.state.id;
-    const data = [
-      {
-        rating: 'Neutral',
-        value: 120
-      },
-      {
-        rating: 'Contento',
-        value: 98
-      },
-      {
-        rating: 'Relajado',
-        value: 86
-      },
-      {
-        rating: 'Triste',
-        value: 99
-      },
-      {
-        rating: 'Enfadado',
-        value: 85
-      }
-    ];
 
     fetch(url)
       .then((res) => res.json())
@@ -60,7 +38,7 @@ class Tweets extends Component {
           total: json.total,
           article: json.new,
           chart: json.chart,
-          emotions: data,
+          emotions: json.emotion,
           items: [],
           page: 0
         });
