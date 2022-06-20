@@ -17,12 +17,10 @@ function timeStamp(date) {
           if (time.length < 2) return '0' + time;
           else return time;
       },
+      date = [pretty(d.getDate()), pretty(d.getMonth() + 1), d.getFullYear()].join('/');
       time = [pretty(d.getHours()), pretty(d.getMinutes()), pretty(d.getSeconds())].join(':');
 
-  return [d.getFullYear(),
-          pretty(d.getMonth() + 1),
-          pretty(d.getDate()), 
-          time].join('-');
+  return time + ' ' + date;
 }
 
 class Medios extends React.Component {
