@@ -32,7 +32,7 @@ function EmotionChart({ data }) {
         cx={250}
         cy={200}
         outerRadius={150}
-        width={500}
+        width={490}
         height={350}
         data={all_emotions}
       >
